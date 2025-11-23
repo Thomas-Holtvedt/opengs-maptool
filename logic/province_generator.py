@@ -1,173 +1,261 @@
-from scipy.ndimage import distance_transform_edt
-from collections import deque
-from typing import List, Tuple
-
+import config
 import numpy as np
+from collections import deque
 from PIL import Image
-
-from .color_utils import color_from_id
-from .seed_generator import generate_grid_jitter_seeds
+from scipy.ndimage import distance_transform_edt
 
 
-def generate_province_map(img: Image.Image, num_points: int) -> Image.Image:
-    """
-    Full province map generator:
-    - border pixels (<128) are walls during filling
-    - land pixels are filled by flood-fill from seeds
-    - after filling: borders are recolored to the nearest province (Option A)
-    """
-    arr = np.array(img)  # shape (H, W), grayscale
-    h, w = arr.shape
+def generate_province_map(main_layout):
+    boundary_image = main_layout.boundary_image_display.get_image()
+    land_image = main_layout.land_image_display.get_image()
 
-    # Borders & land masks
-    border_mask = arr < 128          # True where boundary
-    land_mask = ~border_mask         # True where fillable
-
-    if not land_mask.any():
-        raise ValueError("No land (white) area found in the image.")
-
-    # Create seeds using grid+jitter
-    seeds = generate_grid_jitter_seeds(land_mask, num_points)
-    if not seeds:
-        raise ValueError("No seed points generated.")
-
-    # Ensure seeds aren't on borders
-    seeds = [(x, y) for (x, y) in seeds if not border_mask[y, x]]
-    if not seeds:
+    if boundary_image is None and land_image is None:
         raise ValueError(
-            "All seeds placed on borders. Increase density or adjust image.")
+            "Need at least boundary OR ocean image to determine map size."
+        )
 
-    # Flood fill
-    province_map = _flood_fill_provinces(border_mask, land_mask, seeds)
+    # BOUNDARY MASK
+    if boundary_image is not None:
+        b_arr = np.array(boundary_image, copy=False)
+        if b_arr.ndim == 3:
+            boundary_mask = b_arr[..., 0] < 128
+        else:
+            boundary_mask = b_arr < 128
 
-    # Post-process: recolor border pixels using nearest province
-    _fill_borders_from_neighbors(province_map, border_mask)
+        map_h, map_w = boundary_mask.shape
 
-    # Convert to RGB output
-    rgb = _province_map_to_rgb(province_map)
-    return Image.fromarray(rgb, mode="RGB")
+    else:
+        boundary_mask = None
+
+    if land_image is not None:
+        o_arr = np.array(land_image, copy=False)
+        sea_mask = is_sea_color(o_arr)
+        land_mask = ~sea_mask
+
+        # If boundary does not exist, define size from land image
+        if boundary_mask is None:
+            map_h, map_w = sea_mask.shape
+    else:
+        # No land_image means "treat everything as land"
+        if boundary_mask is None:
+            raise ValueError("Could not determine map size.")
+
+        sea_mask = np.zeros((map_h, map_w), dtype=bool)
+        land_mask = np.ones((map_h, map_w), dtype=bool)
+
+    if boundary_mask is None:
+        land_fill = land_mask
+        land_border = sea_mask
+
+        sea_fill = sea_mask
+        sea_border = land_mask
+    else:
+        land_fill = land_mask & ~boundary_mask
+        land_border = boundary_mask | sea_mask
+
+        sea_fill = sea_mask & ~boundary_mask
+        sea_border = boundary_mask | land_mask
+
+    # GENERATE PROVINCES
+    start_id = 0
+    land_points = main_layout.land_slider.value()
+    sea_points = main_layout.ocean_slider.value()
+
+    land_map, land_meta, next_id = create_province_map(
+        land_fill, land_border, land_points, start_id, "land"
+    )
+
+    if sea_points > 0 and land_image is not None:
+        sea_map, sea_meta, _ = create_province_map(
+            sea_fill, sea_border, sea_points, next_id, "ocean"
+        )
+    else:
+        sea_map = np.full((map_h, map_w), -1, np.int32)
+        sea_meta = []
+
+    metadata = land_meta + sea_meta
+
+    province_image = combine_maps(
+        land_map, sea_map, metadata, land_mask, sea_mask
+    )
+
+    main_layout.province_image_display.set_image(province_image)
+    main_layout.province_data = metadata
+
+    return province_image, metadata
 
 
-# -------------------------------------------------------------------
-#   FLOOD FILL (Method B — respects borders as walls)
-# -------------------------------------------------------------------
+#  BASIC UTILITIES
+def is_sea_color(arr):
+    r, g, b = config.OCEAN_COLOR
+    return (arr[..., 0] == r) & (arr[..., 1] == g) & (arr[..., 2] == b)
 
-def _flood_fill_provinces(
-    border_mask: np.ndarray,
-    land_mask: np.ndarray,
-    seeds: List[Tuple[int, int]],
-) -> np.ndarray:
-    """
-    Multi-source BFS flood-fill:
-    - border_mask: walls (never crossed)
-    - seeds: initial province ID positions
-    Returns province_map:
-        -2 = border pixel
-        -1 = unassigned land (should be rare)
-        >=0 = province ID
-    """
-    h, w = border_mask.shape
-    province_map = np.full((h, w), -1, dtype=np.int32)
 
-    # Borders remain -2 during fill
-    province_map[border_mask] = -2
+def _color_from_id(pid: int):
+    rng = np.random.default_rng(pid + 1)
+    r, g, b = map(int, rng.integers(1, 256, 3))
 
+    # Avoid extremely dark colors
+    if r < 20 and g < 20 and b < 20:
+        r = (r + 50) % 256
+        g = (g + 50) % 256
+        b = (b + 50) % 256
+
+    return r, g, b
+
+
+def generate_jitter_seeds(mask: np.ndarray, num_points: int):
+    if num_points <= 0:
+        return []
+
+    h, w = mask.shape
+    grid = max(1, int(np.sqrt(num_points)))
+
+    cell_h = h / grid
+    cell_w = w / grid
+
+    rng = np.random.default_rng(12345)
+    seeds = []
+
+    for gy in range(grid):
+        y0 = int(gy * cell_h)
+        y1 = int((gy + 1) * cell_h)
+
+        for gx in range(grid):
+            x0 = int(gx * cell_w)
+            x1 = int((gx + 1) * cell_w)
+
+            cell = mask[y0:y1, x0:x1]
+            ys, xs = np.where(cell)
+
+            if xs.size == 0:
+                continue
+
+            i = rng.integers(xs.size)
+            seeds.append((x0 + xs[i], y0 + ys[i]))
+
+    return seeds
+
+
+def create_province_map(fill_mask, border_mask, num_points, start_id, ptype):
+    if num_points <= 0 or not fill_mask.any():
+        empty = np.full(fill_mask.shape, -1, np.int32)
+        return empty, [], start_id
+
+    seeds = generate_jitter_seeds(fill_mask, num_points)
+    seeds = [(x, y) for x, y in seeds if fill_mask[y, x]]  # safety
+
+    if not seeds:
+        empty = np.full(fill_mask.shape, -1, np.int32)
+        return empty, [], start_id
+
+    pmap, metadata = flood_fill(fill_mask, seeds, start_id, ptype)
+    assign_borders(pmap, border_mask)
+    finalize_metadata(metadata)
+
+    next_id = max(metadata.keys()) + 1 if metadata else start_id
+    return pmap, list(metadata.values()), next_id
+
+
+def flood_fill(fill_mask, seeds, start_id, ptype):
+    h, w = fill_mask.shape
+    pmap = np.full((h, w), -1, np.int32)
+
+    metadata = {}
     q = deque()
-    for pid, (sx, sy) in enumerate(seeds):
-        province_map[sy, sx] = pid
-        q.append((sx, sy, pid))
 
-    directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    neighbors = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    _color = _color_from_id
+
+    for i, (sx, sy) in enumerate(seeds):
+        pid = start_id + i
+        pmap[sy, sx] = pid
+
+        r, g, b = _color(pid)
+        metadata[pid] = {
+            "province_id": pid,
+            "province_type": ptype,
+            "R": r, "G": g, "B": b,
+            "sum_x": sx,
+            "sum_y": sy,
+            "count": 1
+        }
+
+        q.append((sx, sy, pid))
 
     while q:
         x, y, pid = q.popleft()
+        d = metadata[pid]
 
-        for dx, dy in directions:
-            nx, ny = x + dx, y + dy
-            if nx < 0 or nx >= w or ny < 0 or ny >= h:
-                continue
-            if province_map[ny, nx] != -1:
-                continue
-            if border_mask[ny, nx]:
-                continue
+        for dx, dy in neighbors:
+            nx = x + dx
+            ny = y + dy
 
-            # valid land pixel: assign province
-            province_map[ny, nx] = pid
-            q.append((nx, ny, pid))
+            if 0 <= nx < w and 0 <= ny < h:
+                if pmap[ny, nx] == -1 and fill_mask[ny, nx]:
+                    pmap[ny, nx] = pid
+                    d["sum_x"] += nx
+                    d["sum_y"] += ny
+                    d["count"] += 1
+                    q.append((nx, ny, pid))
 
-    return province_map
-
-
-# -------------------------------------------------------------------
-#   POST-PROCESS: RECOLOR BORDERS (Option A)
-# -------------------------------------------------------------------
+    return pmap, metadata
 
 
-def _fill_borders_from_neighbors(province_map: np.ndarray, border_mask: np.ndarray):
-    """
-    Option A (improved):
-    Recolor border pixels (-2) using the nearest non-border pixel
-    by Euclidean distance transform.
-    Much better than 4-neighbor logic for long boundaries.
-    """
+def assign_borders(pmap, border_mask):
+    valid = pmap >= 0
+    if not valid.any() or not border_mask.any():
+        return
 
-    h, w = province_map.shape
-
-    # Valid province locations: pid >= 0
-    province_mask = province_map >= 0
-
-    # We compute distance transform from PROVINCES to BORDERS.
-    # For each border pixel, we need the nearest province pixel.
-    #
-    # EDM trick: The distance transform also gives the index of the nearest
-    # source pixel using "return_indices=True".
-
-    distances, (nearest_y, nearest_x) = distance_transform_edt(
-        ~province_mask,      # distance = 0 where province_mask == True
-        return_indices=True
-    )
-
-    # Now nearest_x,nearest_y is for EVERY pixel the coordinate of
-    # the nearest PROVINCE pixel.
-    for y in range(h):
-        for x in range(w):
-            if border_mask[y, x]:
-                ny = nearest_y[y, x]
-                nx = nearest_x[y, x]
-                pid = province_map[ny, nx]
-                if pid >= 0:
-                    province_map[y, x] = pid
-                else:
-                    # fallback (should not happen)
-                    province_map[y, x] = -1
+    _, (ny, nx) = distance_transform_edt(~valid, return_indices=True)
+    bm = border_mask
+    pmap[bm] = pmap[ny[bm], nx[bm]]
 
 
-# -------------------------------------------------------------------
-#   CONVERT TO RGB
-# -------------------------------------------------------------------
+def finalize_metadata(metadata):
+    for d in metadata.values():
+        c = d["count"]
+        d["x"] = d["sum_x"] / c
+        d["y"] = d["sum_y"] / c
+        del d["sum_x"], d["sum_y"], d["count"]
 
-def _province_map_to_rgb(province_map: np.ndarray) -> np.ndarray:
-    """
-    Convert province_map to an RGB array.
-    -1 pixels -> painted white
-    >=0      -> colored by deterministic random color_from_id()
-    """
-    h, w = province_map.shape
-    rgb = np.zeros((h, w, 3), dtype=np.uint8)
 
-    max_pid = province_map.max()
-    color_cache = {}
+def combine_maps(land_map, sea_map, metadata, land_mask, sea_mask):
+    if land_map is not None and land_map.size > 0:
+        h, w = land_map.shape
+    else:
+        h, w = sea_map.shape
 
-    for pid in range(max_pid + 1):
-        color_cache[pid] = color_from_id(pid)
+    combined = np.full((h, w), -1, np.int32)
 
-    for y in range(h):
-        for x in range(w):
-            pid = province_map[y, x]
-            if pid < 0:
-                # unassigned or border fill fallback
-                rgb[y, x] = (255, 255, 255)
-            else:
-                rgb[y, x] = color_cache[pid]
+    if land_map is not None:
+        lm = (land_map >= 0) & land_mask
+        combined[lm] = land_map[lm]
 
-    return rgb
+    if sea_map is not None:
+        sm = (sea_map >= 0) & sea_mask
+        combined[sm] = sea_map[sm]
+
+    # Fill remaining areas by nearest province
+    if (combined >= 0).any():
+        valid = combined >= 0
+        _, (ny, nx) = distance_transform_edt(~valid, return_indices=True)
+        missing = combined < 0
+        combined[missing] = combined[ny[missing], nx[missing]]
+
+    out = np.zeros((h, w, 3), np.uint8)
+
+    if not metadata:
+        return Image.fromarray(out)
+
+    max_id = max(d["province_id"] for d in metadata)
+    color_lut = np.zeros((max_id + 1, 3), np.uint8)
+
+    for d in metadata:
+        pid = d["province_id"]
+        color_lut[pid] = (d["R"], d["G"], d["B"])
+
+    valid = combined >= 0
+    out[valid] = color_lut[combined[valid]]
+
+    return Image.fromarray(out)
