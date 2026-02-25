@@ -1,0 +1,8327 @@
+[
+  {
+    "region_id": "AREA000001",
+    "region_type": "ocean",
+    "color": "#1c28a0",
+    "pixel_count": 2805785,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      0,
+      0,
+      2087,
+      2111
+    ],
+    "global_center": [
+      766,
+      1204
+    ],
+    "global_seed": [
+      766,
+      1204
+    ]
+  },
+  {
+    "region_id": "AREA000002",
+    "region_type": "ocean",
+    "color": "#39026f",
+    "pixel_count": 254,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1027,
+      0,
+      1088,
+      8
+    ],
+    "global_center": [
+      1057,
+      3
+    ],
+    "global_seed": [
+      1057,
+      3
+    ]
+  },
+  {
+    "region_id": "AREA000003",
+    "region_type": "land",
+    "color": "#d2f23f",
+    "pixel_count": 82,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1316,
+      0,
+      1352,
+      4
+    ],
+    "global_center": [
+      1337,
+      1
+    ],
+    "global_seed": [
+      1337,
+      1
+    ]
+  },
+  {
+    "region_id": "AREA000004",
+    "region_type": "land",
+    "color": "#4fde6c",
+    "pixel_count": 98,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1392,
+      0,
+      1424,
+      5
+    ],
+    "global_center": [
+      1407,
+      2
+    ],
+    "global_seed": [
+      1407,
+      2
+    ]
+  },
+  {
+    "region_id": "AREA000005",
+    "region_type": "land",
+    "color": "#45d341",
+    "pixel_count": 374,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1429,
+      0,
+      1509,
+      7
+    ],
+    "global_center": [
+      1468,
+      2
+    ],
+    "global_seed": [
+      1468,
+      2
+    ]
+  },
+  {
+    "region_id": "AREA000006",
+    "region_type": "land",
+    "color": "#68a48c",
+    "pixel_count": 199,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1513,
+      0,
+      1560,
+      7
+    ],
+    "global_center": [
+      1535,
+      2
+    ],
+    "global_seed": [
+      1535,
+      2
+    ]
+  },
+  {
+    "region_id": "AREA000007",
+    "region_type": "land",
+    "color": "#1507dd",
+    "pixel_count": 64763,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1923,
+      0,
+      2495,
+      233
+    ],
+    "global_center": [
+      2180,
+      78
+    ],
+    "global_seed": [
+      2180,
+      78
+    ]
+  },
+  {
+    "region_id": "AREA000008",
+    "region_type": "ocean",
+    "color": "#2d438f",
+    "pixel_count": 2115870,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1284,
+      0,
+      3170,
+      2111
+    ],
+    "global_center": [
+      2386,
+      1142
+    ],
+    "global_seed": [
+      2386,
+      1142
+    ]
+  },
+  {
+    "region_id": "AREA000009",
+    "region_type": "ocean",
+    "color": "#311a88",
+    "pixel_count": 71855,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3171,
+      0,
+      4178,
+      174
+    ],
+    "global_center": [
+      3591,
+      48
+    ],
+    "global_seed": [
+      3591,
+      48
+    ]
+  },
+  {
+    "region_id": "AREA000010",
+    "region_type": "land",
+    "color": "#c91f4d",
+    "pixel_count": 776,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3661,
+      0,
+      3759,
+      28
+    ],
+    "global_center": [
+      3707,
+      11
+    ],
+    "global_seed": [
+      3707,
+      11
+    ]
+  },
+  {
+    "region_id": "AREA000011",
+    "region_type": "land",
+    "color": "#1f74fa",
+    "pixel_count": 664228,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3246,
+      0,
+      5631,
+      528
+    ],
+    "global_center": [
+      4367,
+      210
+    ],
+    "global_seed": [
+      4367,
+      210
+    ]
+  },
+  {
+    "region_id": "AREA000012",
+    "region_type": "ocean",
+    "color": "#081e84",
+    "pixel_count": 53456,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4569,
+      0,
+      5631,
+      96
+    ],
+    "global_center": [
+      5230,
+      31
+    ],
+    "global_seed": [
+      5230,
+      31
+    ]
+  },
+  {
+    "region_id": "AREA000013",
+    "region_type": "ocean",
+    "color": "#36108c",
+    "pixel_count": 50,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2491,
+      0,
+      2515,
+      10
+    ],
+    "global_center": [
+      2505,
+      7
+    ],
+    "global_seed": [
+      2505,
+      7
+    ]
+  },
+  {
+    "region_id": "AREA000014",
+    "region_type": "land",
+    "color": "#4305c0",
+    "pixel_count": 236,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4537,
+      3,
+      4583,
+      19
+    ],
+    "global_center": [
+      4560,
+      11
+    ],
+    "global_seed": [
+      4560,
+      11
+    ]
+  },
+  {
+    "region_id": "AREA000015",
+    "region_type": "land",
+    "color": "#0f477f",
+    "pixel_count": 4201,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      848,
+      6,
+      1007,
+      59
+    ],
+    "global_center": [
+      916,
+      29
+    ],
+    "global_seed": [
+      916,
+      29
+    ]
+  },
+  {
+    "region_id": "AREA000016",
+    "region_type": "ocean",
+    "color": "#1d09b2",
+    "pixel_count": 57,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4568,
+      6,
+      4590,
+      13
+    ],
+    "global_center": [
+      4578,
+      9
+    ],
+    "global_seed": [
+      4578,
+      9
+    ]
+  },
+  {
+    "region_id": "AREA000017",
+    "region_type": "land",
+    "color": "#bff617",
+    "pixel_count": 1308,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1317,
+      12,
+      1400,
+      47
+    ],
+    "global_center": [
+      1351,
+      25
+    ],
+    "global_seed": [
+      1351,
+      25
+    ]
+  },
+  {
+    "region_id": "AREA000018",
+    "region_type": "land",
+    "color": "#b94b8a",
+    "pixel_count": 225,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4486,
+      11,
+      4540,
+      27
+    ],
+    "global_center": [
+      4514,
+      21
+    ],
+    "global_seed": [
+      4514,
+      21
+    ]
+  },
+  {
+    "region_id": "AREA000019",
+    "region_type": "ocean",
+    "color": "#37169e",
+    "pixel_count": 247,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      5018,
+      16,
+      5062,
+      27
+    ],
+    "global_center": [
+      5040,
+      21
+    ],
+    "global_seed": [
+      5040,
+      21
+    ]
+  },
+  {
+    "region_id": "AREA000020",
+    "region_type": "land",
+    "color": "#2952f8",
+    "pixel_count": 1606,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1208,
+      15,
+      1306,
+      56
+    ],
+    "global_center": [
+      1265,
+      36
+    ],
+    "global_seed": [
+      1265,
+      36
+    ]
+  },
+  {
+    "region_id": "AREA000021",
+    "region_type": "land",
+    "color": "#6b844a",
+    "pixel_count": 21511,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1406,
+      17,
+      1846,
+      204
+    ],
+    "global_center": [
+      1639,
+      92
+    ],
+    "global_seed": [
+      1639,
+      92
+    ]
+  },
+  {
+    "region_id": "AREA000022",
+    "region_type": "ocean",
+    "color": "#062195",
+    "pixel_count": 193,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1143,
+      19,
+      1178,
+      32
+    ],
+    "global_center": [
+      1163,
+      23
+    ],
+    "global_seed": [
+      1163,
+      23
+    ]
+  },
+  {
+    "region_id": "AREA000023",
+    "region_type": "land",
+    "color": "#74c65c",
+    "pixel_count": 551,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1550,
+      19,
+      1621,
+      33
+    ],
+    "global_center": [
+      1583,
+      26
+    ],
+    "global_seed": [
+      1583,
+      26
+    ]
+  },
+  {
+    "region_id": "AREA000024",
+    "region_type": "land",
+    "color": "#9cc5ea",
+    "pixel_count": 1517,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3621,
+      22,
+      3709,
+      68
+    ],
+    "global_center": [
+      3666,
+      46
+    ],
+    "global_seed": [
+      3666,
+      46
+    ]
+  },
+  {
+    "region_id": "AREA000025",
+    "region_type": "land",
+    "color": "#6d0ab7",
+    "pixel_count": 11493,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      951,
+      24,
+      1229,
+      101
+    ],
+    "global_center": [
+      1087,
+      63
+    ],
+    "global_seed": [
+      1087,
+      63
+    ]
+  },
+  {
+    "region_id": "AREA000026",
+    "region_type": "land",
+    "color": "#87df75",
+    "pixel_count": 173,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1550,
+      27,
+      1599,
+      44
+    ],
+    "global_center": [
+      1571,
+      36
+    ],
+    "global_seed": [
+      1571,
+      36
+    ]
+  },
+  {
+    "region_id": "AREA000027",
+    "region_type": "land",
+    "color": "#5e0f75",
+    "pixel_count": 61,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2387,
+      26,
+      2424,
+      34
+    ],
+    "global_center": [
+      2404,
+      30
+    ],
+    "global_seed": [
+      2404,
+      30
+    ]
+  },
+  {
+    "region_id": "AREA000028",
+    "region_type": "land",
+    "color": "#a4c5da",
+    "pixel_count": 93,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2430,
+      25,
+      2464,
+      43
+    ],
+    "global_center": [
+      2448,
+      36
+    ],
+    "global_seed": [
+      2448,
+      36
+    ]
+  },
+  {
+    "region_id": "AREA000029",
+    "region_type": "land",
+    "color": "#3797cd",
+    "pixel_count": 285711,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      608,
+      46,
+      1943,
+      512
+    ],
+    "global_center": [
+      1209,
+      266
+    ],
+    "global_seed": [
+      1209,
+      266
+    ]
+  },
+  {
+    "region_id": "AREA000030",
+    "region_type": "ocean",
+    "color": "#0f1ba7",
+    "pixel_count": 195,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      0,
+      52,
+      35,
+      62
+    ],
+    "global_center": [
+      13,
+      57
+    ],
+    "global_seed": [
+      13,
+      57
+    ]
+  },
+  {
+    "region_id": "AREA000031",
+    "region_type": "land",
+    "color": "#9482ac",
+    "pixel_count": 58,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4104,
+      50,
+      4122,
+      65
+    ],
+    "global_center": [
+      4112,
+      58
+    ],
+    "global_seed": [
+      4112,
+      58
+    ]
+  },
+  {
+    "region_id": "AREA000032",
+    "region_type": "ocean",
+    "color": "#1e4ea0",
+    "pixel_count": 76,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      5614,
+      54,
+      5631,
+      64
+    ],
+    "global_center": [
+      5624,
+      59
+    ],
+    "global_seed": [
+      5624,
+      59
+    ]
+  },
+  {
+    "region_id": "AREA000033",
+    "region_type": "land",
+    "color": "#0d258b",
+    "pixel_count": 59825,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      188,
+      56,
+      636,
+      300
+    ],
+    "global_center": [
+      419,
+      157
+    ],
+    "global_seed": [
+      419,
+      157
+    ]
+  },
+  {
+    "region_id": "AREA000034",
+    "region_type": "land",
+    "color": "#d111ae",
+    "pixel_count": 107,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2377,
+      59,
+      2417,
+      71
+    ],
+    "global_center": [
+      2401,
+      65
+    ],
+    "global_seed": [
+      2401,
+      65
+    ]
+  },
+  {
+    "region_id": "AREA000035",
+    "region_type": "land",
+    "color": "#c2c9df",
+    "pixel_count": 2127,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3084,
+      61,
+      3260,
+      108
+    ],
+    "global_center": [
+      3179,
+      84
+    ],
+    "global_seed": [
+      3179,
+      84
+    ]
+  },
+  {
+    "region_id": "AREA000036",
+    "region_type": "land",
+    "color": "#318ecd",
+    "pixel_count": 300,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3256,
+      63,
+      3298,
+      87
+    ],
+    "global_center": [
+      3274,
+      73
+    ],
+    "global_seed": [
+      3274,
+      73
+    ]
+  },
+  {
+    "region_id": "AREA000037",
+    "region_type": "ocean",
+    "color": "#150f8a",
+    "pixel_count": 95,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3733,
+      70,
+      3762,
+      82
+    ],
+    "global_center": [
+      3747,
+      76
+    ],
+    "global_seed": [
+      3747,
+      76
+    ]
+  },
+  {
+    "region_id": "AREA000038",
+    "region_type": "ocean",
+    "color": "#0411a8",
+    "pixel_count": 115,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1721,
+      73,
+      1763,
+      91
+    ],
+    "global_center": [
+      1745,
+      79
+    ],
+    "global_seed": [
+      1745,
+      79
+    ]
+  },
+  {
+    "region_id": "AREA000039",
+    "region_type": "land",
+    "color": "#aadcd7",
+    "pixel_count": 273,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1958,
+      72,
+      2002,
+      87
+    ],
+    "global_center": [
+      1979,
+      80
+    ],
+    "global_seed": [
+      1979,
+      80
+    ]
+  },
+  {
+    "region_id": "AREA000040",
+    "region_type": "ocean",
+    "color": "#341889",
+    "pixel_count": 62,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      749,
+      75,
+      778,
+      86
+    ],
+    "global_center": [
+      764,
+      80
+    ],
+    "global_seed": [
+      764,
+      80
+    ]
+  },
+  {
+    "region_id": "AREA000041",
+    "region_type": "land",
+    "color": "#9e46eb",
+    "pixel_count": 14047,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3145,
+      77,
+      3309,
+      234
+    ],
+    "global_center": [
+      3228,
+      163
+    ],
+    "global_seed": [
+      3228,
+      163
+    ]
+  },
+  {
+    "region_id": "AREA000042",
+    "region_type": "ocean",
+    "color": "#004397",
+    "pixel_count": 51,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      5445,
+      77,
+      5467,
+      83
+    ],
+    "global_center": [
+      5457,
+      80
+    ],
+    "global_seed": [
+      5457,
+      80
+    ]
+  },
+  {
+    "region_id": "AREA000043",
+    "region_type": "land",
+    "color": "#40b869",
+    "pixel_count": 485,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1264,
+      79,
+      1316,
+      104
+    ],
+    "global_center": [
+      1291,
+      91
+    ],
+    "global_seed": [
+      1291,
+      91
+    ]
+  },
+  {
+    "region_id": "AREA000044",
+    "region_type": "ocean",
+    "color": "#324f7a",
+    "pixel_count": 519,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1304,
+      83,
+      1349,
+      123
+    ],
+    "global_center": [
+      1325,
+      99
+    ],
+    "global_seed": [
+      1325,
+      99
+    ]
+  },
+  {
+    "region_id": "AREA000045",
+    "region_type": "ocean",
+    "color": "#1c119b",
+    "pixel_count": 183,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3572,
+      85,
+      3600,
+      97
+    ],
+    "global_center": [
+      3584,
+      90
+    ],
+    "global_seed": [
+      3584,
+      90
+    ]
+  },
+  {
+    "region_id": "AREA000046",
+    "region_type": "land",
+    "color": "#a3d8ce",
+    "pixel_count": 90,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4014,
+      91,
+      4037,
+      110
+    ],
+    "global_center": [
+      4027,
+      98
+    ],
+    "global_seed": [
+      4027,
+      98
+    ]
+  },
+  {
+    "region_id": "AREA000047",
+    "region_type": "land",
+    "color": "#faf6e5",
+    "pixel_count": 17657,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2990,
+      92,
+      3192,
+      306
+    ],
+    "global_center": [
+      3077,
+      189
+    ],
+    "global_seed": [
+      3077,
+      189
+    ]
+  },
+  {
+    "region_id": "AREA000048",
+    "region_type": "land",
+    "color": "#260a7b",
+    "pixel_count": 4405,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      0,
+      94,
+      150,
+      166
+    ],
+    "global_center": [
+      61,
+      131
+    ],
+    "global_seed": [
+      61,
+      131
+    ]
+  },
+  {
+    "region_id": "AREA000049",
+    "region_type": "ocean",
+    "color": "#1447a3",
+    "pixel_count": 130,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1116,
+      94,
+      1161,
+      108
+    ],
+    "global_center": [
+      1137,
+      99
+    ],
+    "global_seed": [
+      1137,
+      99
+    ]
+  },
+  {
+    "region_id": "AREA000050",
+    "region_type": "land",
+    "color": "#6c9396",
+    "pixel_count": 381,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1606,
+      104,
+      1640,
+      120
+    ],
+    "global_center": [
+      1623,
+      112
+    ],
+    "global_seed": [
+      1623,
+      112
+    ]
+  },
+  {
+    "region_id": "AREA000051",
+    "region_type": "land",
+    "color": "#e4067d",
+    "pixel_count": 7399,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2895,
+      102,
+      3075,
+      264
+    ],
+    "global_center": [
+      2973,
+      205
+    ],
+    "global_seed": [
+      2973,
+      205
+    ]
+  },
+  {
+    "region_id": "AREA000052",
+    "region_type": "land",
+    "color": "#ac73eb",
+    "pixel_count": 83,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1973,
+      105,
+      2014,
+      122
+    ],
+    "global_center": [
+      1994,
+      116
+    ],
+    "global_seed": [
+      1994,
+      116
+    ]
+  },
+  {
+    "region_id": "AREA000053",
+    "region_type": "land",
+    "color": "#f3d376",
+    "pixel_count": 160,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1978,
+      119,
+      2015,
+      132
+    ],
+    "global_center": [
+      1999,
+      123
+    ],
+    "global_seed": [
+      1999,
+      123
+    ]
+  },
+  {
+    "region_id": "AREA000054",
+    "region_type": "lake",
+    "color": "#350598",
+    "pixel_count": 851,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      891,
+      124,
+      972,
+      156
+    ],
+    "global_center": [
+      926,
+      139
+    ],
+    "global_seed": [
+      926,
+      139
+    ]
+  },
+  {
+    "region_id": "AREA000055",
+    "region_type": "land",
+    "color": "#443ead",
+    "pixel_count": 3511,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2460,
+      132,
+      2600,
+      180
+    ],
+    "global_center": [
+      2533,
+      157
+    ],
+    "global_seed": [
+      2533,
+      157
+    ]
+  },
+  {
+    "region_id": "AREA000056",
+    "region_type": "land",
+    "color": "#c4e336",
+    "pixel_count": 91,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2458,
+      134,
+      2479,
+      148
+    ],
+    "global_center": [
+      2469,
+      142
+    ],
+    "global_seed": [
+      2469,
+      142
+    ]
+  },
+  {
+    "region_id": "AREA000057",
+    "region_type": "land",
+    "color": "#dfd450",
+    "pixel_count": 1539,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1451,
+      142,
+      1555,
+      184
+    ],
+    "global_center": [
+      1494,
+      165
+    ],
+    "global_seed": [
+      1494,
+      165
+    ]
+  },
+  {
+    "region_id": "AREA000058",
+    "region_type": "ocean",
+    "color": "#033da6",
+    "pixel_count": 12083,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2988,
+      142,
+      3281,
+      330
+    ],
+    "global_center": [
+      3126,
+      249
+    ],
+    "global_seed": [
+      3126,
+      249
+    ]
+  },
+  {
+    "region_id": "AREA000059",
+    "region_type": "lake",
+    "color": "#1b0d6f",
+    "pixel_count": 64,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      911,
+      146,
+      930,
+      156
+    ],
+    "global_center": [
+      920,
+      150
+    ],
+    "global_seed": [
+      920,
+      150
+    ]
+  },
+  {
+    "region_id": "AREA000060",
+    "region_type": "land",
+    "color": "#60c151",
+    "pixel_count": 426,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1592,
+      149,
+      1634,
+      167
+    ],
+    "global_center": [
+      1612,
+      158
+    ],
+    "global_seed": [
+      1612,
+      158
+    ]
+  },
+  {
+    "region_id": "AREA000061",
+    "region_type": "ocean",
+    "color": "#01379f",
+    "pixel_count": 1713304,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4025,
+      156,
+      5631,
+      2111
+    ],
+    "global_center": [
+      5093,
+      1198
+    ],
+    "global_seed": [
+      5093,
+      1198
+    ]
+  },
+  {
+    "region_id": "AREA000062",
+    "region_type": "ocean",
+    "color": "#0a2c83",
+    "pixel_count": 50,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      140,
+      176,
+      164,
+      186
+    ],
+    "global_center": [
+      152,
+      180
+    ],
+    "global_seed": [
+      152,
+      180
+    ]
+  },
+  {
+    "region_id": "AREA000063",
+    "region_type": "ocean",
+    "color": "#1e0096",
+    "pixel_count": 148,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1502,
+      187,
+      1532,
+      199
+    ],
+    "global_center": [
+      1516,
+      193
+    ],
+    "global_seed": [
+      1516,
+      193
+    ]
+  },
+  {
+    "region_id": "AREA000064",
+    "region_type": "lake",
+    "color": "#0f2c85",
+    "pixel_count": 569,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      990,
+      194,
+      1052,
+      220
+    ],
+    "global_center": [
+      1021,
+      209
+    ],
+    "global_seed": [
+      1021,
+      209
+    ]
+  },
+  {
+    "region_id": "AREA000065",
+    "region_type": "land",
+    "color": "#9c1b5d",
+    "pixel_count": 81,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1559,
+      196,
+      1574,
+      208
+    ],
+    "global_center": [
+      1566,
+      202
+    ],
+    "global_seed": [
+      1566,
+      202
+    ]
+  },
+  {
+    "region_id": "AREA000066",
+    "region_type": "lake",
+    "color": "#253d82",
+    "pixel_count": 530,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3286,
+      207,
+      3330,
+      235
+    ],
+    "global_center": [
+      3309,
+      220
+    ],
+    "global_seed": [
+      3309,
+      220
+    ]
+  },
+  {
+    "region_id": "AREA000067",
+    "region_type": "ocean",
+    "color": "#013a8c",
+    "pixel_count": 82,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      199,
+      228,
+      221,
+      236
+    ],
+    "global_center": [
+      211,
+      232
+    ],
+    "global_seed": [
+      211,
+      232
+    ]
+  },
+  {
+    "region_id": "AREA000068",
+    "region_type": "land",
+    "color": "#a7286e",
+    "pixel_count": 146,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      633,
+      235,
+      663,
+      255
+    ],
+    "global_center": [
+      648,
+      244
+    ],
+    "global_seed": [
+      648,
+      244
+    ]
+  },
+  {
+    "region_id": "AREA000069",
+    "region_type": "land",
+    "color": "#e2de50",
+    "pixel_count": 182,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      675,
+      238,
+      703,
+      267
+    ],
+    "global_center": [
+      689,
+      247
+    ],
+    "global_seed": [
+      689,
+      247
+    ]
+  },
+  {
+    "region_id": "AREA000070",
+    "region_type": "land",
+    "color": "#a115cf",
+    "pixel_count": 130,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      696,
+      239,
+      721,
+      272
+    ],
+    "global_center": [
+      708,
+      252
+    ],
+    "global_seed": [
+      708,
+      252
+    ]
+  },
+  {
+    "region_id": "AREA000071",
+    "region_type": "land",
+    "color": "#4457f7",
+    "pixel_count": 1283,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3184,
+      240,
+      3253,
+      272
+    ],
+    "global_center": [
+      3221,
+      254
+    ],
+    "global_seed": [
+      3221,
+      254
+    ]
+  },
+  {
+    "region_id": "AREA000072",
+    "region_type": "land",
+    "color": "#8bdf32",
+    "pixel_count": 63,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      663,
+      250,
+      683,
+      260
+    ],
+    "global_center": [
+      670,
+      255
+    ],
+    "global_seed": [
+      670,
+      255
+    ]
+  },
+  {
+    "region_id": "AREA000073",
+    "region_type": "land",
+    "color": "#c2ff13",
+    "pixel_count": 5851,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2725,
+      251,
+      2843,
+      387
+    ],
+    "global_center": [
+      2779,
+      330
+    ],
+    "global_seed": [
+      2779,
+      330
+    ]
+  },
+  {
+    "region_id": "AREA000074",
+    "region_type": "land",
+    "color": "#3e2541",
+    "pixel_count": 1939,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3145,
+      265,
+      3257,
+      301
+    ],
+    "global_center": [
+      3206,
+      283
+    ],
+    "global_seed": [
+      3206,
+      283
+    ]
+  },
+  {
+    "region_id": "AREA000075",
+    "region_type": "land",
+    "color": "#4f12e5",
+    "pixel_count": 316,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      718,
+      266,
+      780,
+      320
+    ],
+    "global_center": [
+      758,
+      291
+    ],
+    "global_seed": [
+      758,
+      291
+    ]
+  },
+  {
+    "region_id": "AREA000076",
+    "region_type": "ocean",
+    "color": "#0f49a1",
+    "pixel_count": 56,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2966,
+      271,
+      2980,
+      280
+    ],
+    "global_center": [
+      2974,
+      276
+    ],
+    "global_seed": [
+      2974,
+      276
+    ]
+  },
+  {
+    "region_id": "AREA000077",
+    "region_type": "land",
+    "color": "#2cb2c6",
+    "pixel_count": 51,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      692,
+      267,
+      707,
+      291
+    ],
+    "global_center": [
+      702,
+      281
+    ],
+    "global_seed": [
+      702,
+      281
+    ]
+  },
+  {
+    "region_id": "AREA000078",
+    "region_type": "land",
+    "color": "#202160",
+    "pixel_count": 566,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2944,
+      279,
+      2986,
+      315
+    ],
+    "global_center": [
+      2961,
+      296
+    ],
+    "global_seed": [
+      2961,
+      296
+    ]
+  },
+  {
+    "region_id": "AREA000079",
+    "region_type": "land",
+    "color": "#116b7a",
+    "pixel_count": 1921,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3146,
+      290,
+      3232,
+      329
+    ],
+    "global_center": [
+      3190,
+      307
+    ],
+    "global_seed": [
+      3190,
+      307
+    ]
+  },
+  {
+    "region_id": "AREA000080",
+    "region_type": "land",
+    "color": "#aa9274",
+    "pixel_count": 6242,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3180,
+      294,
+      3325,
+      370
+    ],
+    "global_center": [
+      3255,
+      335
+    ],
+    "global_seed": [
+      3255,
+      335
+    ]
+  },
+  {
+    "region_id": "AREA000081",
+    "region_type": "land",
+    "color": "#389674",
+    "pixel_count": 65,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      726,
+      288,
+      749,
+      314
+    ],
+    "global_center": [
+      737,
+      303
+    ],
+    "global_seed": [
+      737,
+      303
+    ]
+  },
+  {
+    "region_id": "AREA000082",
+    "region_type": "ocean",
+    "color": "#32379e",
+    "pixel_count": 99,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      269,
+      297,
+      301,
+      312
+    ],
+    "global_center": [
+      282,
+      303
+    ],
+    "global_seed": [
+      282,
+      303
+    ]
+  },
+  {
+    "region_id": "AREA000083",
+    "region_type": "land",
+    "color": "#925d48",
+    "pixel_count": 85,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2990,
+      298,
+      3008,
+      314
+    ],
+    "global_center": [
+      2999,
+      305
+    ],
+    "global_seed": [
+      2999,
+      305
+    ]
+  },
+  {
+    "region_id": "AREA000084",
+    "region_type": "lake",
+    "color": "#1a2d81",
+    "pixel_count": 669,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4443,
+      300,
+      4536,
+      367
+    ],
+    "global_center": [
+      4505,
+      335
+    ],
+    "global_seed": [
+      4505,
+      335
+    ]
+  },
+  {
+    "region_id": "AREA000085",
+    "region_type": "land",
+    "color": "#251c0b",
+    "pixel_count": 76291,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3545,
+      306,
+      4178,
+      536
+    ],
+    "global_center": [
+      3870,
+      418
+    ],
+    "global_seed": [
+      3870,
+      418
+    ]
+  },
+  {
+    "region_id": "AREA000086",
+    "region_type": "land",
+    "color": "#346848",
+    "pixel_count": 304,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3126,
+      308,
+      3172,
+      322
+    ],
+    "global_center": [
+      3151,
+      316
+    ],
+    "global_seed": [
+      3151,
+      316
+    ]
+  },
+  {
+    "region_id": "AREA000087",
+    "region_type": "land",
+    "color": "#2d50b6",
+    "pixel_count": 322,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2690,
+      308,
+      2728,
+      327
+    ],
+    "global_center": [
+      2711,
+      318
+    ],
+    "global_seed": [
+      2711,
+      318
+    ]
+  },
+  {
+    "region_id": "AREA000088",
+    "region_type": "ocean",
+    "color": "#124992",
+    "pixel_count": 68,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      234,
+      312,
+      258,
+      321
+    ],
+    "global_center": [
+      246,
+      316
+    ],
+    "global_seed": [
+      246,
+      316
+    ]
+  },
+  {
+    "region_id": "AREA000089",
+    "region_type": "ocean",
+    "color": "#084daa",
+    "pixel_count": 73,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2971,
+      305,
+      2991,
+      322
+    ],
+    "global_center": [
+      2981,
+      317
+    ],
+    "global_seed": [
+      2981,
+      317
+    ]
+  },
+  {
+    "region_id": "AREA000090",
+    "region_type": "land",
+    "color": "#c628ca",
+    "pixel_count": 10219,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2910,
+      311,
+      3050,
+      432
+    ],
+    "global_center": [
+      2978,
+      373
+    ],
+    "global_seed": [
+      2978,
+      373
+    ]
+  },
+  {
+    "region_id": "AREA000091",
+    "region_type": "land",
+    "color": "#b3c2b6",
+    "pixel_count": 9420,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3038,
+      315,
+      3193,
+      405
+    ],
+    "global_center": [
+      3119,
+      357
+    ],
+    "global_seed": [
+      3119,
+      357
+    ]
+  },
+  {
+    "region_id": "AREA000092",
+    "region_type": "land",
+    "color": "#9857ea",
+    "pixel_count": 1643,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2655,
+      316,
+      2721,
+      366
+    ],
+    "global_center": [
+      2690,
+      342
+    ],
+    "global_seed": [
+      2690,
+      342
+    ]
+  },
+  {
+    "region_id": "AREA000093",
+    "region_type": "lake",
+    "color": "#3a3780",
+    "pixel_count": 433,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1263,
+      328,
+      1300,
+      363
+    ],
+    "global_center": [
+      1280,
+      344
+    ],
+    "global_seed": [
+      1280,
+      344
+    ]
+  },
+  {
+    "region_id": "AREA000094",
+    "region_type": "land",
+    "color": "#808f13",
+    "pixel_count": 1790,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      5034,
+      331,
+      5074,
+      453
+    ],
+    "global_center": [
+      5050,
+      384
+    ],
+    "global_seed": [
+      5050,
+      384
+    ]
+  },
+  {
+    "region_id": "AREA000095",
+    "region_type": "land",
+    "color": "#167d8f",
+    "pixel_count": 226412,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3969,
+      335,
+      4925,
+      855
+    ],
+    "global_center": [
+      4440,
+      600
+    ],
+    "global_seed": [
+      4440,
+      600
+    ]
+  },
+  {
+    "region_id": "AREA000096",
+    "region_type": "land",
+    "color": "#364321",
+    "pixel_count": 900,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2878,
+      336,
+      2928,
+      378
+    ],
+    "global_center": [
+      2904,
+      354
+    ],
+    "global_seed": [
+      2904,
+      354
+    ]
+  },
+  {
+    "region_id": "AREA000097",
+    "region_type": "land",
+    "color": "#ea8146",
+    "pixel_count": 15948,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3163,
+      354,
+      3444,
+      464
+    ],
+    "global_center": [
+      3305,
+      403
+    ],
+    "global_seed": [
+      3305,
+      403
+    ]
+  },
+  {
+    "region_id": "AREA000098",
+    "region_type": "land",
+    "color": "#c8f54b",
+    "pixel_count": 43567,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4191,
+      358,
+      4693,
+      521
+    ],
+    "global_center": [
+      4429,
+      440
+    ],
+    "global_seed": [
+      4429,
+      440
+    ]
+  },
+  {
+    "region_id": "AREA000099",
+    "region_type": "land",
+    "color": "#e5c4cb",
+    "pixel_count": 2135,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1887,
+      368,
+      1977,
+      431
+    ],
+    "global_center": [
+      1932,
+      408
+    ],
+    "global_seed": [
+      1932,
+      408
+    ]
+  },
+  {
+    "region_id": "AREA000100",
+    "region_type": "land",
+    "color": "#86e926",
+    "pixel_count": 715,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2856,
+      367,
+      2915,
+      397
+    ],
+    "global_center": [
+      2888,
+      380
+    ],
+    "global_seed": [
+      2888,
+      380
+    ]
+  },
+  {
+    "region_id": "AREA000101",
+    "region_type": "land",
+    "color": "#16f77d",
+    "pixel_count": 14457,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2742,
+      374,
+      2943,
+      510
+    ],
+    "global_center": [
+      2854,
+      443
+    ],
+    "global_seed": [
+      2854,
+      443
+    ]
+  },
+  {
+    "region_id": "AREA000102",
+    "region_type": "land",
+    "color": "#66ba4b",
+    "pixel_count": 2017,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3008,
+      375,
+      3109,
+      412
+    ],
+    "global_center": [
+      3055,
+      394
+    ],
+    "global_seed": [
+      3055,
+      394
+    ]
+  },
+  {
+    "region_id": "AREA000103",
+    "region_type": "land",
+    "color": "#a3d8cd",
+    "pixel_count": 570,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      815,
+      378,
+      889,
+      417
+    ],
+    "global_center": [
+      851,
+      397
+    ],
+    "global_seed": [
+      851,
+      397
+    ]
+  },
+  {
+    "region_id": "AREA000104",
+    "region_type": "land",
+    "color": "#1ff8bb",
+    "pixel_count": 125,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1814,
+      392,
+      1849,
+      404
+    ],
+    "global_center": [
+      1831,
+      399
+    ],
+    "global_seed": [
+      1831,
+      399
+    ]
+  },
+  {
+    "region_id": "AREA000105",
+    "region_type": "land",
+    "color": "#b230ec",
+    "pixel_count": 1154,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3081,
+      397,
+      3167,
+      425
+    ],
+    "global_center": [
+      3120,
+      410
+    ],
+    "global_seed": [
+      3120,
+      410
+    ]
+  },
+  {
+    "region_id": "AREA000106",
+    "region_type": "land",
+    "color": "#64f03b",
+    "pixel_count": 194225,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      864,
+      401,
+      1766,
+      779
+    ],
+    "global_center": [
+      1255,
+      556
+    ],
+    "global_seed": [
+      1255,
+      556
+    ]
+  },
+  {
+    "region_id": "AREA000107",
+    "region_type": "land",
+    "color": "#17d795",
+    "pixel_count": 4661,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1653,
+      402,
+      1855,
+      491
+    ],
+    "global_center": [
+      1763,
+      444
+    ],
+    "global_seed": [
+      1763,
+      444
+    ]
+  },
+  {
+    "region_id": "AREA000108",
+    "region_type": "land",
+    "color": "#63f9f9",
+    "pixel_count": 2013,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2965,
+      407,
+      3083,
+      446
+    ],
+    "global_center": [
+      3039,
+      428
+    ],
+    "global_seed": [
+      3039,
+      428
+    ]
+  },
+  {
+    "region_id": "AREA000109",
+    "region_type": "lake",
+    "color": "#0032a4",
+    "pixel_count": 1862,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1375,
+      408,
+      1492,
+      445
+    ],
+    "global_center": [
+      1443,
+      429
+    ],
+    "global_seed": [
+      1443,
+      429
+    ]
+  },
+  {
+    "region_id": "AREA000110",
+    "region_type": "land",
+    "color": "#b19985",
+    "pixel_count": 2345,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3071,
+      413,
+      3173,
+      456
+    ],
+    "global_center": [
+      3119,
+      435
+    ],
+    "global_seed": [
+      3119,
+      435
+    ]
+  },
+  {
+    "region_id": "AREA000111",
+    "region_type": "land",
+    "color": "#884f24",
+    "pixel_count": 724,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3237,
+      415,
+      3284,
+      460
+    ],
+    "global_center": [
+      3261,
+      433
+    ],
+    "global_seed": [
+      3261,
+      433
+    ]
+  },
+  {
+    "region_id": "AREA000112",
+    "region_type": "land",
+    "color": "#65b2f0",
+    "pixel_count": 6118,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3135,
+      417,
+      3280,
+      489
+    ],
+    "global_center": [
+      3206,
+      455
+    ],
+    "global_seed": [
+      3206,
+      455
+    ]
+  },
+  {
+    "region_id": "AREA000113",
+    "region_type": "land",
+    "color": "#f63307",
+    "pixel_count": 126,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1969,
+      422,
+      1991,
+      442
+    ],
+    "global_center": [
+      1980,
+      433
+    ],
+    "global_seed": [
+      1980,
+      433
+    ]
+  },
+  {
+    "region_id": "AREA000114",
+    "region_type": "land",
+    "color": "#fcabc2",
+    "pixel_count": 899,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2912,
+      426,
+      2978,
+      454
+    ],
+    "global_center": [
+      2943,
+      440
+    ],
+    "global_seed": [
+      2943,
+      440
+    ]
+  },
+  {
+    "region_id": "AREA000115",
+    "region_type": "ocean",
+    "color": "#301ca9",
+    "pixel_count": 797,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3361,
+      434,
+      3427,
+      464
+    ],
+    "global_center": [
+      3391,
+      450
+    ],
+    "global_seed": [
+      3391,
+      450
+    ]
+  },
+  {
+    "region_id": "AREA000116",
+    "region_type": "ocean",
+    "color": "#263382",
+    "pixel_count": 9070,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3548,
+      436,
+      3661,
+      600
+    ],
+    "global_center": [
+      3609,
+      520
+    ],
+    "global_seed": [
+      3609,
+      520
+    ]
+  },
+  {
+    "region_id": "AREA000117",
+    "region_type": "land",
+    "color": "#5761b6",
+    "pixel_count": 5999,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2921,
+      437,
+      3105,
+      579
+    ],
+    "global_center": [
+      3005,
+      491
+    ],
+    "global_seed": [
+      3005,
+      491
+    ]
+  },
+  {
+    "region_id": "AREA000118",
+    "region_type": "land",
+    "color": "#800504",
+    "pixel_count": 101,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1853,
+      438,
+      1870,
+      461
+    ],
+    "global_center": [
+      1862,
+      448
+    ],
+    "global_seed": [
+      1862,
+      448
+    ]
+  },
+  {
+    "region_id": "AREA000119",
+    "region_type": "land",
+    "color": "#317e99",
+    "pixel_count": 397,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3026,
+      439,
+      3072,
+      465
+    ],
+    "global_center": [
+      3047,
+      451
+    ],
+    "global_seed": [
+      3047,
+      451
+    ]
+  },
+  {
+    "region_id": "AREA000120",
+    "region_type": "lake",
+    "color": "#3a3e7a",
+    "pixel_count": 163,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3967,
+      441,
+      3997,
+      465
+    ],
+    "global_center": [
+      3979,
+      451
+    ],
+    "global_seed": [
+      3979,
+      451
+    ]
+  },
+  {
+    "region_id": "AREA000121",
+    "region_type": "ocean",
+    "color": "#1e3baa",
+    "pixel_count": 10593,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3248,
+      443,
+      3469,
+      532
+    ],
+    "global_center": [
+      3351,
+      496
+    ],
+    "global_seed": [
+      3351,
+      496
+    ]
+  },
+  {
+    "region_id": "AREA000122",
+    "region_type": "land",
+    "color": "#71b735",
+    "pixel_count": 925,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3041,
+      444,
+      3115,
+      496
+    ],
+    "global_center": [
+      3075,
+      463
+    ],
+    "global_seed": [
+      3075,
+      463
+    ]
+  },
+  {
+    "region_id": "AREA000123",
+    "region_type": "land",
+    "color": "#75e761",
+    "pixel_count": 126,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3800,
+      447,
+      3817,
+      459
+    ],
+    "global_center": [
+      3808,
+      453
+    ],
+    "global_seed": [
+      3808,
+      453
+    ]
+  },
+  {
+    "region_id": "AREA000124",
+    "region_type": "land",
+    "color": "#04c94d",
+    "pixel_count": 544,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3327,
+      450,
+      3387,
+      477
+    ],
+    "global_center": [
+      3353,
+      464
+    ],
+    "global_seed": [
+      3353,
+      464
+    ]
+  },
+  {
+    "region_id": "AREA000125",
+    "region_type": "land",
+    "color": "#70ff63",
+    "pixel_count": 1798,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3111,
+      451,
+      3174,
+      510
+    ],
+    "global_center": [
+      3141,
+      480
+    ],
+    "global_seed": [
+      3141,
+      480
+    ]
+  },
+  {
+    "region_id": "AREA000126",
+    "region_type": "lake",
+    "color": "#0f12a7",
+    "pixel_count": 1199,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1440,
+      452,
+      1486,
+      521
+    ],
+    "global_center": [
+      1456,
+      486
+    ],
+    "global_seed": [
+      1456,
+      486
+    ]
+  },
+  {
+    "region_id": "AREA000127",
+    "region_type": "lake",
+    "color": "#0c3076",
+    "pixel_count": 889,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1492,
+      451,
+      1543,
+      499
+    ],
+    "global_center": [
+      1522,
+      473
+    ],
+    "global_seed": [
+      1522,
+      473
+    ]
+  },
+  {
+    "region_id": "AREA000128",
+    "region_type": "lake",
+    "color": "#303996",
+    "pixel_count": 266,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1534,
+      453,
+      1564,
+      476
+    ],
+    "global_center": [
+      1549,
+      463
+    ],
+    "global_seed": [
+      1549,
+      463
+    ]
+  },
+  {
+    "region_id": "AREA000129",
+    "region_type": "ocean",
+    "color": "#191daf",
+    "pixel_count": 56701,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2730,
+      457,
+      3382,
+      699
+    ],
+    "global_center": [
+      3075,
+      595
+    ],
+    "global_seed": [
+      3075,
+      595
+    ]
+  },
+  {
+    "region_id": "AREA000130",
+    "region_type": "land",
+    "color": "#c26406",
+    "pixel_count": 10485,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3692,
+      461,
+      3956,
+      590
+    ],
+    "global_center": [
+      3802,
+      519
+    ],
+    "global_seed": [
+      3802,
+      519
+    ]
+  },
+  {
+    "region_id": "AREA000131",
+    "region_type": "land",
+    "color": "#207275",
+    "pixel_count": 1705,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      5005,
+      461,
+      5091,
+      524
+    ],
+    "global_center": [
+      5049,
+      493
+    ],
+    "global_seed": [
+      5049,
+      493
+    ]
+  },
+  {
+    "region_id": "AREA000132",
+    "region_type": "land",
+    "color": "#5ffb7a",
+    "pixel_count": 1170,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3063,
+      465,
+      3120,
+      506
+    ],
+    "global_center": [
+      3094,
+      481
+    ],
+    "global_seed": [
+      3094,
+      481
+    ]
+  },
+  {
+    "region_id": "AREA000133",
+    "region_type": "land",
+    "color": "#cb205f",
+    "pixel_count": 2690,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3166,
+      480,
+      3263,
+      527
+    ],
+    "global_center": [
+      3210,
+      503
+    ],
+    "global_seed": [
+      3210,
+      503
+    ]
+  },
+  {
+    "region_id": "AREA000134",
+    "region_type": "lake",
+    "color": "#0d0b90",
+    "pixel_count": 349,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1567,
+      481,
+      1622,
+      496
+    ],
+    "global_center": [
+      1597,
+      490
+    ],
+    "global_seed": [
+      1597,
+      490
+    ]
+  },
+  {
+    "region_id": "AREA000135",
+    "region_type": "land",
+    "color": "#2463af",
+    "pixel_count": 12044,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2671,
+      488,
+      2865,
+      609
+    ],
+    "global_center": [
+      2760,
+      541
+    ],
+    "global_seed": [
+      2760,
+      541
+    ]
+  },
+  {
+    "region_id": "AREA000136",
+    "region_type": "land",
+    "color": "#ca8f9a",
+    "pixel_count": 1488,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3443,
+      491,
+      3546,
+      529
+    ],
+    "global_center": [
+      3497,
+      513
+    ],
+    "global_seed": [
+      3497,
+      513
+    ]
+  },
+  {
+    "region_id": "AREA000137",
+    "region_type": "land",
+    "color": "#4bdc2f",
+    "pixel_count": 235,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3105,
+      492,
+      3131,
+      515
+    ],
+    "global_center": [
+      3117,
+      503
+    ],
+    "global_seed": [
+      3117,
+      503
+    ]
+  },
+  {
+    "region_id": "AREA000138",
+    "region_type": "land",
+    "color": "#bb169a",
+    "pixel_count": 199,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3130,
+      497,
+      3155,
+      516
+    ],
+    "global_center": [
+      3142,
+      506
+    ],
+    "global_seed": [
+      3142,
+      506
+    ]
+  },
+  {
+    "region_id": "AREA000139",
+    "region_type": "land",
+    "color": "#404958",
+    "pixel_count": 4381,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3916,
+      497,
+      4072,
+      558
+    ],
+    "global_center": [
+      3987,
+      522
+    ],
+    "global_seed": [
+      3987,
+      522
+    ]
+  },
+  {
+    "region_id": "AREA000140",
+    "region_type": "land",
+    "color": "#c8ca40",
+    "pixel_count": 2619,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4763,
+      501,
+      4861,
+      583
+    ],
+    "global_center": [
+      4807,
+      544
+    ],
+    "global_seed": [
+      4807,
+      544
+    ]
+  },
+  {
+    "region_id": "AREA000141",
+    "region_type": "lake",
+    "color": "#2006ab",
+    "pixel_count": 430,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1517,
+      502,
+      1578,
+      524
+    ],
+    "global_center": [
+      1546,
+      513
+    ],
+    "global_seed": [
+      1546,
+      513
+    ]
+  },
+  {
+    "region_id": "AREA000142",
+    "region_type": "land",
+    "color": "#f65c8a",
+    "pixel_count": 143,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2951,
+      504,
+      2965,
+      524
+    ],
+    "global_center": [
+      2958,
+      513
+    ],
+    "global_seed": [
+      2958,
+      513
+    ]
+  },
+  {
+    "region_id": "AREA000143",
+    "region_type": "land",
+    "color": "#89c611",
+    "pixel_count": 10989,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3642,
+      504,
+      3858,
+      621
+    ],
+    "global_center": [
+      3747,
+      561
+    ],
+    "global_seed": [
+      3747,
+      561
+    ]
+  },
+  {
+    "region_id": "AREA000144",
+    "region_type": "land",
+    "color": "#87d79c",
+    "pixel_count": 581,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3118,
+      507,
+      3144,
+      554
+    ],
+    "global_center": [
+      3130,
+      529
+    ],
+    "global_seed": [
+      3130,
+      529
+    ]
+  },
+  {
+    "region_id": "AREA000145",
+    "region_type": "land",
+    "color": "#8e08ec",
+    "pixel_count": 539,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3137,
+      511,
+      3175,
+      533
+    ],
+    "global_center": [
+      3155,
+      522
+    ],
+    "global_seed": [
+      3155,
+      522
+    ]
+  },
+  {
+    "region_id": "AREA000146",
+    "region_type": "ocean",
+    "color": "#0b1c99",
+    "pixel_count": 330,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3641,
+      512,
+      3673,
+      537
+    ],
+    "global_center": [
+      3655,
+      525
+    ],
+    "global_seed": [
+      3655,
+      525
+    ]
+  },
+  {
+    "region_id": "AREA000147",
+    "region_type": "land",
+    "color": "#769296",
+    "pixel_count": 1905,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2668,
+      514,
+      2717,
+      593
+    ],
+    "global_center": [
+      2691,
+      551
+    ],
+    "global_seed": [
+      2691,
+      551
+    ]
+  },
+  {
+    "region_id": "AREA000148",
+    "region_type": "land",
+    "color": "#2803f3",
+    "pixel_count": 429,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3224,
+      515,
+      3270,
+      539
+    ],
+    "global_center": [
+      3244,
+      526
+    ],
+    "global_seed": [
+      3244,
+      526
+    ]
+  },
+  {
+    "region_id": "AREA000149",
+    "region_type": "land",
+    "color": "#cf27ab",
+    "pixel_count": 18016,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3225,
+      515,
+      3516,
+      611
+    ],
+    "global_center": [
+      3371,
+      562
+    ],
+    "global_seed": [
+      3371,
+      562
+    ]
+  },
+  {
+    "region_id": "AREA000150",
+    "region_type": "land",
+    "color": "#82bc24",
+    "pixel_count": 1679,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3522,
+      518,
+      3597,
+      571
+    ],
+    "global_center": [
+      3562,
+      541
+    ],
+    "global_seed": [
+      3562,
+      541
+    ]
+  },
+  {
+    "region_id": "AREA000151",
+    "region_type": "land",
+    "color": "#b3b7ff",
+    "pixel_count": 1668,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3131,
+      520,
+      3232,
+      582
+    ],
+    "global_center": [
+      3167,
+      547
+    ],
+    "global_seed": [
+      3167,
+      547
+    ]
+  },
+  {
+    "region_id": "AREA000152",
+    "region_type": "land",
+    "color": "#466e22",
+    "pixel_count": 476,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2944,
+      527,
+      2968,
+      563
+    ],
+    "global_center": [
+      2957,
+      545
+    ],
+    "global_seed": [
+      2957,
+      545
+    ]
+  },
+  {
+    "region_id": "AREA000153",
+    "region_type": "land",
+    "color": "#030b72",
+    "pixel_count": 537,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3498,
+      528,
+      3544,
+      564
+    ],
+    "global_center": [
+      3518,
+      541
+    ],
+    "global_seed": [
+      3518,
+      541
+    ]
+  },
+  {
+    "region_id": "AREA000154",
+    "region_type": "land",
+    "color": "#2cbe31",
+    "pixel_count": 4683,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4866,
+      529,
+      5039,
+      648
+    ],
+    "global_center": [
+      4978,
+      599
+    ],
+    "global_seed": [
+      4978,
+      599
+    ]
+  },
+  {
+    "region_id": "AREA000155",
+    "region_type": "ocean",
+    "color": "#252a7e",
+    "pixel_count": 156,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3239,
+      530,
+      3275,
+      541
+    ],
+    "global_center": [
+      3258,
+      535
+    ],
+    "global_seed": [
+      3258,
+      535
+    ]
+  },
+  {
+    "region_id": "AREA000156",
+    "region_type": "land",
+    "color": "#73fff5",
+    "pixel_count": 120,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3900,
+      531,
+      3922,
+      547
+    ],
+    "global_center": [
+      3911,
+      539
+    ],
+    "global_seed": [
+      3911,
+      539
+    ]
+  },
+  {
+    "region_id": "AREA000157",
+    "region_type": "land",
+    "color": "#46f437",
+    "pixel_count": 2787,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3871,
+      544,
+      3991,
+      598
+    ],
+    "global_center": [
+      3929,
+      570
+    ],
+    "global_seed": [
+      3929,
+      570
+    ]
+  },
+  {
+    "region_id": "AREA000158",
+    "region_type": "land",
+    "color": "#cb58ab",
+    "pixel_count": 93,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3901,
+      544,
+      3920,
+      554
+    ],
+    "global_center": [
+      3910,
+      549
+    ],
+    "global_seed": [
+      3910,
+      549
+    ]
+  },
+  {
+    "region_id": "AREA000159",
+    "region_type": "land",
+    "color": "#a6d861",
+    "pixel_count": 36723,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3507,
+      551,
+      3806,
+      780
+    ],
+    "global_center": [
+      3666,
+      663
+    ],
+    "global_seed": [
+      3666,
+      663
+    ]
+  },
+  {
+    "region_id": "AREA000160",
+    "region_type": "land",
+    "color": "#f0e105",
+    "pixel_count": 14193,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3764,
+      571,
+      3942,
+      712
+    ],
+    "global_center": [
+      3847,
+      644
+    ],
+    "global_seed": [
+      3847,
+      644
+    ]
+  },
+  {
+    "region_id": "AREA000161",
+    "region_type": "land",
+    "color": "#191ea5",
+    "pixel_count": 1913,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4793,
+      570,
+      4843,
+      635
+    ],
+    "global_center": [
+      4819,
+      601
+    ],
+    "global_seed": [
+      4819,
+      601
+    ]
+  },
+  {
+    "region_id": "AREA000162",
+    "region_type": "ocean",
+    "color": "#150c6b",
+    "pixel_count": 57,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1615,
+      569,
+      1630,
+      595
+    ],
+    "global_center": [
+      1624,
+      584
+    ],
+    "global_seed": [
+      1624,
+      584
+    ]
+  },
+  {
+    "region_id": "AREA000163",
+    "region_type": "land",
+    "color": "#ea9908",
+    "pixel_count": 374,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3147,
+      573,
+      3181,
+      600
+    ],
+    "global_center": [
+      3163,
+      585
+    ],
+    "global_seed": [
+      3163,
+      585
+    ]
+  },
+  {
+    "region_id": "AREA000164",
+    "region_type": "land",
+    "color": "#42a843",
+    "pixel_count": 485,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3011,
+      575,
+      3058,
+      598
+    ],
+    "global_center": [
+      3037,
+      585
+    ],
+    "global_seed": [
+      3037,
+      585
+    ]
+  },
+  {
+    "region_id": "AREA000165",
+    "region_type": "land",
+    "color": "#c349a1",
+    "pixel_count": 107,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3953,
+      587,
+      3983,
+      596
+    ],
+    "global_center": [
+      3967,
+      592
+    ],
+    "global_seed": [
+      3967,
+      592
+    ]
+  },
+  {
+    "region_id": "AREA000166",
+    "region_type": "land",
+    "color": "#19cfbd",
+    "pixel_count": 3254,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2934,
+      589,
+      2996,
+      699
+    ],
+    "global_center": [
+      2965,
+      639
+    ],
+    "global_seed": [
+      2965,
+      639
+    ]
+  },
+  {
+    "region_id": "AREA000167",
+    "region_type": "land",
+    "color": "#8aa610",
+    "pixel_count": 9646,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3423,
+      589,
+      3573,
+      718
+    ],
+    "global_center": [
+      3500,
+      656
+    ],
+    "global_seed": [
+      3500,
+      656
+    ]
+  },
+  {
+    "region_id": "AREA000168",
+    "region_type": "land",
+    "color": "#9b7408",
+    "pixel_count": 4041,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3376,
+      590,
+      3479,
+      667
+    ],
+    "global_center": [
+      3418,
+      625
+    ],
+    "global_seed": [
+      3418,
+      625
+    ]
+  },
+  {
+    "region_id": "AREA000169",
+    "region_type": "land",
+    "color": "#076db8",
+    "pixel_count": 50711,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2679,
+      593,
+      3002,
+      876
+    ],
+    "global_center": [
+      2857,
+      732
+    ],
+    "global_seed": [
+      2857,
+      732
+    ]
+  },
+  {
+    "region_id": "AREA000170",
+    "region_type": "land",
+    "color": "#af2c28",
+    "pixel_count": 18619,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3772,
+      591,
+      4022,
+      800
+    ],
+    "global_center": [
+      3901,
+      704
+    ],
+    "global_seed": [
+      3901,
+      704
+    ]
+  },
+  {
+    "region_id": "AREA000171",
+    "region_type": "land",
+    "color": "#406223",
+    "pixel_count": 12478,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2551,
+      611,
+      2798,
+      838
+    ],
+    "global_center": [
+      2685,
+      704
+    ],
+    "global_seed": [
+      2685,
+      704
+    ]
+  },
+  {
+    "region_id": "AREA000172",
+    "region_type": "land",
+    "color": "#055c14",
+    "pixel_count": 54,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3197,
+      619,
+      3219,
+      626
+    ],
+    "global_center": [
+      3208,
+      622
+    ],
+    "global_seed": [
+      3208,
+      622
+    ]
+  },
+  {
+    "region_id": "AREA000173",
+    "region_type": "land",
+    "color": "#323761",
+    "pixel_count": 119,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3323,
+      619,
+      3347,
+      630
+    ],
+    "global_center": [
+      3335,
+      625
+    ],
+    "global_seed": [
+      3335,
+      625
+    ]
+  },
+  {
+    "region_id": "AREA000174",
+    "region_type": "land",
+    "color": "#6a0d76",
+    "pixel_count": 59560,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3887,
+      618,
+      4210,
+      1046
+    ],
+    "global_center": [
+      4041,
+      820
+    ],
+    "global_seed": [
+      4041,
+      820
+    ]
+  },
+  {
+    "region_id": "AREA000175",
+    "region_type": "land",
+    "color": "#e8e223",
+    "pixel_count": 135,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3367,
+      631,
+      3388,
+      655
+    ],
+    "global_center": [
+      3377,
+      641
+    ],
+    "global_seed": [
+      3377,
+      641
+    ]
+  },
+  {
+    "region_id": "AREA000176",
+    "region_type": "land",
+    "color": "#51a705",
+    "pixel_count": 290,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4888,
+      633,
+      4924,
+      660
+    ],
+    "global_center": [
+      4906,
+      646
+    ],
+    "global_seed": [
+      4906,
+      646
+    ]
+  },
+  {
+    "region_id": "AREA000177",
+    "region_type": "ocean",
+    "color": "#2242a2",
+    "pixel_count": 85,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4867,
+      639,
+      4893,
+      652
+    ],
+    "global_center": [
+      4880,
+      645
+    ],
+    "global_seed": [
+      4880,
+      645
+    ]
+  },
+  {
+    "region_id": "AREA000178",
+    "region_type": "land",
+    "color": "#0f4617",
+    "pixel_count": 576,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4847,
+      642,
+      4882,
+      685
+    ],
+    "global_center": [
+      4866,
+      661
+    ],
+    "global_seed": [
+      4866,
+      661
+    ]
+  },
+  {
+    "region_id": "AREA000179",
+    "region_type": "land",
+    "color": "#80f6cc",
+    "pixel_count": 1746,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3363,
+      652,
+      3429,
+      716
+    ],
+    "global_center": [
+      3391,
+      684
+    ],
+    "global_seed": [
+      3391,
+      684
+    ]
+  },
+  {
+    "region_id": "AREA000180",
+    "region_type": "land",
+    "color": "#c0c056",
+    "pixel_count": 60,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3363,
+      652,
+      3377,
+      664
+    ],
+    "global_center": [
+      3370,
+      659
+    ],
+    "global_seed": [
+      3370,
+      659
+    ]
+  },
+  {
+    "region_id": "AREA000181",
+    "region_type": "land",
+    "color": "#fa2122",
+    "pixel_count": 35070,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2962,
+      655,
+      3209,
+      866
+    ],
+    "global_center": [
+      3098,
+      750
+    ],
+    "global_seed": [
+      3098,
+      750
+    ]
+  },
+  {
+    "region_id": "AREA000182",
+    "region_type": "land",
+    "color": "#637656",
+    "pixel_count": 39899,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      982,
+      662,
+      1456,
+      944
+    ],
+    "global_center": [
+      1211,
+      798
+    ],
+    "global_seed": [
+      1211,
+      798
+    ]
+  },
+  {
+    "region_id": "AREA000183",
+    "region_type": "land",
+    "color": "#78df77",
+    "pixel_count": 61,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3363,
+      664,
+      3372,
+      682
+    ],
+    "global_center": [
+      3368,
+      672
+    ],
+    "global_seed": [
+      3368,
+      672
+    ]
+  },
+  {
+    "region_id": "AREA000184",
+    "region_type": "land",
+    "color": "#6ba315",
+    "pixel_count": 227,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3353,
+      668,
+      3370,
+      709
+    ],
+    "global_center": [
+      3361,
+      689
+    ],
+    "global_seed": [
+      3361,
+      689
+    ]
+  },
+  {
+    "region_id": "AREA000185",
+    "region_type": "land",
+    "color": "#e4ed05",
+    "pixel_count": 40572,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3357,
+      669,
+      3686,
+      915
+    ],
+    "global_center": [
+      3513,
+      795
+    ],
+    "global_seed": [
+      3513,
+      795
+    ]
+  },
+  {
+    "region_id": "AREA000186",
+    "region_type": "land",
+    "color": "#9ffe1d",
+    "pixel_count": 21136,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3203,
+      679,
+      3391,
+      831
+    ],
+    "global_center": [
+      3282,
+      758
+    ],
+    "global_seed": [
+      3282,
+      758
+    ]
+  },
+  {
+    "region_id": "AREA000187",
+    "region_type": "land",
+    "color": "#261ceb",
+    "pixel_count": 2839,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4070,
+      698,
+      4196,
+      760
+    ],
+    "global_center": [
+      4129,
+      730
+    ],
+    "global_seed": [
+      4129,
+      730
+    ]
+  },
+  {
+    "region_id": "AREA000188",
+    "region_type": "ocean",
+    "color": "#1b4c6b",
+    "pixel_count": 1285502,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3168,
+      698,
+      4593,
+      2111
+    ],
+    "global_center": [
+      3896,
+      1605
+    ],
+    "global_seed": [
+      3896,
+      1605
+    ]
+  },
+  {
+    "region_id": "AREA000189",
+    "region_type": "land",
+    "color": "#afa189",
+    "pixel_count": 253,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3546,
+      702,
+      3573,
+      726
+    ],
+    "global_center": [
+      3560,
+      713
+    ],
+    "global_seed": [
+      3560,
+      713
+    ]
+  },
+  {
+    "region_id": "AREA000190",
+    "region_type": "ocean",
+    "color": "#240a66",
+    "pixel_count": 8577,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3327,
+      712,
+      3497,
+      976
+    ],
+    "global_center": [
+      3421,
+      853
+    ],
+    "global_seed": [
+      3421,
+      853
+    ]
+  },
+  {
+    "region_id": "AREA000191",
+    "region_type": "land",
+    "color": "#9ecee6",
+    "pixel_count": 5154,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4194,
+      714,
+      4339,
+      828
+    ],
+    "global_center": [
+      4275,
+      760
+    ],
+    "global_seed": [
+      4275,
+      760
+    ]
+  },
+  {
+    "region_id": "AREA000192",
+    "region_type": "land",
+    "color": "#c976ea",
+    "pixel_count": 12505,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4259,
+      727,
+      4393,
+      1004
+    ],
+    "global_center": [
+      4326,
+      837
+    ],
+    "global_seed": [
+      4326,
+      837
+    ]
+  },
+  {
+    "region_id": "AREA000193",
+    "region_type": "land",
+    "color": "#08ab83",
+    "pixel_count": 719,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4206,
+      730,
+      4257,
+      755
+    ],
+    "global_center": [
+      4231,
+      743
+    ],
+    "global_seed": [
+      4231,
+      743
+    ]
+  },
+  {
+    "region_id": "AREA000194",
+    "region_type": "land",
+    "color": "#b1de29",
+    "pixel_count": 20939,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2550,
+      747,
+      2736,
+      942
+    ],
+    "global_center": [
+      2654,
+      856
+    ],
+    "global_seed": [
+      2654,
+      856
+    ]
+  },
+  {
+    "region_id": "AREA000195",
+    "region_type": "land",
+    "color": "#c70675",
+    "pixel_count": 528,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2632,
+      748,
+      2679,
+      766
+    ],
+    "global_center": [
+      2658,
+      758
+    ],
+    "global_seed": [
+      2658,
+      758
+    ]
+  },
+  {
+    "region_id": "AREA000196",
+    "region_type": "land",
+    "color": "#103ef6",
+    "pixel_count": 1943,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4195,
+      759,
+      4261,
+      832
+    ],
+    "global_center": [
+      4224,
+      794
+    ],
+    "global_seed": [
+      4224,
+      794
+    ]
+  },
+  {
+    "region_id": "AREA000197",
+    "region_type": "ocean",
+    "color": "#1833b0",
+    "pixel_count": 52,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3600,
+      762,
+      3611,
+      782
+    ],
+    "global_center": [
+      3606,
+      771
+    ],
+    "global_seed": [
+      3606,
+      771
+    ]
+  },
+  {
+    "region_id": "AREA000198",
+    "region_type": "land",
+    "color": "#f21659",
+    "pixel_count": 154,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3611,
+      764,
+      3623,
+      788
+    ],
+    "global_center": [
+      3617,
+      777
+    ],
+    "global_seed": [
+      3617,
+      777
+    ]
+  },
+  {
+    "region_id": "AREA000199",
+    "region_type": "land",
+    "color": "#fec16b",
+    "pixel_count": 1204,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3627,
+      768,
+      3698,
+      818
+    ],
+    "global_center": [
+      3665,
+      800
+    ],
+    "global_seed": [
+      3665,
+      800
+    ]
+  },
+  {
+    "region_id": "AREA000200",
+    "region_type": "land",
+    "color": "#10a52a",
+    "pixel_count": 919,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2584,
+      775,
+      2627,
+      839
+    ],
+    "global_center": [
+      2607,
+      813
+    ],
+    "global_seed": [
+      2607,
+      813
+    ]
+  },
+  {
+    "region_id": "AREA000201",
+    "region_type": "land",
+    "color": "#e84672",
+    "pixel_count": 609,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4696,
+      778,
+      4724,
+      826
+    ],
+    "global_center": [
+      4710,
+      801
+    ],
+    "global_seed": [
+      4710,
+      801
+    ]
+  },
+  {
+    "region_id": "AREA000202",
+    "region_type": "land",
+    "color": "#8c7d8e",
+    "pixel_count": 24807,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2625,
+      781,
+      2882,
+      1013
+    ],
+    "global_center": [
+      2761,
+      901
+    ],
+    "global_seed": [
+      2761,
+      901
+    ]
+  },
+  {
+    "region_id": "AREA000203",
+    "region_type": "land",
+    "color": "#ce7f56",
+    "pixel_count": 5962,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3631,
+      783,
+      3752,
+      911
+    ],
+    "global_center": [
+      3694,
+      851
+    ],
+    "global_seed": [
+      3694,
+      851
+    ]
+  },
+  {
+    "region_id": "AREA000204",
+    "region_type": "land",
+    "color": "#6ccb93",
+    "pixel_count": 244,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4248,
+      803,
+      4266,
+      841
+    ],
+    "global_center": [
+      4258,
+      821
+    ],
+    "global_seed": [
+      4258,
+      821
+    ]
+  },
+  {
+    "region_id": "AREA000205",
+    "region_type": "land",
+    "color": "#76f741",
+    "pixel_count": 23619,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2819,
+      805,
+      3065,
+      987
+    ],
+    "global_center": [
+      2963,
+      900
+    ],
+    "global_seed": [
+      2963,
+      900
+    ]
+  },
+  {
+    "region_id": "AREA000206",
+    "region_type": "land",
+    "color": "#75f5d6",
+    "pixel_count": 25087,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3027,
+      807,
+      3191,
+      1056
+    ],
+    "global_center": [
+      3108,
+      933
+    ],
+    "global_seed": [
+      3108,
+      933
+    ]
+  },
+  {
+    "region_id": "AREA000207",
+    "region_type": "land",
+    "color": "#930e8e",
+    "pixel_count": 5519,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4416,
+      808,
+      4529,
+      1038
+    ],
+    "global_center": [
+      4486,
+      910
+    ],
+    "global_seed": [
+      4486,
+      910
+    ]
+  },
+  {
+    "region_id": "AREA000208",
+    "region_type": "land",
+    "color": "#62f78f",
+    "pixel_count": 1632,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1494,
+      811,
+      1654,
+      862
+    ],
+    "global_center": [
+      1581,
+      833
+    ],
+    "global_seed": [
+      1581,
+      833
+    ]
+  },
+  {
+    "region_id": "AREA000209",
+    "region_type": "land",
+    "color": "#939e68",
+    "pixel_count": 4007,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4385,
+      822,
+      4501,
+      955
+    ],
+    "global_center": [
+      4440,
+      883
+    ],
+    "global_seed": [
+      4440,
+      883
+    ]
+  },
+  {
+    "region_id": "AREA000210",
+    "region_type": "land",
+    "color": "#408266",
+    "pixel_count": 37174,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3158,
+      828,
+      3419,
+      1037
+    ],
+    "global_center": [
+      3284,
+      922
+    ],
+    "global_seed": [
+      3284,
+      922
+    ]
+  },
+  {
+    "region_id": "AREA000211",
+    "region_type": "land",
+    "color": "#d4f277",
+    "pixel_count": 8303,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4343,
+      854,
+      4470,
+      989
+    ],
+    "global_center": [
+      4401,
+      918
+    ],
+    "global_seed": [
+      4401,
+      918
+    ]
+  },
+  {
+    "region_id": "AREA000212",
+    "region_type": "land",
+    "color": "#a63195",
+    "pixel_count": 140,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      373,
+      857,
+      390,
+      876
+    ],
+    "global_center": [
+      380,
+      866
+    ],
+    "global_seed": [
+      380,
+      866
+    ]
+  },
+  {
+    "region_id": "AREA000213",
+    "region_type": "land",
+    "color": "#271034",
+    "pixel_count": 545,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4518,
+      860,
+      4553,
+      888
+    ],
+    "global_center": [
+      4533,
+      873
+    ],
+    "global_seed": [
+      4533,
+      873
+    ]
+  },
+  {
+    "region_id": "AREA000214",
+    "region_type": "land",
+    "color": "#0ddd36",
+    "pixel_count": 297,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1650,
+      861,
+      1693,
+      889
+    ],
+    "global_center": [
+      1679,
+      875
+    ],
+    "global_seed": [
+      1679,
+      875
+    ]
+  },
+  {
+    "region_id": "AREA000215",
+    "region_type": "land",
+    "color": "#e923ab",
+    "pixel_count": 777,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1690,
+      862,
+      1745,
+      896
+    ],
+    "global_center": [
+      1711,
+      877
+    ],
+    "global_seed": [
+      1711,
+      877
+    ]
+  },
+  {
+    "region_id": "AREA000216",
+    "region_type": "land",
+    "color": "#fb1c00",
+    "pixel_count": 8698,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3484,
+      876,
+      3646,
+      975
+    ],
+    "global_center": [
+      3560,
+      923
+    ],
+    "global_seed": [
+      3560,
+      923
+    ]
+  },
+  {
+    "region_id": "AREA000217",
+    "region_type": "land",
+    "color": "#485d7c",
+    "pixel_count": 1517,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4692,
+      882,
+      4733,
+      960
+    ],
+    "global_center": [
+      4713,
+      916
+    ],
+    "global_seed": [
+      4713,
+      916
+    ]
+  },
+  {
+    "region_id": "AREA000218",
+    "region_type": "land",
+    "color": "#0e11a3",
+    "pixel_count": 126,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1590,
+      884,
+      1621,
+      894
+    ],
+    "global_center": [
+      1604,
+      888
+    ],
+    "global_seed": [
+      1604,
+      888
+    ]
+  },
+  {
+    "region_id": "AREA000219",
+    "region_type": "land",
+    "color": "#160b62",
+    "pixel_count": 110,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1764,
+      884,
+      1787,
+      892
+    ],
+    "global_center": [
+      1774,
+      888
+    ],
+    "global_seed": [
+      1774,
+      888
+    ]
+  },
+  {
+    "region_id": "AREA000220",
+    "region_type": "land",
+    "color": "#112514",
+    "pixel_count": 321,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1419,
+      884,
+      1438,
+      924
+    ],
+    "global_center": [
+      1426,
+      904
+    ],
+    "global_seed": [
+      1426,
+      904
+    ]
+  },
+  {
+    "region_id": "AREA000221",
+    "region_type": "land",
+    "color": "#7c45d4",
+    "pixel_count": 2050,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3387,
+      892,
+      3488,
+      979
+    ],
+    "global_center": [
+      3422,
+      931
+    ],
+    "global_seed": [
+      3422,
+      931
+    ]
+  },
+  {
+    "region_id": "AREA000222",
+    "region_type": "land",
+    "color": "#9355ce",
+    "pixel_count": 1905,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1372,
+      895,
+      1432,
+      957
+    ],
+    "global_center": [
+      1400,
+      928
+    ],
+    "global_seed": [
+      1400,
+      928
+    ]
+  },
+  {
+    "region_id": "AREA000223",
+    "region_type": "land",
+    "color": "#334423",
+    "pixel_count": 3403,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2545,
+      913,
+      2637,
+      980
+    ],
+    "global_center": [
+      2590,
+      947
+    ],
+    "global_seed": [
+      2590,
+      947
+    ]
+  },
+  {
+    "region_id": "AREA000224",
+    "region_type": "land",
+    "color": "#4868d3",
+    "pixel_count": 1928,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1418,
+      923,
+      1510,
+      969
+    ],
+    "global_center": [
+      1458,
+      941
+    ],
+    "global_seed": [
+      1458,
+      941
+    ]
+  },
+  {
+    "region_id": "AREA000225",
+    "region_type": "land",
+    "color": "#5cbed8",
+    "pixel_count": 5009,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2729,
+      938,
+      2852,
+      1022
+    ],
+    "global_center": [
+      2788,
+      980
+    ],
+    "global_seed": [
+      2788,
+      980
+    ]
+  },
+  {
+    "region_id": "AREA000226",
+    "region_type": "land",
+    "color": "#20bace",
+    "pixel_count": 2268,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1446,
+      939,
+      1512,
+      1005
+    ],
+    "global_center": [
+      1484,
+      972
+    ],
+    "global_seed": [
+      1484,
+      972
+    ]
+  },
+  {
+    "region_id": "AREA000227",
+    "region_type": "land",
+    "color": "#5ad4ce",
+    "pixel_count": 21728,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3333,
+      942,
+      3564,
+      1119
+    ],
+    "global_center": [
+      3435,
+      1038
+    ],
+    "global_seed": [
+      3435,
+      1038
+    ]
+  },
+  {
+    "region_id": "AREA000228",
+    "region_type": "land",
+    "color": "#2d29a0",
+    "pixel_count": 3242,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4419,
+      946,
+      4500,
+      1009
+    ],
+    "global_center": [
+      4458,
+      974
+    ],
+    "global_seed": [
+      4458,
+      974
+    ]
+  },
+  {
+    "region_id": "AREA000229",
+    "region_type": "land",
+    "color": "#6b32f9",
+    "pixel_count": 287,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1404,
+      947,
+      1441,
+      967
+    ],
+    "global_center": [
+      1424,
+      958
+    ],
+    "global_seed": [
+      1424,
+      958
+    ]
+  },
+  {
+    "region_id": "AREA000230",
+    "region_type": "land",
+    "color": "#3e2c7e",
+    "pixel_count": 51,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4741,
+      955,
+      4756,
+      975
+    ],
+    "global_center": [
+      4749,
+      963
+    ],
+    "global_seed": [
+      4749,
+      963
+    ]
+  },
+  {
+    "region_id": "AREA000231",
+    "region_type": "land",
+    "color": "#5d8552",
+    "pixel_count": 17313,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2858,
+      957,
+      3044,
+      1105
+    ],
+    "global_center": [
+      2942,
+      1022
+    ],
+    "global_seed": [
+      2942,
+      1022
+    ]
+  },
+  {
+    "region_id": "AREA000232",
+    "region_type": "land",
+    "color": "#7a768a",
+    "pixel_count": 119,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4702,
+      962,
+      4718,
+      981
+    ],
+    "global_center": [
+      4712,
+      970
+    ],
+    "global_seed": [
+      4712,
+      970
+    ]
+  },
+  {
+    "region_id": "AREA000233",
+    "region_type": "land",
+    "color": "#e8366a",
+    "pixel_count": 8437,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2950,
+      969,
+      3069,
+      1145
+    ],
+    "global_center": [
+      3014,
+      1085
+    ],
+    "global_seed": [
+      3014,
+      1085
+    ]
+  },
+  {
+    "region_id": "AREA000234",
+    "region_type": "land",
+    "color": "#c7e847",
+    "pixel_count": 379,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2560,
+      975,
+      2601,
+      1000
+    ],
+    "global_center": [
+      2584,
+      983
+    ],
+    "global_seed": [
+      2584,
+      983
+    ]
+  },
+  {
+    "region_id": "AREA000235",
+    "region_type": "land",
+    "color": "#f3e947",
+    "pixel_count": 4291,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2582,
+      975,
+      2694,
+      1059
+    ],
+    "global_center": [
+      2644,
+      1009
+    ],
+    "global_seed": [
+      2644,
+      1009
+    ]
+  },
+  {
+    "region_id": "AREA000236",
+    "region_type": "land",
+    "color": "#83b64d",
+    "pixel_count": 304,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3470,
+      974,
+      3495,
+      1001
+    ],
+    "global_center": [
+      3482,
+      989
+    ],
+    "global_seed": [
+      3482,
+      989
+    ]
+  },
+  {
+    "region_id": "AREA000237",
+    "region_type": "land",
+    "color": "#382c77",
+    "pixel_count": 146,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4762,
+      977,
+      4782,
+      999
+    ],
+    "global_center": [
+      4774,
+      985
+    ],
+    "global_seed": [
+      4774,
+      985
+    ]
+  },
+  {
+    "region_id": "AREA000238",
+    "region_type": "land",
+    "color": "#7cb960",
+    "pixel_count": 21268,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1579,
+      979,
+      1763,
+      1239
+    ],
+    "global_center": [
+      1671,
+      1112
+    ],
+    "global_seed": [
+      1671,
+      1112
+    ]
+  },
+  {
+    "region_id": "AREA000239",
+    "region_type": "land",
+    "color": "#7d9fbe",
+    "pixel_count": 1983,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2828,
+      980,
+      2875,
+      1074
+    ],
+    "global_center": [
+      2852,
+      1021
+    ],
+    "global_seed": [
+      2852,
+      1021
+    ]
+  },
+  {
+    "region_id": "AREA000240",
+    "region_type": "land",
+    "color": "#7f2e09",
+    "pixel_count": 11689,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3194,
+      983,
+      3376,
+      1117
+    ],
+    "global_center": [
+      3290,
+      1059
+    ],
+    "global_seed": [
+      3290,
+      1059
+    ]
+  },
+  {
+    "region_id": "AREA000241",
+    "region_type": "land",
+    "color": "#80d592",
+    "pixel_count": 8655,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3458,
+      986,
+      3618,
+      1197
+    ],
+    "global_center": [
+      3531,
+      1099
+    ],
+    "global_seed": [
+      3531,
+      1099
+    ]
+  },
+  {
+    "region_id": "AREA000242",
+    "region_type": "land",
+    "color": "#0d1ad3",
+    "pixel_count": 136,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4726,
+      989,
+      4743,
+      1007
+    ],
+    "global_center": [
+      4733,
+      998
+    ],
+    "global_seed": [
+      4733,
+      998
+    ]
+  },
+  {
+    "region_id": "AREA000243",
+    "region_type": "land",
+    "color": "#4fd02a",
+    "pixel_count": 16852,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1669,
+      990,
+      1878,
+      1161
+    ],
+    "global_center": [
+      1779,
+      1062
+    ],
+    "global_seed": [
+      1779,
+      1062
+    ]
+  },
+  {
+    "region_id": "AREA000244",
+    "region_type": "land",
+    "color": "#ec2caa",
+    "pixel_count": 1020,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4355,
+      993,
+      4414,
+      1083
+    ],
+    "global_center": [
+      4377,
+      1045
+    ],
+    "global_seed": [
+      4377,
+      1045
+    ]
+  },
+  {
+    "region_id": "AREA000245",
+    "region_type": "land",
+    "color": "#722955",
+    "pixel_count": 3025,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3484,
+      994,
+      3582,
+      1048
+    ],
+    "global_center": [
+      3540,
+      1021
+    ],
+    "global_seed": [
+      3540,
+      1021
+    ]
+  },
+  {
+    "region_id": "AREA000246",
+    "region_type": "land",
+    "color": "#713970",
+    "pixel_count": 750,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1472,
+      999,
+      1519,
+      1042
+    ],
+    "global_center": [
+      1497,
+      1016
+    ],
+    "global_seed": [
+      1497,
+      1016
+    ]
+  },
+  {
+    "region_id": "AREA000247",
+    "region_type": "land",
+    "color": "#1fa1f4",
+    "pixel_count": 4358,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2765,
+      999,
+      2833,
+      1098
+    ],
+    "global_center": [
+      2796,
+      1049
+    ],
+    "global_seed": [
+      2796,
+      1049
+    ]
+  },
+  {
+    "region_id": "AREA000248",
+    "region_type": "land",
+    "color": "#6173ac",
+    "pixel_count": 871,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2815,
+      1000,
+      2843,
+      1077
+    ],
+    "global_center": [
+      2831,
+      1040
+    ],
+    "global_seed": [
+      2831,
+      1040
+    ]
+  },
+  {
+    "region_id": "AREA000249",
+    "region_type": "land",
+    "color": "#ee3427",
+    "pixel_count": 11505,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3042,
+      1002,
+      3242,
+      1135
+    ],
+    "global_center": [
+      3136,
+      1070
+    ],
+    "global_seed": [
+      3136,
+      1070
+    ]
+  },
+  {
+    "region_id": "AREA000250",
+    "region_type": "land",
+    "color": "#5af58b",
+    "pixel_count": 152,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4733,
+      1001,
+      4750,
+      1031
+    ],
+    "global_center": [
+      4742,
+      1016
+    ],
+    "global_seed": [
+      4742,
+      1016
+    ]
+  },
+  {
+    "region_id": "AREA000251",
+    "region_type": "land",
+    "color": "#106df9",
+    "pixel_count": 5836,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2682,
+      1007,
+      2776,
+      1105
+    ],
+    "global_center": [
+      2728,
+      1053
+    ],
+    "global_seed": [
+      2728,
+      1053
+    ]
+  },
+  {
+    "region_id": "AREA000252",
+    "region_type": "ocean",
+    "color": "#0712b1",
+    "pixel_count": 170,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1687,
+      1008,
+      1703,
+      1031
+    ],
+    "global_center": [
+      1695,
+      1021
+    ],
+    "global_seed": [
+      1695,
+      1021
+    ]
+  },
+  {
+    "region_id": "AREA000253",
+    "region_type": "land",
+    "color": "#0db088",
+    "pixel_count": 1160,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2609,
+      1017,
+      2651,
+      1064
+    ],
+    "global_center": [
+      2631,
+      1038
+    ],
+    "global_seed": [
+      2631,
+      1038
+    ]
+  },
+  {
+    "region_id": "AREA000254",
+    "region_type": "land",
+    "color": "#d5ea5b",
+    "pixel_count": 1235,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4752,
+      1022,
+      4797,
+      1085
+    ],
+    "global_center": [
+      4776,
+      1054
+    ],
+    "global_seed": [
+      4776,
+      1054
+    ]
+  },
+  {
+    "region_id": "AREA000255",
+    "region_type": "land",
+    "color": "#4cf19a",
+    "pixel_count": 1001,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1517,
+      1023,
+      1606,
+      1060
+    ],
+    "global_center": [
+      1560,
+      1039
+    ],
+    "global_seed": [
+      1560,
+      1039
+    ]
+  },
+  {
+    "region_id": "AREA000256",
+    "region_type": "land",
+    "color": "#cf07fa",
+    "pixel_count": 1098,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4065,
+      1022,
+      4097,
+      1080
+    ],
+    "global_center": [
+      4079,
+      1055
+    ],
+    "global_seed": [
+      4079,
+      1055
+    ]
+  },
+  {
+    "region_id": "AREA000257",
+    "region_type": "land",
+    "color": "#6e32a6",
+    "pixel_count": 178,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4725,
+      1038,
+      4755,
+      1064
+    ],
+    "global_center": [
+      4742,
+      1048
+    ],
+    "global_seed": [
+      4742,
+      1048
+    ]
+  },
+  {
+    "region_id": "AREA000258",
+    "region_type": "land",
+    "color": "#7abc62",
+    "pixel_count": 1601,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2636,
+      1041,
+      2699,
+      1104
+    ],
+    "global_center": [
+      2669,
+      1072
+    ],
+    "global_seed": [
+      2669,
+      1072
+    ]
+  },
+  {
+    "region_id": "AREA000259",
+    "region_type": "land",
+    "color": "#4b9dea",
+    "pixel_count": 3689,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1855,
+      1043,
+      1927,
+      1154
+    ],
+    "global_center": [
+      1892,
+      1098
+    ],
+    "global_seed": [
+      1892,
+      1098
+    ]
+  },
+  {
+    "region_id": "AREA000260",
+    "region_type": "land",
+    "color": "#40a219",
+    "pixel_count": 3127,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4533,
+      1065,
+      4683,
+      1159
+    ],
+    "global_center": [
+      4612,
+      1117
+    ],
+    "global_seed": [
+      4612,
+      1117
+    ]
+  },
+  {
+    "region_id": "AREA000261",
+    "region_type": "land",
+    "color": "#297a0f",
+    "pixel_count": 2233,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4384,
+      1070,
+      4447,
+      1152
+    ],
+    "global_center": [
+      4416,
+      1110
+    ],
+    "global_seed": [
+      4416,
+      1110
+    ]
+  },
+  {
+    "region_id": "AREA000262",
+    "region_type": "land",
+    "color": "#a39462",
+    "pixel_count": 2540,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1907,
+      1080,
+      1970,
+      1144
+    ],
+    "global_center": [
+      1940,
+      1108
+    ],
+    "global_seed": [
+      1940,
+      1108
+    ]
+  },
+  {
+    "region_id": "AREA000263",
+    "region_type": "land",
+    "color": "#c0fcec",
+    "pixel_count": 1399,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1962,
+      1084,
+      2007,
+      1139
+    ],
+    "global_center": [
+      1982,
+      1111
+    ],
+    "global_seed": [
+      1982,
+      1111
+    ]
+  },
+  {
+    "region_id": "AREA000264",
+    "region_type": "land",
+    "color": "#679a4c",
+    "pixel_count": 7633,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4308,
+      1085,
+      4476,
+      1264
+    ],
+    "global_center": [
+      4406,
+      1181
+    ],
+    "global_seed": [
+      4406,
+      1181
+    ]
+  },
+  {
+    "region_id": "AREA000265",
+    "region_type": "land",
+    "color": "#16d067",
+    "pixel_count": 44397,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3009,
+      1090,
+      3305,
+      1382
+    ],
+    "global_center": [
+      3185,
+      1217
+    ],
+    "global_seed": [
+      3185,
+      1217
+    ]
+  },
+  {
+    "region_id": "AREA000266",
+    "region_type": "land",
+    "color": "#776945",
+    "pixel_count": 168069,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1658,
+      1092,
+      2270,
+      1701
+    ],
+    "global_center": [
+      1984,
+      1343
+    ],
+    "global_seed": [
+      1984,
+      1343
+    ]
+  },
+  {
+    "region_id": "AREA000267",
+    "region_type": "land",
+    "color": "#b34905",
+    "pixel_count": 10830,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3347,
+      1096,
+      3469,
+      1245
+    ],
+    "global_center": [
+      3408,
+      1164
+    ],
+    "global_seed": [
+      3408,
+      1164
+    ]
+  },
+  {
+    "region_id": "AREA000268",
+    "region_type": "land",
+    "color": "#f2b5f6",
+    "pixel_count": 9598,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4521,
+      1105,
+      4678,
+      1237
+    ],
+    "global_center": [
+      4601,
+      1176
+    ],
+    "global_seed": [
+      4601,
+      1176
+    ]
+  },
+  {
+    "region_id": "AREA000269",
+    "region_type": "land",
+    "color": "#d5a5fd",
+    "pixel_count": 3693,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3279,
+      1108,
+      3363,
+      1195
+    ],
+    "global_center": [
+      3322,
+      1149
+    ],
+    "global_seed": [
+      3322,
+      1149
+    ]
+  },
+  {
+    "region_id": "AREA000270",
+    "region_type": "land",
+    "color": "#4728b6",
+    "pixel_count": 6073,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2990,
+      1116,
+      3107,
+      1251
+    ],
+    "global_center": [
+      3055,
+      1186
+    ],
+    "global_seed": [
+      3055,
+      1186
+    ]
+  },
+  {
+    "region_id": "AREA000271",
+    "region_type": "land",
+    "color": "#af37fc",
+    "pixel_count": 4557,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2955,
+      1138,
+      3042,
+      1233
+    ],
+    "global_center": [
+      3001,
+      1182
+    ],
+    "global_seed": [
+      3001,
+      1182
+    ]
+  },
+  {
+    "region_id": "AREA000272",
+    "region_type": "land",
+    "color": "#52fa8a",
+    "pixel_count": 352,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2964,
+      1140,
+      2993,
+      1158
+    ],
+    "global_center": [
+      2980,
+      1148
+    ],
+    "global_seed": [
+      2980,
+      1148
+    ]
+  },
+  {
+    "region_id": "AREA000273",
+    "region_type": "land",
+    "color": "#2e6621",
+    "pixel_count": 458,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4693,
+      1147,
+      4776,
+      1173
+    ],
+    "global_center": [
+      4733,
+      1161
+    ],
+    "global_seed": [
+      4733,
+      1161
+    ]
+  },
+  {
+    "region_id": "AREA000274",
+    "region_type": "land",
+    "color": "#598df9",
+    "pixel_count": 90,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4812,
+      1149,
+      4831,
+      1168
+    ],
+    "global_center": [
+      4822,
+      1159
+    ],
+    "global_seed": [
+      4822,
+      1159
+    ]
+  },
+  {
+    "region_id": "AREA000275",
+    "region_type": "land",
+    "color": "#f72bac",
+    "pixel_count": 4392,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1550,
+      1152,
+      1637,
+      1251
+    ],
+    "global_center": [
+      1588,
+      1195
+    ],
+    "global_seed": [
+      1588,
+      1195
+    ]
+  },
+  {
+    "region_id": "AREA000276",
+    "region_type": "lake",
+    "color": "#241e67",
+    "pixel_count": 896,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3312,
+      1169,
+      3351,
+      1212
+    ],
+    "global_center": [
+      3330,
+      1190
+    ],
+    "global_seed": [
+      3330,
+      1190
+    ]
+  },
+  {
+    "region_id": "AREA000277",
+    "region_type": "land",
+    "color": "#8d17d0",
+    "pixel_count": 24642,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1543,
+      1175,
+      1739,
+      1460
+    ],
+    "global_center": [
+      1651,
+      1317
+    ],
+    "global_seed": [
+      1651,
+      1317
+    ]
+  },
+  {
+    "region_id": "AREA000278",
+    "region_type": "land",
+    "color": "#35c6fd",
+    "pixel_count": 2016,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4676,
+      1174,
+      4742,
+      1262
+    ],
+    "global_center": [
+      4702,
+      1215
+    ],
+    "global_seed": [
+      4702,
+      1215
+    ]
+  },
+  {
+    "region_id": "AREA000279",
+    "region_type": "land",
+    "color": "#7db968",
+    "pixel_count": 566,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2015,
+      1170,
+      2057,
+      1203
+    ],
+    "global_center": [
+      2037,
+      1187
+    ],
+    "global_seed": [
+      2037,
+      1187
+    ]
+  },
+  {
+    "region_id": "AREA000280",
+    "region_type": "land",
+    "color": "#deb20c",
+    "pixel_count": 834,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4868,
+      1179,
+      4918,
+      1210
+    ],
+    "global_center": [
+      4896,
+      1194
+    ],
+    "global_seed": [
+      4896,
+      1194
+    ]
+  },
+  {
+    "region_id": "AREA000281",
+    "region_type": "land",
+    "color": "#61ae7e",
+    "pixel_count": 16798,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3280,
+      1189,
+      3448,
+      1356
+    ],
+    "global_center": [
+      3363,
+      1275
+    ],
+    "global_seed": [
+      3363,
+      1275
+    ]
+  },
+  {
+    "region_id": "AREA000282",
+    "region_type": "land",
+    "color": "#70726a",
+    "pixel_count": 357,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3268,
+      1191,
+      3299,
+      1217
+    ],
+    "global_center": [
+      3284,
+      1204
+    ],
+    "global_seed": [
+      3284,
+      1204
+    ]
+  },
+  {
+    "region_id": "AREA000283",
+    "region_type": "land",
+    "color": "#87b549",
+    "pixel_count": 5709,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4887,
+      1197,
+      5023,
+      1314
+    ],
+    "global_center": [
+      4982,
+      1242
+    ],
+    "global_seed": [
+      4982,
+      1242
+    ]
+  },
+  {
+    "region_id": "AREA000284",
+    "region_type": "land",
+    "color": "#4e7f83",
+    "pixel_count": 113,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4463,
+      1198,
+      4486,
+      1220
+    ],
+    "global_center": [
+      4476,
+      1208
+    ],
+    "global_seed": [
+      4476,
+      1208
+    ]
+  },
+  {
+    "region_id": "AREA000285",
+    "region_type": "land",
+    "color": "#7d42b7",
+    "pixel_count": 340,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3272,
+      1210,
+      3298,
+      1242
+    ],
+    "global_center": [
+      3284,
+      1226
+    ],
+    "global_seed": [
+      3284,
+      1226
+    ]
+  },
+  {
+    "region_id": "AREA000286",
+    "region_type": "land",
+    "color": "#649a88",
+    "pixel_count": 7150,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      5022,
+      1215,
+      5173,
+      1340
+    ],
+    "global_center": [
+      5073,
+      1275
+    ],
+    "global_seed": [
+      5073,
+      1275
+    ]
+  },
+  {
+    "region_id": "AREA000287",
+    "region_type": "land",
+    "color": "#cc2828",
+    "pixel_count": 184,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4821,
+      1217,
+      4864,
+      1232
+    ],
+    "global_center": [
+      4844,
+      1223
+    ],
+    "global_seed": [
+      4844,
+      1223
+    ]
+  },
+  {
+    "region_id": "AREA000288",
+    "region_type": "land",
+    "color": "#46f86b",
+    "pixel_count": 103,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4789,
+      1222,
+      4808,
+      1233
+    ],
+    "global_center": [
+      4798,
+      1227
+    ],
+    "global_seed": [
+      4798,
+      1227
+    ]
+  },
+  {
+    "region_id": "AREA000289",
+    "region_type": "lake",
+    "color": "#01257a",
+    "pixel_count": 384,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3272,
+      1234,
+      3304,
+      1310
+    ],
+    "global_center": [
+      3282,
+      1274
+    ],
+    "global_seed": [
+      3282,
+      1274
+    ]
+  },
+  {
+    "region_id": "AREA000290",
+    "region_type": "land",
+    "color": "#cc05a4",
+    "pixel_count": 451,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      5139,
+      1240,
+      5202,
+      1271
+    ],
+    "global_center": [
+      5172,
+      1260
+    ],
+    "global_seed": [
+      5172,
+      1260
+    ]
+  },
+  {
+    "region_id": "AREA000291",
+    "region_type": "land",
+    "color": "#098fcc",
+    "pixel_count": 56,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3005,
+      1243,
+      3019,
+      1263
+    ],
+    "global_center": [
+      3009,
+      1252
+    ],
+    "global_seed": [
+      3009,
+      1252
+    ]
+  },
+  {
+    "region_id": "AREA000292",
+    "region_type": "land",
+    "color": "#de1e32",
+    "pixel_count": 93,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      5239,
+      1260,
+      5257,
+      1280
+    ],
+    "global_center": [
+      5248,
+      1271
+    ],
+    "global_seed": [
+      5248,
+      1271
+    ]
+  },
+  {
+    "region_id": "AREA000293",
+    "region_type": "land",
+    "color": "#281a06",
+    "pixel_count": 24182,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3000,
+      1265,
+      3192,
+      1455
+    ],
+    "global_center": [
+      3090,
+      1366
+    ],
+    "global_seed": [
+      3090,
+      1366
+    ]
+  },
+  {
+    "region_id": "AREA000294",
+    "region_type": "land",
+    "color": "#647523",
+    "pixel_count": 2057,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4469,
+      1266,
+      4607,
+      1308
+    ],
+    "global_center": [
+      4537,
+      1287
+    ],
+    "global_seed": [
+      4537,
+      1287
+    ]
+  },
+  {
+    "region_id": "AREA000295",
+    "region_type": "land",
+    "color": "#d68eca",
+    "pixel_count": 158,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4973,
+      1288,
+      4992,
+      1304
+    ],
+    "global_center": [
+      4983,
+      1296
+    ],
+    "global_seed": [
+      4983,
+      1296
+    ]
+  },
+  {
+    "region_id": "AREA000296",
+    "region_type": "land",
+    "color": "#928a21",
+    "pixel_count": 52,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4608,
+      1300,
+      4627,
+      1309
+    ],
+    "global_center": [
+      4619,
+      1304
+    ],
+    "global_seed": [
+      4619,
+      1304
+    ]
+  },
+  {
+    "region_id": "AREA000297",
+    "region_type": "land",
+    "color": "#64b73e",
+    "pixel_count": 14320,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3161,
+      1303,
+      3342,
+      1455
+    ],
+    "global_center": [
+      3250,
+      1384
+    ],
+    "global_seed": [
+      3250,
+      1384
+    ]
+  },
+  {
+    "region_id": "AREA000298",
+    "region_type": "land",
+    "color": "#8ea46c",
+    "pixel_count": 132,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4691,
+      1303,
+      4729,
+      1312
+    ],
+    "global_center": [
+      4707,
+      1308
+    ],
+    "global_seed": [
+      4707,
+      1308
+    ]
+  },
+  {
+    "region_id": "AREA000299",
+    "region_type": "land",
+    "color": "#ffea9e",
+    "pixel_count": 161,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4774,
+      1304,
+      4807,
+      1319
+    ],
+    "global_center": [
+      4787,
+      1311
+    ],
+    "global_seed": [
+      4787,
+      1311
+    ]
+  },
+  {
+    "region_id": "AREA000300",
+    "region_type": "land",
+    "color": "#dbcb38",
+    "pixel_count": 85,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4641,
+      1305,
+      4663,
+      1315
+    ],
+    "global_center": [
+      4652,
+      1310
+    ],
+    "global_seed": [
+      4652,
+      1310
+    ]
+  },
+  {
+    "region_id": "AREA000301",
+    "region_type": "land",
+    "color": "#3e2a1c",
+    "pixel_count": 163,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4750,
+      1315,
+      4774,
+      1335
+    ],
+    "global_center": [
+      4762,
+      1325
+    ],
+    "global_seed": [
+      4762,
+      1325
+    ]
+  },
+  {
+    "region_id": "AREA000302",
+    "region_type": "land",
+    "color": "#ea6628",
+    "pixel_count": 51,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      5316,
+      1318,
+      5333,
+      1328
+    ],
+    "global_center": [
+      5323,
+      1324
+    ],
+    "global_seed": [
+      5323,
+      1324
+    ]
+  },
+  {
+    "region_id": "AREA000303",
+    "region_type": "land",
+    "color": "#4ac15b",
+    "pixel_count": 129,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4679,
+      1320,
+      4707,
+      1334
+    ],
+    "global_center": [
+      4694,
+      1326
+    ],
+    "global_seed": [
+      4694,
+      1326
+    ]
+  },
+  {
+    "region_id": "AREA000304",
+    "region_type": "lake",
+    "color": "#122e80",
+    "pixel_count": 357,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3347,
+      1322,
+      3367,
+      1396
+    ],
+    "global_center": [
+      3356,
+      1359
+    ],
+    "global_seed": [
+      3356,
+      1359
+    ]
+  },
+  {
+    "region_id": "AREA000305",
+    "region_type": "land",
+    "color": "#6b8d59",
+    "pixel_count": 1484,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3329,
+      1323,
+      3377,
+      1436
+    ],
+    "global_center": [
+      3352,
+      1386
+    ],
+    "global_seed": [
+      3352,
+      1386
+    ]
+  },
+  {
+    "region_id": "AREA000306",
+    "region_type": "land",
+    "color": "#edb200",
+    "pixel_count": 21510,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1726,
+      1326,
+      1914,
+      1531
+    ],
+    "global_center": [
+      1802,
+      1435
+    ],
+    "global_seed": [
+      1802,
+      1435
+    ]
+  },
+  {
+    "region_id": "AREA000307",
+    "region_type": "land",
+    "color": "#d02989",
+    "pixel_count": 15017,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3290,
+      1338,
+      3455,
+      1593
+    ],
+    "global_center": [
+      3373,
+      1444
+    ],
+    "global_seed": [
+      3373,
+      1444
+    ]
+  },
+  {
+    "region_id": "AREA000308",
+    "region_type": "land",
+    "color": "#b83e64",
+    "pixel_count": 164350,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      4592,
+      1342,
+      5221,
+      1781
+    ],
+    "global_center": [
+      4920,
+      1574
+    ],
+    "global_seed": [
+      4920,
+      1574
+    ]
+  },
+  {
+    "region_id": "AREA000309",
+    "region_type": "land",
+    "color": "#e7491e",
+    "pixel_count": 11656,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3494,
+      1363,
+      3606,
+      1573
+    ],
+    "global_center": [
+      3546,
+      1478
+    ],
+    "global_seed": [
+      3546,
+      1478
+    ]
+  },
+  {
+    "region_id": "AREA000310",
+    "region_type": "land",
+    "color": "#f66443",
+    "pixel_count": 7662,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3212,
+      1418,
+      3332,
+      1523
+    ],
+    "global_center": [
+      3283,
+      1471
+    ],
+    "global_seed": [
+      3283,
+      1471
+    ]
+  },
+  {
+    "region_id": "AREA000311",
+    "region_type": "land",
+    "color": "#edb6b7",
+    "pixel_count": 16621,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3000,
+      1439,
+      3208,
+      1626
+    ],
+    "global_center": [
+      3084,
+      1520
+    ],
+    "global_seed": [
+      3084,
+      1520
+    ]
+  },
+  {
+    "region_id": "AREA000312",
+    "region_type": "land",
+    "color": "#f613c3",
+    "pixel_count": 148,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      5592,
+      1445,
+      5612,
+      1459
+    ],
+    "global_center": [
+      5602,
+      1452
+    ],
+    "global_seed": [
+      5602,
+      1452
+    ]
+  },
+  {
+    "region_id": "AREA000313",
+    "region_type": "land",
+    "color": "#9ab595",
+    "pixel_count": 11943,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1639,
+      1449,
+      1765,
+      1953
+    ],
+    "global_center": [
+      1704,
+      1686
+    ],
+    "global_seed": [
+      1704,
+      1686
+    ]
+  },
+  {
+    "region_id": "AREA000314",
+    "region_type": "land",
+    "color": "#b9b9ce",
+    "pixel_count": 11745,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3129,
+      1451,
+      3271,
+      1593
+    ],
+    "global_center": [
+      3188,
+      1520
+    ],
+    "global_seed": [
+      3188,
+      1520
+    ]
+  },
+  {
+    "region_id": "AREA000315",
+    "region_type": "land",
+    "color": "#57457a",
+    "pixel_count": 8026,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1835,
+      1475,
+      1965,
+      1604
+    ],
+    "global_center": [
+      1901,
+      1536
+    ],
+    "global_seed": [
+      1901,
+      1536
+    ]
+  },
+  {
+    "region_id": "AREA000316",
+    "region_type": "land",
+    "color": "#a056cd",
+    "pixel_count": 177,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      5387,
+      1491,
+      5430,
+      1523
+    ],
+    "global_center": [
+      5406,
+      1506
+    ],
+    "global_seed": [
+      5406,
+      1506
+    ]
+  },
+  {
+    "region_id": "AREA000317",
+    "region_type": "land",
+    "color": "#b5e3a0",
+    "pixel_count": 64923,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1665,
+      1515,
+      1975,
+      1991
+    ],
+    "global_center": [
+      1795,
+      1722
+    ],
+    "global_seed": [
+      1795,
+      1722
+    ]
+  },
+  {
+    "region_id": "AREA000318",
+    "region_type": "land",
+    "color": "#e76ee7",
+    "pixel_count": 26300,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3074,
+      1520,
+      3330,
+      1717
+    ],
+    "global_center": [
+      3208,
+      1627
+    ],
+    "global_seed": [
+      3208,
+      1627
+    ]
+  },
+  {
+    "region_id": "AREA000319",
+    "region_type": "land",
+    "color": "#af184d",
+    "pixel_count": 288,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3298,
+      1577,
+      3318,
+      1601
+    ],
+    "global_center": [
+      3308,
+      1589
+    ],
+    "global_seed": [
+      3308,
+      1589
+    ]
+  },
+  {
+    "region_id": "AREA000320",
+    "region_type": "land",
+    "color": "#60be74",
+    "pixel_count": 546,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      3240,
+      1622,
+      3276,
+      1653
+    ],
+    "global_center": [
+      3258,
+      1636
+    ],
+    "global_seed": [
+      3258,
+      1636
+    ]
+  },
+  {
+    "region_id": "AREA000321",
+    "region_type": "land",
+    "color": "#5be4f7",
+    "pixel_count": 3824,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1900,
+      1645,
+      1983,
+      1720
+    ],
+    "global_center": [
+      1938,
+      1687
+    ],
+    "global_seed": [
+      1938,
+      1687
+    ]
+  },
+  {
+    "region_id": "AREA000322",
+    "region_type": "ocean",
+    "color": "#191379",
+    "pixel_count": 110,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      2000,
+      1648,
+      2023,
+      1672
+    ],
+    "global_center": [
+      2012,
+      1660
+    ],
+    "global_seed": [
+      2012,
+      1660
+    ]
+  },
+  {
+    "region_id": "AREA000323",
+    "region_type": "land",
+    "color": "#410591",
+    "pixel_count": 128,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      5527,
+      1720,
+      5548,
+      1742
+    ],
+    "global_center": [
+      5539,
+      1729
+    ],
+    "global_seed": [
+      5539,
+      1729
+    ]
+  },
+  {
+    "region_id": "AREA000324",
+    "region_type": "land",
+    "color": "#49a0c7",
+    "pixel_count": 2090,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      5537,
+      1749,
+      5610,
+      1824
+    ],
+    "global_center": [
+      5571,
+      1785
+    ],
+    "global_seed": [
+      5571,
+      1785
+    ]
+  },
+  {
+    "region_id": "AREA000325",
+    "region_type": "land",
+    "color": "#4b0593",
+    "pixel_count": 3533,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      5426,
+      1809,
+      5544,
+      1903
+    ],
+    "global_center": [
+      5486,
+      1862
+    ],
+    "global_seed": [
+      5486,
+      1862
+    ]
+  },
+  {
+    "region_id": "AREA000326",
+    "region_type": "land",
+    "color": "#2a9f4f",
+    "pixel_count": 1385,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      5081,
+      1810,
+      5138,
+      1856
+    ],
+    "global_center": [
+      5111,
+      1830
+    ],
+    "global_seed": [
+      5111,
+      1830
+    ]
+  },
+  {
+    "region_id": "AREA000327",
+    "region_type": "land",
+    "color": "#da88ad",
+    "pixel_count": 106,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1652,
+      1827,
+      1666,
+      1852
+    ],
+    "global_center": [
+      1658,
+      1841
+    ],
+    "global_seed": [
+      1658,
+      1841
+    ]
+  },
+  {
+    "region_id": "AREA000328",
+    "region_type": "land",
+    "color": "#5c6ae1",
+    "pixel_count": 50,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1806,
+      1833,
+      1819,
+      1844
+    ],
+    "global_center": [
+      1815,
+      1838
+    ],
+    "global_seed": [
+      1815,
+      1838
+    ]
+  },
+  {
+    "region_id": "AREA000329",
+    "region_type": "land",
+    "color": "#92351b",
+    "pixel_count": 268,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1646,
+      1952,
+      1684,
+      1993
+    ],
+    "global_center": [
+      1670,
+      1971
+    ],
+    "global_seed": [
+      1670,
+      1971
+    ]
+  },
+  {
+    "region_id": "AREA000330",
+    "region_type": "land",
+    "color": "#8fd2c7",
+    "pixel_count": 446,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1669,
+      1981,
+      1728,
+      2024
+    ],
+    "global_center": [
+      1701,
+      1996
+    ],
+    "global_seed": [
+      1701,
+      1996
+    ]
+  },
+  {
+    "region_id": "AREA000331",
+    "region_type": "land",
+    "color": "#0dedb3",
+    "pixel_count": 455,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1712,
+      1995,
+      1743,
+      2037
+    ],
+    "global_center": [
+      1731,
+      2012
+    ],
+    "global_seed": [
+      1731,
+      2012
+    ]
+  },
+  {
+    "region_id": "AREA000332",
+    "region_type": "ocean",
+    "color": "#344e6e",
+    "pixel_count": 61,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1705,
+      1999,
+      1716,
+      2025
+    ],
+    "global_center": [
+      1709,
+      2007
+    ],
+    "global_seed": [
+      1709,
+      2007
+    ]
+  },
+  {
+    "region_id": "AREA000333",
+    "region_type": "land",
+    "color": "#0ccaf8",
+    "pixel_count": 480,
+    "density_multiplier": null,
+    "parent_id": null,
+    "local_bbox": null,
+    "local_center": null,
+    "local_seed": null,
+    "global_bbox": [
+      1741,
+      2008,
+      1794,
+      2037
+    ],
+    "global_center": [
+      1758,
+      2024
+    ],
+    "global_seed": [
+      1758,
+      2024
+    ]
+  }
+]
