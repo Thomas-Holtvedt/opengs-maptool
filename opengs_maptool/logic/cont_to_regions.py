@@ -9,7 +9,7 @@ from logic.utils import (
     poisson_disk_samples, lloyd_relaxation, assign_regions, build_metadata, hex_to_rgb,
     round_float, round_bbox, defragment_regions,
 )
-import config
+import opengs_maptool.config as config
 
 
 @grepr_dataclass(validate=False, frozen=True)

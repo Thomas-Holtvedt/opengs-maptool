@@ -8,7 +8,7 @@ from logic.maptool import MapTool
 from ui.buttons import create_slider, create_button
 from ui.image_display import ImageDisplay
 from ui.flappy_bird_game import FlappyBirdGame
-import config
+import opengs_maptool.config as config
 
 
 class ProgressButton(QPushButton):

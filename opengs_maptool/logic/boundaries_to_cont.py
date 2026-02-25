@@ -3,7 +3,7 @@ from numpy.typing import NDArray
 from scipy import ndimage
 from tqdm import tqdm
 from logic.utils import ColorSeries, round_float, hex_to_rgb
-import config
+import opengs_maptool.config as config
 
 NEIGHBOR_OFFSETS = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
