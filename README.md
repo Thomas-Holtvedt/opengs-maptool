@@ -235,7 +235,7 @@ Contributions can come in many forms and all are appreciated:
 - Added functionality
 
 ## Discord 
-Follow and/or support the project on [OpenGS Discord Server](https://discord.gg/6apDaJrY)
+Follow and/or support the project on [OpenGS Discord Server](https://discord.gg/6pRc9f6g6S)
 
 ## Delivered and maintained by 
 <img width="350" height="350" alt="gsi-logo" src="https://github.com/user-attachments/assets/e7210566-7997-4d82-845e-48f249d439a0" />
