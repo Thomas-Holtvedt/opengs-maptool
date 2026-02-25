@@ -1,12 +1,34 @@
-import opengs_maptool.config as config
-import math
+from __future__ import annotations
+from collections import deque
+from dataclasses import asdict
+from gceutils import grepr_dataclass
+import logging
 import numpy as np
-from PIL import Image, ImageDraw
 from numpy.typing import NDArray
-from typing import Any, Iterable
+from PIL import Image
 from scipy.ndimage import distance_transform_edt, label as scipy_label
 from scipy.spatial import cKDTree
-from collections import deque
+from scipy.stats import mode
+from typing import Any, Iterable, Literal
+
+from opengs_maptool import config
+
+
+FOUR_CONNECTED = np.array(
+    [
+        [0, 1, 0],
+        [1, 1, 1],
+        [0, 1, 0],
+    ],
+    dtype=np.uint8,
+)
+
+FOUR_NEIGHBOR_OFFSETS: tuple[tuple[int, int], ...] = (
+    (-1, 0),
+    (1, 0),
+    (0, -1),
+    (0, 1),
+)
 
 
 def rgb_to_hex(rgb: tuple[int, int, int]) -> str:
@@ -18,31 +40,82 @@ def rgb_to_hex(rgb: tuple[int, int, int]) -> str:
 def hex_to_rgb(hex_color: str) -> tuple[int, int, int]:
     """Convert hex color string (e.g., '#aabbcc') to RGB tuple"""
     hex_color = hex_color.lstrip('#')
-    return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+    return (int(hex_color[0:2], 16), int(hex_color[2:4], 16), int(hex_color[4:6], 16))
 
 
-def round_float(value: float, decimals: int = 2) -> float:
-    """Round a float value to a fixed number of decimals."""
-    return float(round(value, decimals))
+def ensure_point_in_mask(mask: NDArray[np.bool_], x: int, y: int) -> tuple[int, int]:
+    """Return a point guaranteed to be inside `mask`.
 
-
-def round_bbox(
-    bbox: list[float],
-    decimals: int = 0,
-) -> list[int]:
-    """Convert bbox to integers.
-
-    For pixel coordinates, we use floor for min values and ceil for max values
-    to ensure the bbox fully encompasses the region.
+    If (x, y) rounds to a pixel inside the mask, that rounded point is returned.
+    Otherwise, the nearest pixel in the mask is returned.
     """
-    
-    # bbox format: [x0, y0, x1, y1]
-    return [
-        int(math.floor(bbox[0])),  # x0: floor to include leftmost
-        int(math.floor(bbox[1])),  # y0: floor to include topmost
-        int(math.ceil(bbox[2])),   # x1: ceil to include rightmost
-        int(math.ceil(bbox[3])),   # y1: ceil to include bottommost
-    ]
+    h, w = mask.shape
+    x = max(0, min(w - 1, x))
+    y = max(0, min(h - 1, y))
+
+    if mask[y, x]:
+        return (x, y)
+
+    ys, xs = np.where(mask)
+    if len(xs) == 0:
+        return (x, y)
+
+    dx = xs.astype(np.int32) - x
+    dy = ys.astype(np.int32) - y
+    nearest_idx = int(np.argmin(dx * dx + dy * dy))
+    return int(xs[nearest_idx]), int(ys[nearest_idx])
+
+
+def get_area_pixel_mask(image: NDArray[np.uint8], threshold: int) -> NDArray[np.bool_]:
+    """Return mask for area pixels in boundary images.
+
+    Args:
+        image: Boundary image (RGB/RGBA).
+        threshold: Red-channel cutoff. Use 180 for uncleaned images and 0 for
+            cleaned images where borders are exactly 0.
+    """
+    return image[:, :, 0] > threshold
+
+
+
+def calculate_density_multiplier(
+    image: NDArray[np.uint8],
+    mask: NDArray[np.bool_],
+    region_id: Any | None = None,
+    fallback: float = 128.0,
+    use_rgb_average: bool = True,
+    warn_on_empty: bool = True,
+) -> float:
+    """
+    Calculate a density multiplier from the average brightness of masked pixels.
+    Uses the red channel by default, or RGB average if use_rgb_average is True.
+    If the mask is empty, returns fallback and optionally warns.
+    Maps brightness (0-255) to a density multiplier (piecewise linear).
+    """
+    if not np.any(mask):
+        if warn_on_empty:
+            logging.warning(
+                f"No pixels found for region_id {region_id} while calculating density multiplier.",
+            )
+        avg_brightness = fallback
+    else:
+        if use_rgb_average:
+            # Use mean of all RGB channels for masked pixels
+            avg_brightness = float(np.mean(image[:, :, :3][mask]))
+        else:
+            # Use mean of red channel for masked pixels
+            avg_brightness = float(np.mean(image[:, :, 0][mask]))
+
+    # Map average brightness to density multiplier using config min/max
+    min_factor = config.DENSITY_MULTIPLIER_MIN
+    mid_factor = config.DENSITY_MULTIPLIER_NORMAL
+    max_factor = config.DENSITY_MULTIPLIER_MAX
+    if avg_brightness <= 128.0:
+        # Linear interpolation from min_factor to mid_factor
+        return (avg_brightness / 128.0) * (mid_factor - min_factor) + min_factor
+    else:
+        # Linear interpolation from mid_factor to max_factor
+        return ((avg_brightness - 128.0) / 127.0) * (max_factor - mid_factor) + mid_factor
 
 
 class NumberSeries:
@@ -52,10 +125,9 @@ class NumberSeries:
         self.id_length: int = len(str(number_end))
         self.number_next: int = number_start
 
-    def get_id(self) -> str | None:
+    def get_id(self) -> str:
         if self.number_next > self.number_end:
-            print("ERROR: No more available numbers!")
-            return None
+            raise ValueError("No more available numbers in NumberSeries")
 
         formatted_number: str = self.prefix + \
             str(self.number_next).zfill(self.id_length)
@@ -64,7 +136,7 @@ class NumberSeries:
 
 
 class ColorSeries:
-    def __init__(self, rng_seed: int, exclude_values: Iterable[tuple[int, int, int]] | None = None) -> None:
+    def __init__(self, rng_seed: int  | np.random.SeedSequence, exclude_values: Iterable[tuple[int, int, int]] | None = None) -> None:
         self.rng = np.random.default_rng(rng_seed)
         self.used_values = set() if exclude_values is None else set(exclude_values) 
 
@@ -90,69 +162,142 @@ class ColorSeries:
         return (rgb, rgb_to_hex(rgb))
 
 
-def is_sea_color(arr: NDArray[np.uint8]) -> NDArray[np.bool]:
-    # Vectorized comparison - faster than individual channel checks
-    ocean_color = np.array(config.OCEAN_COLOR, dtype=np.uint8)
-    return np.all(arr[..., :3] == ocean_color, axis=-1)
+@grepr_dataclass(validate=False)
+class RegionMetadata:
+    region_id: str
+    region_type: Literal["land", "ocean", "lake", "unknown"]
+    color: str # format: "#00aa99"
+    pixel_count: int
+    density_multiplier: float | None = None
+    parent_id: str | None = None
+    local_bbox: tuple[int, int, int, int] | None = None # (x_min, y_min, x_max, y_max)
+    local_center: tuple[int, int] | None = None # (x, y)
+    local_seed: tuple[int, int] | None = None # (x, y)
+    global_bbox: tuple[int, int, int, int] | None = None # (x_min, y_min, x_max, y_max)
+    global_center: tuple[int, int] | None = None # (x, y)
+    global_seed: tuple[int, int] | None = None # (x, y)
+    # See README for an exact description
 
+    def to_json_dict(self) -> dict[str, Any]:
+        return asdict(self)
+    
+    def to_csv_dict(self) -> dict[str, Any]:
+        local_bbox = self.local_bbox or (None, None, None, None)
+        local_center = self.local_center or (None, None)
+        local_seed = self.local_seed or (None, None)
+        global_bbox = self.global_bbox or (None, None, None, None)
+        global_center = self.global_center or (None, None)
+        global_seed = self.global_seed or (None, None)
 
-def build_masks(
-    boundary_image: NDArray[np.uint8] | None,
-    land_image: NDArray[np.uint8] | None,
-):
-    if boundary_image is None and land_image is None:
-        raise ValueError("Need at least boundary OR ocean image to determine map size.")
+        return dict(
+            region_id=self.region_id,
+            region_type=self.region_type,
+            color=self.color,
+            pixel_count=self.pixel_count,
+            parent_id=self.parent_id,
+            
+            local_bbox_min_x=local_bbox[0],
+            local_bbox_min_y=local_bbox[1],
+            local_bbox_max_x=local_bbox[2],
+            local_bbox_max_y=local_bbox[3],
 
-    # Boundary mask
-    if boundary_image is not None:
-        if boundary_image.ndim == 3:
-            r, g, b = config.BOUNDARY_COLOR
-            boundary_mask = (
-                (boundary_image[..., 0] == r) &
-                (boundary_image[..., 1] == g) &
-                (boundary_image[..., 2] == b)
-            )
-        else:
-            (val,) = config.BOUNDARY_COLOR[:1]
-            boundary_mask = (boundary_image == val)
-        map_h, map_w = boundary_mask.shape
-    else:
-        boundary_mask = None
+            local_center_x=local_center[0],
+            local_center_y=local_center[1],
+            local_seed_x=local_seed[0],
+            local_seed_y=local_seed[1],
 
-    # Land / sea mask
-    if land_image is not None:
-        sea_mask = is_sea_color(land_image)
-        land_mask = ~sea_mask
-        if boundary_mask is None:
-            map_h, map_w = sea_mask.shape
-    else:
-        if boundary_mask is None:
-            raise ValueError("Could not determine map size.")
-        sea_mask = np.zeros((map_h, map_w), dtype=bool)
-        land_mask = np.ones((map_h, map_w), dtype=bool)
+            global_bbox_min_x=global_bbox[0],
+            global_bbox_min_y=global_bbox[1],
+            global_bbox_max_x=global_bbox[2],
+            global_bbox_max_y=global_bbox[3],
 
-    if boundary_mask is None:
-        land_fill = land_mask
-        land_border = sea_mask
-        sea_fill = sea_mask
-        sea_border = land_mask
-    else:
-        land_fill = land_mask & ~boundary_mask
-        land_border = boundary_mask | sea_mask
-        sea_fill = sea_mask & ~boundary_mask
-        sea_border = boundary_mask | land_mask
+            global_center_x=global_center[0],
+            global_center_y=global_center[1],
+            global_seed_x=global_seed[0],
+            global_seed_y=global_seed[1],
+        )
 
-    return land_fill, land_border, sea_fill, sea_border, land_mask, sea_mask
+    @classmethod
+    def from_json_dict(cls, d: dict[str, Any]) -> RegionMetadata:
+        def parse_opt_str(key: str) -> str | None:
+            return d.get(key, False) or None # "" -> None
 
+        def parse_num[DT](key: str, default: DT = None, as_float: bool = False) -> int | float | DT:
+            val = d.get(key, None)
+            if val in {"", None}:
+                return default
+            try:
+                return float(val) if as_float else int(val)
+            except ValueError:
+                return default
+                
+        def parse_coords(key: str) -> tuple[int, ...] | None:
+            val = d.get(key, None)
+            if not val:
+                return None
+            if isinstance(val, list):
+                return tuple(val)
+            if isinstance(val, tuple):
+                return val
+            return None
+        
+        return cls(
+            region_id=parse_opt_str("region_id"),
+            region_type=parse_opt_str("region_type"),
+            color=parse_opt_str("color"),
+            pixel_count=parse_num("pixel_count", default=0),
+            density_multiplier=parse_num("density_multiplier", as_float=True),
+            parent_id=parse_opt_str("parent_id"),
+            local_bbox=parse_coords("local_bbox"),
+            local_center=parse_coords("local_center"),
+            local_seed=parse_coords("local_seed"),
+            global_bbox=parse_coords("global_bbox"),
+            global_center=parse_coords("global_center"),
+            global_seed=parse_coords("global_seed"),
+        )
+    
+    @classmethod
+    def from_csv_dict(cls, d: dict[str, Any]) -> RegionMetadata:
+        def parse_opt_str(key: str) -> str | None:
+            return d.get(key, False) or None # "" -> None
+
+        def parse_num[DT](key: str, default: DT = None, as_float: bool = False) -> int | float | DT:
+            val = d.get(key, None)
+            if val in {"", None}:
+                return default
+            try:
+                return float(val) if as_float else int(val)
+            except ValueError:
+                return default
+                
+        def parse_coords(*keys: tuple[str]) -> tuple[int, ...] | None:
+            vals = tuple(parse_num(key, default=None) for key in keys)
+            if not all(vals):
+                return None
+            return vals
+
+        return cls(
+            region_id=parse_opt_str("region_id"),
+            region_type=parse_opt_str("region_type"),
+            color=parse_opt_str("color"),
+            pixel_count=parse_num("pixel_count", default=0),
+            density_multiplier=parse_num("density_multiplier", as_float=True),
+            parent_id=parse_opt_str("parent_id"),
+            local_bbox=parse_coords("local_bbox_min_x", "local_bbox_min_y", "local_bbox_max_x", "local_bbox_max_y"),
+            local_center=parse_coords("local_center_x", "local_center_y"),
+            local_seed=parse_coords("local_seed_x", "local_seed_y"),
+            global_bbox=parse_coords("global_bbox_min_x", "global_bbox_min_y", "global_bbox_max_x", "global_bbox_max_y"),
+            global_center=parse_coords("global_center_x", "global_center_y"), 
+            global_seed=parse_coords("global_seed_x", "global_seed_y"),
+        )
 
 def poisson_disk_samples(
     mask: NDArray[np.bool],
     num_points: int,
-    rng_seed: int,
+    rng_seed: int | np.random.SeedSequence,
     min_dist: float | None = None,
     k: int = 30,
     border_margin: float = 0.0,
-    debug_output_path: Any | None = None,
     no_distance_limit: bool = False,
 ) -> list[tuple[int, int]]:
     """
@@ -165,7 +310,6 @@ def poisson_disk_samples(
         min_dist: Minimum distance between points. If None, estimated from area/num_points.
         k: Number of attempts per active point.
         border_margin: Minimum distance from the boundary (in pixels). Uses distance transform.
-        debug_output_path: Optional path to save a debug visualization.
         no_distance_limit: If True, fill remaining points without distance constraint.
 
     Returns:
@@ -276,24 +420,12 @@ def poisson_disk_samples(
             if remaining <= 0:
                 break
 
-    if debug_output_path is not None:
-        try:
-            debug_img = np.zeros((h, w, 3), dtype=np.uint8)
-            debug_img[allowed_mask] = [200, 200, 200]
-            debug_pil = Image.fromarray(debug_img)
-            draw = ImageDraw.Draw(debug_pil)
-            for px, py in samples:
-                draw.ellipse([px - 2, py - 2, px + 2, py + 2], fill=(255, 0, 0))
-            debug_pil.save(debug_output_path)
-        except Exception:
-            pass
-
     return samples
 
 
 def lloyd_relaxation(
         mask: NDArray[np.bool], point_seeds: list[tuple[int, int]], 
-        rng_seed: int, iterations: int, boundary_mask: NDArray[np.bool] | None = None
+        rng_seed: int | np.random.SeedSequence, iterations: int, boundary_mask: NDArray[np.bool] | None = None
     ) -> list[tuple[int, int]]:
     """
     Lloyd relaxation with optional fast mode.
@@ -368,8 +500,7 @@ def assign_regions(mask: NDArray[np.bool], seeds: list[tuple[int, int]], start_i
     Assign each pixel in mask to nearest seed using geodesic (through-mask) distance.
     
     Uses distance transform and Voronoi-like assignment where distance is measured
-    through the valid mask pixels only. This naturally handles narrow straits and
-    ensures no region splits due to narrow passages.
+    through the valid mask pixels only. This naturally handles narrow straits and makes fragments rare.
     
     Args:
         mask: Boolean mask of valid pixels (True = valid)
@@ -433,15 +564,14 @@ def assign_regions(mask: NDArray[np.bool], seeds: list[tuple[int, int]], start_i
 def defragment_regions(
     pmap: NDArray[np.int32],
     mask: NDArray[np.bool],
-    seeds: list[tuple[int, int]],
-    size_threshold: int = 100,
 ) -> NDArray[np.int32]:
     """
     Fix regions that got fragmented into multiple disconnected components.
     
-    Two-phase approach:
+    Three-phase approach:
     1. Merge small fragments (<size_threshold) to best neighboring region
     2. Reassign remaining fragments to nearest other seeds
+    3. Enforce one connected component per seed/region iteratively
     
     Args:
         pmap: Region map with region assignments
@@ -453,103 +583,54 @@ def defragment_regions(
         Fixed pmap with defragmented regions
     """
     
+    # Use fix_region_connectivity to detect islands, but set all islands to -1
     pmap_fixed = pmap.copy()
     h, w = mask.shape
-    
-    # Phase 1: Merge small fragments to neighbors
+    # Set max_iters proportional to pixel count (at least 50)
+    pixel_count = np.count_nonzero(mask)
+    max_iters = max(50, int(pixel_count // 2))
+    # Explicitly set all fragments to -1 before filling
+    h, w = mask.shape
     valid_ids = set(np.unique(pmap[mask])) - {-1}
-    
     for region_id in valid_ids:
         region_mask = (pmap_fixed == region_id)
-        
-        # Detect connected components within this region
-        components, num_components = scipy_label(region_mask)
-        
+        components, num_components = scipy_label(region_mask, structure=FOUR_CONNECTED)
         if num_components <= 1:
-            continue  # region is already contiguous
-        
-        # Analyze fragment sizes
-        fragment_sizes = np.bincount(components[region_mask])
-        largest_idx = np.argmax(fragment_sizes)
-        
-        # Merge only small fragments to neighbors
-        for frag_idx in range(num_components):
-            if frag_idx == largest_idx or frag_idx == 0:
+            continue
+        # Find the largest component
+        component_sizes = np.bincount(components[region_mask])
+        largest_idx = np.argmax(component_sizes)
+        # Set all other components (islands) to -1
+        for comp_idx in range(1, num_components + 1):
+            if comp_idx == largest_idx or comp_idx == 0:
                 continue
-            
-            if fragment_sizes[frag_idx] >= size_threshold:
-                continue  # Skip large fragments in phase 1
-            
-            frag_mask = (components == frag_idx)
-            neighbor_counts: dict[int, int] = {}
-            
-            # Find neighbors
-            frag_coords = np.where(frag_mask)
-            for y, x in zip(frag_coords[0], frag_coords[1]):
-                for dy in [-1, 0, 1]:
-                    for dx in [-1, 0, 1]:
-                        if dy == 0 and dx == 0:
-                            continue
-                        ny, nx = y + dy, x + dx
-                        if 0 <= ny < h and 0 <= nx < w:
-                            neighbor_id = pmap_fixed[ny, nx]
-                            if neighbor_id >= 0 and neighbor_id != region_id:
-                                neighbor_counts[neighbor_id] = neighbor_counts.get(neighbor_id, 0) + 1
-            
-            # Merge to best neighbor if found
-            if neighbor_counts:
-                best_neighbor = max(neighbor_counts, key=neighbor_counts.get)
-                pmap_fixed[frag_mask] = best_neighbor
-    
-    # Phase 2: Reassign remaining fragmented regions to nearest other seeds
-    valid_ids_after_phase1 = set(np.unique(pmap_fixed[mask])) - {-1}
-    
-    for region_id in valid_ids_after_phase1:
-        region_mask = (pmap_fixed == region_id)
-        
-        # Detect connected components again after phase 1
-        components, num_components = scipy_label(region_mask)
-        
-        if num_components <= 1:
-            continue  # region is already contiguous
-        
-        # Find which seeds belong to this region
-        region_seed_indices = set()
-        for idx, (sx, sy) in enumerate(seeds):
-            if pmap_fixed[sy, sx] == region_id:
-                region_seed_indices.add(idx)
-        
-        # Reassign all pixels to nearest seed outside their region
-        region_coords = np.where(region_mask)
-        for y, x in zip(region_coords[0], region_coords[1]):
-            min_dist = np.inf
-            best_seed_id = region_id
-            
-            for idx, (sx, sy) in enumerate(seeds):
-                # Skip seeds of this region
-                if idx in region_seed_indices:
-                    continue
-                
-                dist = np.sqrt((x - sx) ** 2 + (y - sy) ** 2)
-                if dist < min_dist:
-                    min_dist = dist
-                    best_seed_id = idx
-            
-            if best_seed_id != region_id:
-                pmap_fixed[y, x] = best_seed_id
-    
+            comp_mask = (components == comp_idx)
+            pmap_fixed[comp_mask] = -1
+
+    for _ in range(max_iters):
+        changed = False
+        # Find all -1 (fragment) pixels inside the mask
+        island_mask = (pmap_fixed == -1) & mask
+        if not np.any(island_mask):
+            break
+        # Pad for neighbor access
+        padded = np.pad(pmap_fixed, pad_width=1, mode="constant", constant_values=-1)
+        n0 = padded[:-2, 1:-1]
+        n1 = padded[2:, 1:-1]
+        n2 = padded[1:-1, :-2]
+        n3 = padded[1:-1, 2:]
+
+        for y, x in zip(*np.where(island_mask)):
+            vals = [n0[y, x], n1[y, x], n2[y, x], n3[y, x]]
+            vals = [v for v in vals if v != -1]
+            if vals:
+                # Assign to majority neighbor
+                new_val = mode(vals, keepdims=False).mode
+                pmap_fixed[y, x] = new_val
+                changed = True
+        if not changed:
+            break
     return pmap_fixed
-
-
-def assign_borders(pmap: NDArray[np.int32], border_mask: NDArray[np.bool]) -> None:
-    """Assign border pixels to nearest valid region (respects boundary structure)."""
-    valid = pmap >= 0
-    if not valid.any() or not border_mask.any():
-        return
-
-    _, (ny, nx) = distance_transform_edt(~valid, return_indices=True)
-    bm = border_mask
-    pmap[bm] = pmap[ny[bm], nx[bm]]
 
 
 def build_metadata(
@@ -561,7 +642,7 @@ def build_metadata(
     color_series: ColorSeries,
     parent_id: str | None = None,
     parent_density_multiplier: float | None = None,
-) -> list[dict[str, Any]]:
+) -> list[RegionMetadata]:
     if pmap.size == 0 or not seeds:
         return []
 
@@ -593,156 +674,47 @@ def build_metadata(
 
     metadata = []
     for i in range(len(seeds)):
-        rid = series.get_id()
-        if rid is None:
-            continue
+        region_id = series.get_id()
 
+        sx, sy = seeds[i]
         color_hex = color_series.get_color_hex(is_water=(region_type != "land"))
         if counts[i] <= 0:
-            sx, sy = seeds[i]
-            cx, cy = float(sx), float(sy)
-            bbox_local = [int(sx), int(sy), int(sx) + 1, int(sy) + 1]
+            cx, cy = sx, sy
+            local_bbox = (int(sx), int(sy), int(sx), int(sy))
+            pixel_count = 0
         else:
-            cx = float(sum_x[i] / counts[i])
-            cy = float(sum_y[i] / counts[i])
-            # Convert to integers with floor/ceil for proper pixel coverage
-            bbox_local = [int(min_x[i]), int(min_y[i]), int(max_x[i]) + 1, int(max_y[i]) + 1]
+            cx = round(float(sum_x[i] / counts[i]))
+            cy = round(float(sum_y[i] / counts[i]))
+            region_mask = pmap == (start_index + i)
 
-        cx = round_float(cx, 2)
-        cy = round_float(cy, 2)
-        bbox_local = round_bbox(bbox_local, 0)
+            h, w = region_mask.shape
+            cx = max(0, min(w - 1, cx))
+            cy = max(0, min(h - 1, cy))
 
-        meta_dict = {
-            "region_type": region_type,
-            "region_id": rid,
-            "parent_id": parent_id,
-            "color": color_hex,
-            "local_x": cx,
-            "local_y": cy,
-            "global_x": None, # Set later
-            "global_y": None,
-            "bbox_local": bbox_local,
-            "bbox": None,  # Set later (global bbox)
-            "density_multiplier": parent_density_multiplier or 1.0,
-        }
-        metadata.append(meta_dict)
-
-    return metadata
-
-
-def fix_region_connectivity(
-    pmap: NDArray[np.int32],
-    mask: NDArray[np.bool],
-    island_threshold: int = 50,
-) -> tuple[np.ndarray, dict[str, int]]:
-    """
-    Fix disconnected regions by reassigning isolated pixel clusters to neighbors.
-    
-    Iteratively detects and merges small disconnected "islands" into adjacent regions
-    based on border adjacency count. Handles cascading merges until all islands are resolved.
-    
-    Args:
-        pmap: Region map where each pixel has a region ID (or -1 for invalid)
-        mask: Valid region mask
-        island_threshold: Max pixels for a cluster to be considered an "island" to fix
-    
-    Returns:
-        Tuple of:
-        - Fixed pmap (copy with islands reassigned)
-        - Stats dict with keys:
-            - "islands_found": Number of islands detected and fixed
-            - "pixels_reassigned": Total pixels reassigned
-            - "regions_affected": regions that had islands
-    """
-    
-    stats = {
-        "islands_found": 0,
-        "pixels_reassigned": 0,
-        "regions_affected": 0,
-    }
-    
-    pmap_fixed = pmap.copy()
-    max_iterations = 10
-    iteration = 0
-    
-    while iteration < max_iterations:
-        iteration += 1
-        found_any_island = False
-        
-        # Get unique region IDs (excluding invalid -1)
-        valid_ids = set(np.unique(pmap_fixed[mask])) - {-1}
-        
-        for region_id in valid_ids:
-            region_mask = (pmap_fixed == region_id)
-            
-            if not region_mask.any():
-                continue
-            
-            # Label connected components within this region (8-connected for better connectivity)
-            components, num_components = scipy_label(region_mask)
-            
-            if num_components <= 1:
-                # region is already fully connected
-                continue
-            
-            # Find the size of each component
-            component_sizes = np.bincount(components[region_mask])
-            if len(component_sizes) == 0:
-                continue
-                
-            largest_component_idx = np.argmax(component_sizes)
-            
-            # For each smaller component (potential island), reassign to best neighbor
-            for comp_idx in range(1, num_components + 1):
-                if comp_idx == largest_component_idx or comp_idx == 0:
-                    continue
-                
-                comp_mask = (components == comp_idx)
-                comp_size = np.sum(comp_mask)
-                
-                # Only fix small islands (leave large disconnected parts alone)
-                if comp_size > island_threshold:
-                    continue
-                
-                found_any_island = True
-                stats["islands_found"] += 1
-                stats["pixels_reassigned"] += comp_size
-                stats["regions_affected"] += 1
-                
-                # Find neighboring region IDs at the border of this island
-                neighbor_counts: dict[int, int] = {}
-                island_coords = np.where(comp_mask)
-                
-                for y, x in zip(island_coords[0], island_coords[1]):
-                    # Check 8-connected neighbors
-                    for dy in [-1, 0, 1]:
-                        for dx in [-1, 0, 1]:
-                            if dy == 0 and dx == 0:
-                                continue
-                            ny = y + dy
-                            nx = x + dx
-                            if 0 <= ny < pmap_fixed.shape[0] and 0 <= nx < pmap_fixed.shape[1]:
-                                neighbor_id = pmap_fixed[ny, nx]
-                                # Count adjacencies to ALL neighboring regions (including same ID)
-                                if neighbor_id >= 0:
-                                    neighbor_counts[neighbor_id] = neighbor_counts.get(neighbor_id, 0) + 1
-                
-                # Prefer merging with the main component of the same region if adjacent
-                if region_id in neighbor_counts:
-                    best_neighbor = region_id
-                elif neighbor_counts:
-                    # Otherwise assign island to the neighbor with most shared border
-                    best_neighbor = max(neighbor_counts, key=neighbor_counts.get)
+            if not region_mask[cy, cx]:
+                if 0 <= sx < w and 0 <= sy < h and region_mask[sy, sx]:
+                    cx, cy = sx, sy
                 else:
-                    # No neighbors found, skip
-                    continue
-                
-                if best_neighbor != region_id:
-                    pmap_fixed[comp_mask] = best_neighbor
-        
-        # If no islands found in this iteration, we're done
-        if not found_any_island:
-            break
-    
-    return pmap_fixed, stats
+                    cx, cy = ensure_point_in_mask(region_mask, sx, sy)
 
+            # Convert to integers with floor/ceil for proper pixel coverage
+            local_bbox = (int(min_x[i]),  int(min_y[i]), int(max_x[i]), int(max_y[i]))
+            pixel_count = int(region_mask.sum())
+
+        # Create Region (e.g. Territory or Province)
+        meta = RegionMetadata(
+            region_id=region_id,
+            region_type=region_type,
+            color=color_hex,
+            pixel_count=pixel_count,
+            density_multiplier=parent_density_multiplier or 1.0,
+            parent_id=parent_id,
+            local_bbox=local_bbox,
+            local_center=(cx, cy),
+            local_seed=(int(sx), int(sy)),
+            global_bbox=None, # Set later
+            global_center=None, # Set later
+            global_seed=None, # Set later
+        )
+        metadata.append(meta)
+    return metadata
