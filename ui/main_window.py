@@ -3,7 +3,9 @@ from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QProgressBar, QTa
 from logic.province_generator import generate_province_map
 from logic.territory_generator import generate_territory_map
 from logic.import_module import import_image
-from logic.export_module import export_image, export_provinces_csv, export_territories_csv, export_territories_json
+from logic.export_module import (export_image, export_territory_definitions,
+                                 export_territory_history,
+                                 export_province_definitions)
 from ui.buttons import create_slider, create_button
 from ui.image_display import ImageDisplay
 
@@ -61,50 +63,7 @@ class MainWindow(QWidget):
                                            "Import Boundary Image",
                                            self.boundary_image_display))
 
-        # TAB3 PROVINCE IMAGE
-        self.province_tab = QWidget()
-        self.province_image_display = ImageDisplay()
-        province_tab_layout = QVBoxLayout(self.province_tab)
-        province_tab_layout.addWidget(self.province_image_display)
-        self.tabs.addTab(self.province_tab, "Province Image")
-        button_row = QHBoxLayout()
-        province_tab_layout.addLayout(button_row)
-
-        # Buttons
-        self.land_slider = create_slider(province_tab_layout,
-                                         "Land province Density:",
-                                         config.LAND_PROVINCES_MIN,
-                                         config.LAND_PROVINCES_MAX,
-                                         config.LAND_PROVINCES_DEFAULT,
-                                         config.LAND_PROVINCES_TICK,
-                                         config.LAND_PROVINCES_STEP)
-
-        self.ocean_slider = create_slider(province_tab_layout,
-                                          "Ocean province Density",
-                                          config.OCEAN_PROVINCES_MIN,
-                                          config.OCEAN_PROVINCES_MAX,
-                                          config.OCEAN_PROVINCES_DEFAULT,
-                                          config.OCEAN_PROVINCES_TICK,
-                                          config.OCEAN_PROVINCES_STEP)
-
-        self.button_gen_prov = create_button(province_tab_layout,
-                                             "Generate Provinces",
-                                             lambda: generate_province_map(self))
-        self.button_gen_prov.setEnabled(False)
-
-        self.button_exp_prov_img = create_button(button_row,
-                                                 "Export Province Image",
-                                                 lambda: export_image(self,
-                                                                      self.province_image_display.get_image(),
-                                                                      "Export Province Image"))
-        self.button_exp_prov_img.setEnabled(False)
-
-        self.button_exp_prov_csv = create_button(button_row,
-                                                 "Export Province Definitions",
-                                                 lambda: export_provinces_csv(self))
-        self.button_exp_prov_csv.setEnabled(False)
-
-        # TAB4 TERRITORY IMAGE
+        # TAB3 TERRITORY IMAGE
         self.territory_tab = QWidget()
         self.territory_image_display = ImageDisplay()
         territory_tab_layout = QVBoxLayout(self.territory_tab)
@@ -142,12 +101,56 @@ class MainWindow(QWidget):
                                                                       "Export Territory Image"))
         self.button_exp_terr_img.setEnabled(False)
 
-        self.button_exp_terr_csv = create_button(button_territory_row,
+        self.button_exp_terr_def = create_button(button_territory_row,
                                                  "Export Territory Definitions",
-                                                 lambda: export_territories_csv(self))
-        self.button_exp_terr_csv.setEnabled(False)
+                                                 lambda: export_territory_definitions(self))
+        self.button_exp_terr_def.setEnabled(False)
 
-        self.button_exp_terr_json = create_button(button_territory_row,
+        self.button_exp_terr_hist = create_button(button_territory_row,
                                                   "Export Territory History",
-                                                  lambda: export_territories_json(self))
-        self.button_exp_terr_json.setEnabled(False)
+                                                  lambda: export_territory_history(self))
+        self.button_exp_terr_hist.setEnabled(False)
+
+        # TAB4 PROVINCE IMAGE
+        self.province_tab = QWidget()
+        self.province_image_display = ImageDisplay()
+        province_tab_layout = QVBoxLayout(self.province_tab)
+        province_tab_layout.addWidget(self.province_image_display)
+        self.tabs.addTab(self.province_tab, "Province Image")
+        button_row = QHBoxLayout()
+        province_tab_layout.addLayout(button_row)
+
+        # Buttons
+        self.land_slider = create_slider(province_tab_layout,
+                                         "Land province Density:",
+                                         config.LAND_PROVINCES_MIN,
+                                         config.LAND_PROVINCES_MAX,
+                                         config.LAND_PROVINCES_DEFAULT,
+                                         config.LAND_PROVINCES_TICK,
+                                         config.LAND_PROVINCES_STEP)
+
+        self.ocean_slider = create_slider(province_tab_layout,
+                                          "Ocean province Density",
+                                          config.OCEAN_PROVINCES_MIN,
+                                          config.OCEAN_PROVINCES_MAX,
+                                          config.OCEAN_PROVINCES_DEFAULT,
+                                          config.OCEAN_PROVINCES_TICK,
+                                          config.OCEAN_PROVINCES_STEP)
+
+        self.button_gen_prov = create_button(province_tab_layout,
+                                             "Generate Provinces",
+                                             lambda: generate_province_map(self))
+        self.button_gen_prov.setEnabled(False)
+
+        self.button_exp_prov_img = create_button(button_row,
+                                                 "Export Province Image",
+                                                 lambda: export_image(self,
+                                                                      self.province_image_display.get_image(),
+                                                                      "Export Province Image"))
+        self.button_exp_prov_img.setEnabled(False)
+
+        self.button_exp_prov_def = create_button(button_row,
+                                                  "Export Province Definitions",
+                                                  lambda: export_province_definitions(self))
+        self.button_exp_prov_def.setEnabled(False)
+

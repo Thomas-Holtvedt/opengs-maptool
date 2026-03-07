@@ -1,4 +1,3 @@
-import os
 import json
 from PyQt6.QtWidgets import QFileDialog
 import csv
@@ -19,84 +18,113 @@ def export_image(parent_layout, image, text):
             print(f"Error saving image: {error}")
 
 
-def export_provinces_csv(main_layout):
-    metadata = getattr(main_layout, "province_data", None)
-    if not metadata:
-        print("No province data to export.")
-        return
-
-    path, _ = QFileDialog.getSaveFileName(
-        main_layout, "Export Province CSV", "", "CSV Files (*.csv)")
-    if not path:
-        return
-    if not path.lower().endswith(".csv"):
-        path += ".csv"
-
-    try:
-        with open(path, "w", newline="") as f:
-            w = csv.writer(f, delimiter=';')
-            w.writerow(["province_id", "R", "G", "B",
-                       "province_type", "x", "y"])
-            for d in metadata:
-                w.writerow([d["province_id"], d["R"], d["G"], d["B"],
-                            d["province_type"], round(d["x"], 2), round(d["y"], 2)])
-    except Exception as e:
-        print("Error saving province data:", e)
-
-
-def export_territories_csv(main_layout):
-    metadata = getattr(main_layout, "territory_data", None)
-    if not metadata:
+def export_territory_definitions(main_layout):
+    territory_data = getattr(main_layout, "territory_data", None)
+    if not territory_data:
         print("No territory data to export.")
         return
 
-    path, _ = QFileDialog.getSaveFileName(
-        main_layout, "Export territory CSV", "", "CSV Files (*.csv)")
+    path, fmt = _pick_file(main_layout, "Export Territory Definitions")
     if not path:
         return
-    if not path.lower().endswith(".csv"):
-        path += ".csv"
 
-    try:
-        with open(path, "w", newline="") as f:
+    if fmt == "json":
+        data = {}
+        for d in territory_data:
+            data[d["territory_id"]] = {
+                "territory_type": d["territory_type"],
+                "R": d["R"], "G": d["G"], "B": d["B"],
+                "x": round(d["x"], 2), "y": round(d["y"], 2),
+            }
+        _write_json(path, data)
+    else:
+        with open(path, "w", newline="", encoding="utf-8") as f:
             w = csv.writer(f, delimiter=';')
-            w.writerow(["territory_id", "R", "G", "B",
-                       "territory_type", "x", "y"])
-            for d in metadata:
-                w.writerow([d["territory_id"], d["R"], d["G"], d["B"],
-                            d["territory_type"], round(d["x"], 2), round(d["y"], 2)])
-    except Exception as e:
-        print("Error saving territory data:", e)
+            w.writerow(["id", "territory_type", "R", "G", "B", "x", "y"])
+            for d in territory_data:
+                w.writerow([d["territory_id"], d["territory_type"],
+                            d["R"], d["G"], d["B"],
+                            round(d["x"], 2), round(d["y"], 2)])
 
 
-def export_territories_json(main_layout):
-
-    # Ask user for export directory
-    export_dir = QFileDialog.getExistingDirectory(
-        main_layout,
-        "Select Territory Export Folder",
-        "",
-        QFileDialog.Option.ShowDirsOnly | QFileDialog.Option.DontResolveSymlinks
-    )
-
-    if not export_dir:
-        print("Territory export cancelled.")
+def export_territory_history(main_layout):
+    territory_data = getattr(main_layout, "territory_data", None)
+    if not territory_data:
+        print("No territory data to export.")
         return
 
-    territories = main_layout.territory_data
+    path, fmt = _pick_file(main_layout, "Export Territory History")
+    if not path:
+        return
 
-    for terr in territories:
-        tid = terr["territory_id"]
-        provinces = terr.get("province_ids", [])
+    if fmt == "json":
+        data = {}
+        for d in territory_data:
+            data[d["territory_id"]] = {
+                "provinces": d.get("province_ids", []),
+            }
+        _write_json(path, data)
+    else:
+        with open(path, "w", newline="", encoding="utf-8") as f:
+            w = csv.writer(f, delimiter=';')
+            w.writerow(["id", "provinces"])
+            for d in territory_data:
+                provinces = ",".join(d.get("province_ids", []))
+                w.writerow([d["territory_id"], provinces])
 
-        data = {
-            "territory_id": tid,
-            "provinces": provinces
-        }
 
-        filename = os.path.join(export_dir, f"{tid}.json")
+def export_province_definitions(main_layout):
+    province_data = getattr(main_layout, "province_data", None)
+    if not province_data:
+        print("No province data to export.")
+        return
 
-        with open(filename, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=4)
+    path, fmt = _pick_file(main_layout, "Export Province Definitions")
+    if not path:
+        return
 
-    print(f"Exported {len(territories)} territories to: {export_dir}")
+    if fmt == "json":
+        data = {}
+        for d in province_data:
+            data[d["province_id"]] = {
+                "province_type": d["province_type"],
+                "R": d["R"], "G": d["G"], "B": d["B"],
+                "x": round(d["x"], 2), "y": round(d["y"], 2),
+            }
+        _write_json(path, data)
+    else:
+        with open(path, "w", newline="", encoding="utf-8") as f:
+            w = csv.writer(f, delimiter=';')
+            w.writerow(["id", "province_type", "R", "G", "B", "x", "y"])
+            for d in province_data:
+                w.writerow([d["province_id"], d["province_type"],
+                            d["R"], d["G"], d["B"],
+                            round(d["x"], 2), round(d["y"], 2)])
+
+
+
+def _pick_file(parent, title):
+    """Open save dialog with JSON/CSV filter. Returns (path, format) or (None, None)."""
+    path, selected_filter = QFileDialog.getSaveFileName(
+        parent, title, "", "JSON Files (*.json);;CSV Files (*.csv)")
+    if not path:
+        return None, None
+
+    # Determine format from extension, fall back to selected filter
+    if path.lower().endswith(".json"):
+        fmt = "json"
+    elif path.lower().endswith(".csv"):
+        fmt = "csv"
+    elif "json" in selected_filter.lower():
+        fmt = "json"
+        path += ".json"
+    else:
+        fmt = "csv"
+        path += ".csv"
+
+    return path, fmt
+
+
+def _write_json(path, data):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=4)
