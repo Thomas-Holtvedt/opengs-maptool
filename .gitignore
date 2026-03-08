@@ -12,3 +12,6 @@ __pycache__/
 
 # Windows Zone.Identifier files
 *:Zone.Identifier
+
+# Claude
+CLAUDE.md

@@ -9,6 +9,9 @@ Province and territory maps form the backbone of these games, defining the geogr
 - Generate and Export province data
 - Generate and Export territory maps
 - Generate and Export territory data
+- Density image support for controlling province/territory distribution
+- Lake support — lakes are automatically detected and become individual provinces
+- Exclude ocean from density influence per generation step
 
 ## Showcase
 <img width="2200" height="2318" alt="image" src="https://github.com/user-attachments/assets/1ad0250a-0a50-4bbd-b616-0e215a7ed2bc" />
@@ -28,33 +31,43 @@ inside the project directory
 
 ## How to use the tool
 ### Land Image
-The first tab takes a image that specifies the ocean area of the map,
-the color defining the ocean must be RGB color (5,20,18), see example in the folder "example_input".
-Everything else is considered land. 
+The first tab takes an image that specifies the ocean and lake areas of the map.
+- **Ocean** must be RGB color (5, 20, 18)
+- **Lakes** must be RGB color (0, 255, 0)
+- Everything else is considered land
+
+See examples in the folder "example_input".
 
 ### Boundary Image
-The second tab defines the bounds that the provinces needs to adhere to.
+The second tab defines the bounds that the provinces and territories need to adhere to.
 Typical use would be borders for countries, states or other administrative units.
-The boundery borders must be pure black, RGB (0,0,0), everything else will be ignored.
+The boundary borders must be pure black, RGB (0, 0, 0), everything else will be ignored.
 
-### Province Image
-The third third tab generates the province map, based on the input in tab 1 and 2.
-NB! You dont need both inputs, but you need at least one. 
-Ex. A map without any ocean, does not need to have a input in tab 1, but then there must be a input in tab2, and visa versa.
-Both input images must have the same dimensions/size for a good result.
-
-Use the sliders to adjust the number of provinces on land and ocean.
-
-Province map and the file containing province information(id,rgb,type,coordinates) can be exported after generation.
+### Density Image
+The third tab allows you to import a density image that controls how provinces and territories are distributed.
+Darker areas attract more seeds, resulting in smaller and denser regions. A normalize preset and an equator distribution preset are available.
 
 ### Territory Image
-The fourt tab generates the territory map, based on the generated provinces.
-NB! You need to generate provinces before you can generate territories.
+The fourth tab generates the territory map, based on the input in tab 1 and 2.
+NB! You dont need both inputs, but you need at least one.
+Ex. A map without any ocean does not need to have input in tab 1, but then there must be input in tab 2, and vice versa.
+Both input images must have the same dimensions/size for a good result.
 
 Use the sliders to adjust the number of territories on land and ocean.
+The density strength slider controls how strongly the density image influences seed placement.
+Check "Exclude Ocean" to ignore the density image for ocean territories.
 
-Territory map and the file containing province information(id,rgb,type,coordinates) can be exported after generation.
-Terriroity json files (One file per territory, defining the belonging provinces) can be exported after generation.
+Territory map and the file containing territory information (id, rgb, type, coordinates) can be exported after generation.
+
+### Province Image
+The fifth tab generates the province map, based on the generated territories.
+NB! You need to generate territories before you can generate provinces.
+
+Use the sliders to adjust the number of provinces on land and ocean.
+Lakes are automatically detected and each connected lake region becomes its own province, assigned to the overlapping territory.
+
+Province map and the file containing province information (id, rgb, type, coordinates) can be exported after generation.
+Territory history files (defining the belonging provinces per territory) can be exported after generation.
 
 ## Contributions
 Contributions can come in many forms and all are appreciated:
