@@ -16,8 +16,11 @@ Province and territory maps form the backbone of these games, defining the geogr
 - Terrain system — import a terrain image to assign terrain types to provinces
 
 ## Showcase
-<img width="2200" height="2318" alt="image" src="https://github.com/user-attachments/assets/1ad0250a-0a50-4bbd-b616-0e215a7ed2bc" />
-<img width="2200" height="2308" alt="image" src="https://github.com/user-attachments/assets/7afe9e4c-648d-4e63-9636-a8df47bfba27" />
+Output territory Map:
+![example](/example_output/territores.png)
+Output Province Map:
+![example2](/example_output/provinces.png)
+
 
 ## How to install
 ### Option 1 (Windows only):
