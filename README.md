@@ -29,10 +29,11 @@ Output Province Map:
 3. Run the Executable
 
 ### Option 2:
-1. Clone the repository
-2. Download the necessary libraries by running "pip install -r requirements.txt" in your terminal, 
+1. [Download Python](https://www.python.org/downloads/) if not installed (Version 3.12 and up)
+2. Clone the repository
+3. Download the necessary libraries and install by running `pip install .` in your terminal, 
 inside the project directory
-3. Start project by running "python -m opengs_maptool.main"
+4. Start project by running `python -m opengs_maptool.main` (can be run from any directory, except if you use a venv)
 
 ## How to use the tool
 ### Land Image
