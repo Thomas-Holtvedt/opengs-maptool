@@ -123,6 +123,7 @@ class MainWindow(QWidget):
         territory_tab_layout = QVBoxLayout(self.territory_tab)
         territory_tab_layout.addWidget(self.territory_image_display)
         self.tabs.addTab(self.territory_tab, "Territory Image")
+
         button_territory_row = QHBoxLayout()
         territory_tab_layout.addLayout(button_territory_row)
         self.territory_land_slider = create_slider(
@@ -287,6 +288,9 @@ class MainWindow(QWidget):
 
     def set_progress(self, value: int) -> None:
         self.progress.setValue(value)
+    
+    def get_progress(self) -> int:
+        return self.progress.value()
 
     # Land
     def set_land_image(self, image: Image.Image | None) -> None:
@@ -326,7 +330,11 @@ class MainWindow(QWidget):
         self.territory_data = data
     
     def get_territory_pmap_and_data(self) -> tuple[NDArray[np.int32], list[dict]]:
-        return (self.territory_pmap, self.territory_data)
+        # Providing a default value makes no sense here, so raise
+        try:
+            return (self.territory_pmap, self.territory_data)
+        except AttributeError as error:
+            raise RuntimeError("Territory pmap and data accessed before being set") from error
     
     def set_cached_masks(self, masks: dict) -> None:
         self.cached_masks = masks
@@ -380,7 +388,7 @@ class MainWindow(QWidget):
         self.province_data = data
 
     def get_province_data(self) -> list[dict] | None:
-        return self.province_data
+        return self.province_data # None by default
 
     def get_province_density_strength(self) -> float:
         return self.province_density_strength.value() / 10.0
