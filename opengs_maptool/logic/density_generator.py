@@ -1,23 +1,26 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from opengs_maptool.logic.map_tool_protocol import MapToolProtocol
+
 import opengs_maptool.config as config
 import numpy as np
 from PIL import Image
 
 
-def normalize_density(layout):
-    land_image = layout.land_image_display.get_image()
+def normalize_density(map_tool: MapToolProtocol) -> None:
+    land_image = map_tool.get_land_image()
     if land_image is None:
         return
 
     w, h = land_image.size
     density = Image.new("L", (w, h), config.DEFAULT_DENSITY_GREY)
-    layout.density_image = density
-
-    layout.density_image_display.set_image(density.convert("RGBA"))
-    layout.check_territory_ready()
+    map_tool.set_density_image(density)
+    map_tool.check_territory_ready()
 
 
-def equator_density(layout):
-    land_image = layout.land_image_display.get_image()
+def equator_density(map_tool: MapToolProtocol) -> None:
+    land_image = map_tool.get_land_image()
     if land_image is None:
         return
 
@@ -29,6 +32,5 @@ def equator_density(layout):
     arr = np.tile(pixel_values[:, np.newaxis], (1, w))
 
     density = Image.fromarray(arr, mode="L")
-    layout.density_image = density
-    layout.density_image_display.set_image(density.convert("RGBA"))
-    layout.check_territory_ready()
+    map_tool.set_density_image(density)
+    map_tool.check_territory_ready()

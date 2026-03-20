@@ -1,5 +1,5 @@
 class NumberSeries:
-    def __init__(self, PREFIX, NUMBER_START, NUMBER_END):
+    def __init__(self, PREFIX, NUMBER_START, NUMBER_END) -> None:
         self.PREFIX: str = PREFIX
         self.NUMBER_END: int = NUMBER_END
         self.ID_LENGTH: int = len(str(NUMBER_END))

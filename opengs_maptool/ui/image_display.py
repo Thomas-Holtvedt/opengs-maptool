@@ -1,3 +1,4 @@
+from PIL import Image
 from PyQt6.QtWidgets import QLabel, QSizePolicy
 from PyQt6.QtGui import QPixmap, QImage
 from PyQt6.QtCore import Qt
@@ -12,7 +13,7 @@ class ImageDisplay(QLabel):
 
         self._image = None
 
-    def set_image(self, image):
+    def set_image(self, image: Image.Image | None) -> None:
         if image is None:
             self._image = None
             self.clear()
@@ -33,5 +34,5 @@ class ImageDisplay(QLabel):
 
         self.setPixmap(pixmap)
 
-    def get_image(self):
+    def get_image(self) -> Image.Image | None:
         return self._image
