@@ -23,7 +23,6 @@ def import_land_image(map_tool: MapToolProtocol) -> None:
 
     # Reset density and enable density editing
     map_tool.set_density_image(None)
-    map_tool.set_edit_density_available(True)
     map_tool.check_territory_ready()
 
 

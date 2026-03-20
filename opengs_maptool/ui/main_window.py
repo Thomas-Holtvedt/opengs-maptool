@@ -102,8 +102,8 @@ class MainWindow(QWidget):
             "Import Density Image",
             lambda: import_density_image(self),
         )
-        self.territory_exclude_ocean_density = create_checkbox(density_tab_layout, "Territory Exclude Ocean")
-        self.province_exclude_ocean_density = create_checkbox(density_tab_layout, "Province Exclude Ocean")
+        self.territory_exclude_ocean_density = create_checkbox(density_tab_layout, "Territory Exclude Ocean (Density)")
+        self.province_exclude_ocean_density = create_checkbox(density_tab_layout, "Province Exclude Ocean (Density)")
 
     def create_terrain_tab(self) -> None:
         self.terrain_tab = QWidget()
@@ -208,7 +208,7 @@ class MainWindow(QWidget):
         province_tab_layout.addLayout(button_row)
 
         # Buttons
-        self.land_slider = create_slider(
+        self.province_land_slider = create_slider(
             province_tab_layout,
             "Land province Density:",
             config.LAND_PROVINCES_MIN,
@@ -218,7 +218,7 @@ class MainWindow(QWidget):
             config.LAND_PROVINCES_STEP,
         )
 
-        self.ocean_slider = create_slider(
+        self.province_ocean_slider = create_slider(
             province_tab_layout,
             "Ocean province Density",
             config.OCEAN_PROVINCES_MIN,
@@ -295,6 +295,7 @@ class MainWindow(QWidget):
     # Land
     def set_land_image(self, image: Image.Image | None) -> None:
         self.land_image_display.set_image(image)
+        self.set_edit_density_available(True)
 
     def get_land_image(self) -> Image.Image | None:
         return self.land_image_display.get_image()
@@ -383,6 +384,9 @@ class MainWindow(QWidget):
     # Province
     def set_province_image(self, image: Image.Image | None) -> None:
         self.province_image_display.set_image(image)
+    
+    def get_province_image(self) -> Image.Image | None:
+        return self.province_image_display.get_image()
 
     def set_province_data(self, data: list[dict] | None) -> None:
         self.province_data = data
@@ -402,11 +406,11 @@ class MainWindow(QWidget):
     def get_province_jagged_ocean(self) -> bool:
         return self.province_jagged_ocean.isChecked()
 
-    def get_land_province_count(self) -> int:
-        return self.land_slider.value()
+    def get_province_land_province_density(self) -> int:
+        return self.province_land_slider.value()
 
-    def get_ocean_province_count(self) -> int:
-        return self.ocean_slider.value()
+    def get_province_ocean_province_density(self) -> int:
+        return self.province_ocean_slider.value()
 
     def set_province_gen_available(self, available: bool) -> None:
         self.button_gen_prov.setEnabled(available)

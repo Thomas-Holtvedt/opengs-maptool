@@ -5,7 +5,7 @@ class NumberSeries:
         self.ID_LENGTH: int = len(str(NUMBER_END))
         self.number_next: int = NUMBER_START
 
-    def get_id(self) -> str:
+    def get_id(self) -> str | None:
         if self.number_next > self.NUMBER_END:
             print("ERROR: No more available numbers!")
             return None

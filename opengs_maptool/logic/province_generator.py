@@ -26,8 +26,8 @@ def generate_province_map(map_tool: MapToolProtocol) -> None:
     jagged_ocean = map_tool.get_province_jagged_ocean()
     map_h, map_w = masks["map_h"], masks["map_w"]
 
-    total_land_provs = map_tool.get_land_province_count()
-    total_ocean_provs = map_tool.get_ocean_province_count()
+    total_land_provs = map_tool.get_province_land_province_density()
+    total_ocean_provs = map_tool.get_province_ocean_province_density()
     lake_mask = masks.get("lake_mask")
 
     # Separate territories by type

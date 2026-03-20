@@ -1,4 +1,5 @@
 from __future__ import annotations
+from pathlib import Path
 from typing import TYPE_CHECKING, Literal
 if TYPE_CHECKING:
     from opengs_maptool.logic.map_tool_protocol import MapToolProtocol
@@ -33,7 +34,9 @@ def export_territory_definitions(map_tool: MapToolProtocol) -> None:
     path, fmt = _pick_file(map_tool, "Export Territory Definitions")
     if not path:
         return
+    export_territory_definitions_to_path(territory_data, path, fmt)
 
+def export_territory_definitions_to_path(territory_data: list[dict], path: str | Path, fmt: str) -> None:
     if fmt == "json":
         data = {}
         for d in territory_data:
@@ -62,13 +65,15 @@ def export_territory_history(map_tool: MapToolProtocol) -> None:
     path, fmt = _pick_file(map_tool, "Export Territory History")
     if not path:
         return
-    
+    export_territory_history_to_path(territory_data, path, fmt)
+
+def export_territory_history_to_path(territory_data: list[dict], path: str | Path, fmt: str) -> None:
     if fmt == "json":
         data = {}
         for d in territory_data:
             data[d["territory_id"]] = {
                 "provinces": d.get("province_ids", []),
-        }
+            }
         _write_json(path, data)
     else:
         with open(path, "w", newline="", encoding="utf-8") as f:
@@ -88,7 +93,9 @@ def export_province_definitions(map_tool: MapToolProtocol) -> None:
     path, fmt = _pick_file(map_tool, "Export Province Definitions")
     if not path:
         return
+    export_province_definitions_to_path(province_data, path, fmt)
 
+def export_province_definitions_to_path(province_data: list[dict], path: str | Path, fmt: str) -> None:
     has_terrain = any("province_terrain" in d for d in province_data)
 
     if fmt == "json":
@@ -142,6 +149,6 @@ def _pick_file(parent, title: str) -> tuple[None, None] | tuple[str, Literal["js
     return path, fmt
 
 
-def _write_json(path, data) -> None:
+def _write_json(path: str | Path, data) -> None:
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)

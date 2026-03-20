@@ -28,14 +28,96 @@ Output Province Map:
 2. Download and unpack "ogs_maptool.zip"
 3. Run the Executable
 
-### Option 2:
+### Option 2 (recommended):
 1. [Download Python](https://www.python.org/downloads/) if not installed (Version 3.12 and up)
 2. Clone the repository
 3. Download the necessary libraries and install by running `pip install .` in your terminal, 
 inside the project directory
-4. Start project by running `python -m opengs_maptool.main` (can be run from any directory, except if you use a venv)
 
 ## How to use the tool
+
+### Launching the User Interface (Only works for Option 2)
+You can start the OpenGS Map Tool with its graphical interface using the following from any directory(except if you use a venv):
+
+```sh
+opengs-maptool-main-gui
+```
+
+Or, if running from source:
+
+```sh
+python -m opengs_maptool.main --mode gui
+```
+
+This will open the main window, allowing you to use all features through an interactive interface.
+
+---
+
+### Python Interface and `main_terminal` Mode (Only works for Option 2)
+
+The OpenGS Map Tool can also be used programmatically via its Python interface, or run in batch mode using the `main_terminal` mode. This is useful for automation, scripting, or running example workflows without the graphical interface.
+
+You can import and use the main logic in your own Python scripts. The core class is `MainProgram` in `opengs_maptool.logic.main_program`.
+
+Example:
+
+```python
+from opengs_maptool.logic.main_program import MainProgram
+import opengs_maptool.config as config
+from pathlib import Path
+
+input_dir = Path("opengs_maptool/examples/input/")
+output_dir = Path("opengs_maptool/examples/output/")
+mp = MainProgram()
+mp.load_land_image(input_dir / "land.png")
+mp.load_boundary_image(input_dir / "bound.png")
+mp.load_density_image(input_dir / "density.png")
+mp.load_terrain_image(input_dir / "terrain.png")
+
+# Set parameters and generate territories
+mp.set_territory_params(
+	land_density=config.LAND_TERRITORIES_MIN,
+	ocean_density=config.OCEAN_TERRITORIES_MIN,
+	density_strength=config.DENSITY_STRENGTH_DEFAULT / 10.0,
+	jagged_land_borders=False,
+	jagged_ocean_borders=False
+)
+mp.generate_territories()
+mp.export_territory_image(output_dir / "territories.png")
+
+# Set parameters and generate provinces
+mp.set_province_params(
+	land_density=config.LAND_PROVINCES_DEFAULT,
+	ocean_density=config.OCEAN_PROVINCES_DEFAULT,
+	density_strength=config.DENSITY_STRENGTH_DEFAULT / 10.0,
+	jagged_land_borders=False,
+	jagged_ocean_borders=False
+)
+mp.generate_provinces()
+mp.export_province_image(output_dir / "provinces.png")
+```
+
+### main_terminal Mode (Only works for Option 2)
+You can run the tool in batch mode from the command line, which will process example input images and export all output files automatically. This is useful for testing or automation.
+
+**Command:**
+
+```sh
+python -m opengs_maptool.main --mode main_terminal
+```
+
+This will:
+- Load example images from `opengs_maptool/examples/input/`
+- Generate territories and provinces
+- Export all output files to `opengs_maptool/examples/output/`
+
+You can also use the installed script (if installed via pip):
+
+```sh
+opengs-maptool-main-terminal
+```
+
+
 ### Land Image
 The first tab takes an image that specifies the ocean and lake areas of the map.
 - **Ocean** must be RGB color (5, 20, 18)
