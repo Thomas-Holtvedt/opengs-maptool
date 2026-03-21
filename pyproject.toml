@@ -15,6 +15,7 @@ dependencies = [
     "PyQt6_sip==13.10.2",
     "scipy==1.16.3",
     "tkinterdnd2==0.4.3",
+    "tqdm==4.67.2",
 ]
 
 classifiers = [
@@ -45,4 +46,6 @@ opengs_maptool = ["**/*"]
 include-package-data = true
 
 [project.gui-scripts]
-opengs-maptool = "opengs_maptool.main:main"
+opengs-maptool-main-gui = "opengs_maptool.main:main_gui"
+[project.scripts]
+opengs-maptool-main-terminal = "opengs_maptool.main:main_terminal"

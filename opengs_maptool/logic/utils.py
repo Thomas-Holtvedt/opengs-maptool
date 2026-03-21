@@ -1,5 +1,9 @@
+from __future__ import annotations
+from typing import Any, Callable, TypeAlias
+
 import opengs_maptool.config as config
 import numpy as np
+from numpy.typing import NDArray
 from PIL import Image
 from scipy.spatial import cKDTree
 from scipy.ndimage import distance_transform_edt, label as ndlabel
@@ -8,16 +12,16 @@ from PyQt6.QtWidgets import QApplication
 MAX_LLOYD_SAMPLE = 100_000
 
 # Steps per create_region_map: sampling=1, lloyd=LLOYD_ITERATIONS, assign=1, meta+borders=1
-STEPS_PER_REGION_MAP = 1 + config.LLOYD_ITERATIONS + 1 + 1
+STEPS_PER_REGION_MAP: int = 1 + config.LLOYD_ITERATIONS + 1 + 1
 
 used_colors = set()
 
 
-def clear_used_colors():
+def clear_used_colors() -> None:
     used_colors.clear()
 
 
-def color_from_id(index, ptype):
+def color_from_id(index: int, ptype: str) -> tuple[int, int, int]:
     rng = np.random.default_rng(index + 1)
     while True:
         if ptype == "ocean":
@@ -37,8 +41,10 @@ def color_from_id(index, ptype):
             return color
 
 
-def random_seeds(mask, num_points, rng_seed=None, density=None,
-                 density_strength=1.0):
+def random_seeds(
+        mask: NDArray[np.bool_], num_points: int, rng_seed: int | None = None,
+        density: NDArray[np.uint8] | None = None, density_strength: float = 1.0,
+    ) -> list[tuple[int, int]]:
     """Pick num_points random pixels from mask.
 
     When density is provided (2D uint8 array, same shape as mask),
@@ -66,7 +72,10 @@ def random_seeds(mask, num_points, rng_seed=None, density=None,
     return [(int(x), int(y)) for y, x in coords_yx[indices]]
 
 
-def lloyd_relaxation(mask, point_seeds, rng_seed=None, iterations=4, step_fn=None):
+def lloyd_relaxation(
+        mask: NDArray[np.bool], point_seeds: list[tuple[int, int]], rng_seed: int | None = None,
+        iterations: int = 4, step_fn: Callable[[int], None] | None = None,
+    ) -> list[tuple[int, int]]:
     """
     Improve seed placement by iteratively moving each seed to the centroid
     of its Voronoi cell.
@@ -118,7 +127,7 @@ def lloyd_relaxation(mask, point_seeds, rng_seed=None, iterations=4, step_fn=Non
     return [(int(x), int(y)) for x, y in seeds_arr]
 
 
-def _build_jitter_maps(h, w, seeds_arr):
+def _build_jitter_maps(h: int, w: int, seeds_arr: NDArray[np.float32]) -> tuple[NDArray[np.float32] | None, NDArray[np.float32] | None]:
     """Build spatially-correlated noise maps for jagged border effect.
 
     Returns (jitter_x, jitter_y) arrays of shape (h, w), or (None, None)
@@ -146,7 +155,10 @@ def _build_jitter_maps(h, w, seeds_arr):
     return jx, jy
 
 
-def _jitter_coords(coords_xy, coords_yx, jitter_x, jitter_y):
+def _jitter_coords(
+        coords_xy: NDArray[np.float32], coords_yx: NDArray[np.intp],
+        jitter_x: NDArray[np.float32], jitter_y: NDArray[np.float32],
+    ) -> NDArray[np.float32]:
     """Return a copy of coords_xy with spatially-correlated noise added."""
     out = coords_xy.copy()
     out[:, 0] += jitter_x[coords_yx[:, 0], coords_yx[:, 1]]
@@ -154,7 +166,7 @@ def _jitter_coords(coords_xy, coords_yx, jitter_x, jitter_y):
     return out
 
 
-def _remove_enclaves(pmap, mask):
+def _remove_enclaves(pmap: NDArray[np.int32], mask: NDArray[np.bool]) -> None:
     """Reassign disconnected region fragments to surrounding regions.
 
     For each region, keeps only the largest connected component.
@@ -184,7 +196,10 @@ def _remove_enclaves(pmap, mask):
         pmap[cleared] = pmap[ny[cleared], nx[cleared]]
 
 
-def assign_regions(mask, seeds, start_index, jagged=False):
+def assign_regions(
+        mask: NDArray[np.bool], seeds: list[tuple[int, int]],
+        start_index: int, jagged: bool = False
+    ) -> NDArray[np.int32]:
     """
     Assign each pixel in mask to the nearest seed, respecting boundaries.
 
@@ -271,17 +286,17 @@ def assign_regions(mask, seeds, start_index, jagged=False):
     return pmap
 
 
-def is_sea_color(arr):
+def is_sea_color(arr: NDArray[np.uint8]) -> NDArray[np.bool]:
     r, g, b = config.OCEAN_COLOR
     return (arr[..., 0] == r) & (arr[..., 1] == g) & (arr[..., 2] == b)
 
 
-def is_lake_color(arr):
+def is_lake_color(arr: NDArray[np.uint8]) -> NDArray[np.bool]:
     r, g, b = config.LAKE_COLOR
     return (arr[..., 0] == r) & (arr[..., 1] == g) & (arr[..., 2] == b)
 
 
-def assign_borders(pmap, border_mask):
+def assign_borders(pmap: NDArray[np.int32], border_mask: NDArray[np.bool]) -> None:
     valid = pmap >= 0
     if not valid.any() or not border_mask.any():
         return
@@ -291,7 +306,13 @@ def assign_borders(pmap, border_mask):
     pmap[bm] = pmap[ny[bm], nx[bm]]
 
 
-def combine_maps(land_map, sea_map, metadata, land_mask, sea_mask):
+def combine_maps(
+        land_map: NDArray[np.int32] | None,
+        sea_map: NDArray[np.int32] | None,
+        metadata: list[dict],
+        land_mask: NDArray[np.bool_],
+        sea_mask: NDArray[np.bool_],
+    ) -> tuple[Image.Image, NDArray[np.int32]]:
     """Merge land/sea maps into RGB image. Returns (image, combined_pmap)."""
     if land_map is not None and land_map.size > 0:
         h, w = land_map.shape
@@ -330,18 +351,20 @@ def combine_maps(land_map, sea_map, metadata, land_mask, sea_mask):
     return Image.fromarray(out), combined
 
 
-def make_progress_updater(main_layout, total_steps):
+def make_progress_updater(set_progress: Callable[[int], None], total_steps: int) -> Callable[[int], None]:
     done = [0]
 
-    def step(n=1):
+    def step(n=1) -> None:
         done[0] = min(done[0] + n, total_steps)
-        main_layout.progress.setValue(int(done[0] * 100 / total_steps))
+        set_progress(int(done[0] * 100 / total_steps))
         QApplication.processEvents()
 
     return step
 
 
-def extract_masks(boundary_image, land_image):
+def extract_masks(
+        boundary_image: Image.Image | None, land_image: Image.Image | None,
+    ) -> dict[str, NDArray[np.bool] | int | None]:
     """Extract all masks from boundary and land images.
 
     Returns dict with keys: boundary_mask, land_mask, sea_mask,
@@ -414,9 +437,13 @@ def extract_masks(boundary_image, land_image):
     }
 
 
-def create_region_map(fill_mask, border_mask, num_points, start_index,
-                      ptype, series, id_key, type_key, step_fn=None,
-                      density=None, density_strength=1.0, jagged=False):
+def create_region_map(fill_mask: NDArray[np.bool_], border_mask: NDArray[np.bool_],
+                      num_points: int, start_index: int, ptype: str,
+                      series, id_key: str, type_key: str,
+                      step_fn: Callable[[int], None] | None = None,
+                      density: NDArray[np.uint8] | None = None,
+                      density_strength: float = 1.0, jagged: bool = False
+    ) -> tuple[NDArray[np.int32], list[dict], int]:
     """Unified region map creator for both provinces and territories.
 
     id_key/type_key control metadata key names (e.g. "province_id"/"province_type"
@@ -453,8 +480,10 @@ def create_region_map(fill_mask, border_mask, num_points, start_index,
     return pmap, metadata, next_index
 
 
-def _build_region_metadata(pmap, seeds, start_index, ptype, series,
-                           id_key, type_key):
+def _build_region_metadata(pmap: NDArray[np.int32], seeds: list[tuple[int, int]],
+        start_index: int, ptype: str,
+        series: Any, id_key: str, type_key: str,
+    ) -> list[dict]:
     valid_mask = pmap >= 0
     ys, xs = np.where(valid_mask)
     flat = pmap[valid_mask]

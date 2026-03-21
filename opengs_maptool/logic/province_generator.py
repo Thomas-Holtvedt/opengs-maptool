@@ -1,31 +1,33 @@
-import opengs_maptool.config as config
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from opengs_maptool.logic.map_tool_protocol import MapToolProtocol
+
 import numpy as np
 from PIL import Image
 from scipy.ndimage import label as ndlabel
+import opengs_maptool.config as config
 from opengs_maptool.logic.numb_gen import NumberSeries
 from opengs_maptool.logic.utils import (
     clear_used_colors, color_from_id, create_region_map, make_progress_updater,
-    STEPS_PER_REGION_MAP
 )
 
 
-def generate_province_map(main_layout):
+def generate_province_map(map_tool: MapToolProtocol) -> None:
     clear_used_colors()
-    main_layout.progress.setVisible(True)
-    main_layout.progress.setValue(0)
-
-    territory_pmap = main_layout.territory_pmap
-    territory_data = main_layout.territory_data
-    masks = main_layout.cached_masks
-    density_arr = np.array(main_layout.density_image)
-    density_strength = main_layout.province_density_strength.value() / 10.0
-    exclude_ocean_density = main_layout.province_exclude_ocean_density.isChecked()
-    jagged_land = main_layout.province_jagged_land.isChecked()
-    jagged_ocean = main_layout.province_jagged_ocean.isChecked()
+    map_tool.start_progress()
+    territory_pmap, territory_data = map_tool.get_territory_pmap_and_data()
+    masks = map_tool.get_cached_masks()
+    density_arr = np.array(map_tool.get_density_image().convert("L"))
+    
+    density_strength = map_tool.get_province_density_strength()
+    exclude_ocean_density = map_tool.get_province_exclude_ocean_density()
+    jagged_land = map_tool.get_province_jagged_land()
+    jagged_ocean = map_tool.get_province_jagged_ocean()
     map_h, map_w = masks["map_h"], masks["map_w"]
 
-    total_land_provs = main_layout.land_slider.value()
-    total_ocean_provs = main_layout.ocean_slider.value()
+    total_land_provs = map_tool.get_province_land_province_density()
+    total_ocean_provs = map_tool.get_province_ocean_province_density()
     lake_mask = masks.get("lake_mask")
 
     # Separate territories by type
@@ -64,7 +66,7 @@ def generate_province_map(main_layout):
 
     # Progress: one step per territory + setup/finalize
     total_steps = 2 + len(all_terrs) + 2
-    step = make_progress_updater(main_layout, total_steps)
+    step = make_progress_updater(map_tool.set_progress, total_steps)
     step(2)
 
     series = NumberSeries(
@@ -170,7 +172,7 @@ def generate_province_map(main_layout):
     step(1)
 
     # Assign terrain from terrain image, or use defaults
-    terrain_image = getattr(main_layout, "terrain_image", None)
+    terrain_image = map_tool.get_terrain_image()
     if terrain_image is not None:
         terrain_arr = np.array(terrain_image)
         _assign_terrain(all_metadata, terrain_arr)
@@ -184,20 +186,19 @@ def generate_province_map(main_layout):
             else:
                 prov["province_terrain"] = config.DEFAULT_TERRAIN_LAND
 
-    main_layout.province_image_display.set_image(province_image)
-    main_layout.province_data = all_metadata
+    map_tool.set_province_image(province_image)
+    map_tool.set_province_data(all_metadata)
     step(1)
 
-    main_layout.progress.setValue(100)
-    main_layout.button_exp_prov_img.setEnabled(True)
-    main_layout.button_exp_prov_def.setEnabled(True)
-    main_layout.button_exp_terr_hist.setEnabled(True)
+    map_tool.set_progress(100)
+    map_tool.set_province_export_available(True)
+    map_tool.set_territory_history_export_available(True)
 
     return province_image, all_metadata
 
 
 def _distribute(territories, total_provinces, pixel_counts,
-                density_weights=None):
+                density_weights=None) -> list[int]:
     """Distribute total_provinces proportionally across territories.
 
     When density_weights is provided, each territory's pixel count is scaled
@@ -242,7 +243,7 @@ def _distribute(territories, total_provinces, pixel_counts,
     return alloc
 
 
-def _assign_terrain(metadata, terrain_arr):
+def _assign_terrain(metadata, terrain_arr) -> None:
     """Look up terrain color at each province center and assign province_terrain.
 
     Enforces category constraints: land provinces only get land terrains,
