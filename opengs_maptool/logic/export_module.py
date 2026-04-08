@@ -1,6 +1,9 @@
 import json
 from PyQt6.QtWidgets import QFileDialog
 import csv
+import yaml
+import xml.etree.ElementTree as ET
+from xml.dom import minidom
 
 
 def export_image(parent_layout, image, text):
@@ -28,15 +31,37 @@ def export_territory_definitions(main_layout):
     if not path:
         return
 
-    if fmt == "json":
+    if fmt in ("json", "yaml", "xml"):
         data = {}
         for d in territory_data:
             data[d["territory_id"]] = {
                 "territory_type": d["territory_type"],
                 "R": d["R"], "G": d["G"], "B": d["B"],
-                "x": round(d["x"], 2), "y": round(d["y"], 2),
+                "x": round(float(d["x"]), 2),
+                "y": round(float(d["y"]), 2),
             }
-        _write_json(path, data)
+
+        if fmt == "json":
+            _write_json(path, data)
+        elif fmt == "yaml":
+            _write_yaml(path, data)
+        elif fmt == "xml":
+            root = ET.Element("territories")
+
+            for territory_id, info in data.items():
+                territory_element = ET.SubElement(root, "territory")
+                territory_element.set("id", str(territory_id))
+                
+                for key, value in info.items():
+                    element = ET.SubElement(territory_element, key)
+                    element.text = str(value)
+
+            rough_xml = ET.tostring(root, encoding="unicode")
+            pretty_xml = minidom.parseString(rough_xml).toprettyxml(indent="    ")
+            
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(pretty_xml)
+
     else:
         with open(path, "w", newline="", encoding="utf-8") as f:
             w = csv.writer(f, delimiter=';')
@@ -57,13 +82,35 @@ def export_territory_history(main_layout):
     if not path:
         return
 
-    if fmt == "json":
+    if fmt in ("json", "yaml", "xml"):
         data = {}
         for d in territory_data:
             data[d["territory_id"]] = {
                 "provinces": d.get("province_ids", []),
             }
-        _write_json(path, data)
+        if fmt == "json":
+            _write_json(path, data)
+        elif fmt == "yaml":
+            _write_yaml(path, data)
+        elif fmt == "xml":
+            root = ET.Element("territories")
+
+            for territory_id, info in data.items():
+                territory_element = ET.SubElement(root, "territory")
+                territory_element.set("id", str(territory_id))
+                
+                provinces_element = ET.SubElement(territory_element, "provinces")
+
+                for province_id in info.get("provinces", []):
+                    province_element = ET.SubElement(provinces_element, "province")
+                    province_element.text = str(province_id)
+
+            rough_xml = ET.tostring(root, encoding="unicode")
+            pretty_xml = minidom.parseString(rough_xml).toprettyxml(indent="    ")
+            
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(pretty_xml)
+
     else:
         with open(path, "w", newline="", encoding="utf-8") as f:
             w = csv.writer(f, delimiter=';')
@@ -85,18 +132,39 @@ def export_province_definitions(main_layout):
 
     has_terrain = any("province_terrain" in d for d in province_data)
 
-    if fmt == "json":
+    if fmt in ("json", "yaml", "xml"):
         data = {}
         for d in province_data:
             entry = {
                 "province_type": d["province_type"],
                 "R": d["R"], "G": d["G"], "B": d["B"],
-                "x": round(d["x"], 2), "y": round(d["y"], 2),
+                "x": round(float(d["x"]), 2),
+                "y": round(float(d["y"]), 2),
             }
             if has_terrain:
                 entry["province_terrain"] = d.get("province_terrain", "unknown")
             data[d["province_id"]] = entry
-        _write_json(path, data)
+        if fmt == "json":
+            _write_json(path, data)
+        elif fmt == "yaml":
+            _write_yaml(path, data)
+        elif fmt == "xml":
+            root = ET.Element("provinces")
+
+            for province_id, info in data.items():
+                province_element = ET.SubElement(root, "province")
+                province_element.set("id", str(province_id))
+
+                for key, value in info.items():
+                    element = ET.SubElement(province_element, key)
+                    element.text = str(value)
+
+            rough_xml = ET.tostring(root, encoding="unicode")
+            pretty_xml = minidom.parseString(rough_xml).toprettyxml(indent="    ")
+
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(pretty_xml)
+
     else:
         with open(path, "w", newline="", encoding="utf-8") as f:
             w = csv.writer(f, delimiter=';')
@@ -113,11 +181,15 @@ def export_province_definitions(main_layout):
                 w.writerow(row)
 
 
-
 def _pick_file(parent, title):
-    """Open save dialog with JSON/CSV filter. Returns (path, format) or (None, None)."""
+    """Open save dialog with data format filters. Returns (path, format) or (None, None)."""
     path, selected_filter = QFileDialog.getSaveFileName(
-        parent, title, "", "JSON Files (*.json);;CSV Files (*.csv)")
+        parent, title, "", 
+        "JSON Files (*.json);;" \
+        "CSV Files (*.csv);;" \
+        "YAML Files (*.yaml);;" \
+        "XML Files (*.xml)"
+    )
     if not path:
         return None, None
 
@@ -126,9 +198,19 @@ def _pick_file(parent, title):
         fmt = "json"
     elif path.lower().endswith(".csv"):
         fmt = "csv"
+    elif path.lower().endswith(".yaml"):
+        fmt = "yaml"
+    elif path.lower().endswith(".xml"):
+        fmt = "xml"
     elif "json" in selected_filter.lower():
         fmt = "json"
         path += ".json"
+    elif "yaml" in selected_filter.lower():
+        fmt = "yaml"
+        path += ".yaml"
+    elif "xml" in selected_filter.lower():
+        fmt = "xml"
+        path += ".xml"
     else:
         fmt = "csv"
         path += ".csv"
@@ -139,3 +221,8 @@ def _pick_file(parent, title):
 def _write_json(path, data):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
+
+
+def _write_yaml(path, data):
+    with open(path, "w", encoding="utf-8") as f:
+        yaml.dump(data, f)

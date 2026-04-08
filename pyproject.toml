@@ -15,6 +15,7 @@ dependencies = [
     "PyQt6_sip==13.10.2",
     "scipy==1.16.3",
     "tkinterdnd2==0.4.3",
+    "PyYAML==6.0.3"
 ]
 
 classifiers = [
