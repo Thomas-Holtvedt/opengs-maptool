@@ -190,7 +190,7 @@ def export_province_definitions(main_layout):
 def _pick_file_image(parent, title):
     """Open save dialog with image format filters. Returns path (with valid file extension) or None"""
     filters = (
-        "All Files (*.*);;"
+        "All Files (*);;"
         "PNG Files (*.png);;"
         "JPEG Files (*.jpg *.jpeg);;"
         "BMP Files (*.bmp);;"
@@ -225,7 +225,7 @@ def _pick_file_image(parent, title):
 def _pick_file_data(parent, title):
     """Open save dialog with data format filters. Returns (path, format) or (None, None)."""
     filters = (
-        "All Files (*.*);;"
+        "All Files (*);;"
         "JSON Files (*.json);;"
         "CSV Files (*.csv);;"
         "YAML Files (*.yaml *.yml);;"
