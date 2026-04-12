@@ -190,13 +190,13 @@ def export_province_definitions(main_layout):
 def _pick_file_image(parent, title):
     """Open save dialog with image format filters. Returns path (with valid file extension) or None"""
     filters = (
-        "PNG Files (*.png);;" \
-        "JPEG Files (*.jpg *.jpeg);;" \
-        "BMP Files (*.bmp);;" \
+        "All Files (*.*);;"
+        "PNG Files (*.png);;"
+        "JPEG Files (*.jpg *.jpeg);;"
+        "BMP Files (*.bmp);;"
         "GIF Files (*.gif);;"
         "TIFF Files (*.tiff *.tif);;"
-        "WebP Files (*.webp);;" \
-        "All Files (*.*)"
+        "WebP Files (*.webp)"
     )
     
     path, selected_filter = QFileDialog.getSaveFileName(parent, title, "", filters)
@@ -225,37 +225,44 @@ def _pick_file_image(parent, title):
 def _pick_file_data(parent, title):
     """Open save dialog with data format filters. Returns (path, format) or (None, None)."""
     filters = (
-        "JSON Files (*.json);;" \
-        "CSV Files (*.csv);;" \
-        "YAML Files (*.yaml);;" \
+        "All Files (*.*);;"
+        "JSON Files (*.json);;"
+        "CSV Files (*.csv);;"
+        "YAML Files (*.yaml *.yml);;"
         "XML Files (*.xml)"
     )
     
     path, selected_filter = QFileDialog.getSaveFileName(parent, title, "", filters)
     if not path:
         return None, None
-
-    # Determine format from extension, fall back to selected filter
+        
+    # Determine format from extension
     if path.lower().endswith(".json"):
         fmt = "json"
     elif path.lower().endswith(".csv"):
         fmt = "csv"
-    elif path.lower().endswith(".yaml"):
+    elif path.lower().endswith((".yaml", ".yml")):
         fmt = "yaml"
     elif path.lower().endswith(".xml"):
         fmt = "xml"
-    elif "json" in selected_filter.lower():
-        fmt = "json"
-        path += ".json"
-    elif "yaml" in selected_filter.lower():
-        fmt = "yaml"
-        path += ".yaml"
-    elif "xml" in selected_filter.lower():
-        fmt = "xml"
-        path += ".xml"
-    else:
-        fmt = "csv"
-        path += ".csv"
+    
+    # Fallback to the selected filter
+    elif not path.lower().endswith((".json", ".csv", ".yaml", ".yml", ".xml")):
+        if "json" in selected_filter.lower():
+            fmt = "json"
+            path += ".json"
+        elif "yaml" in selected_filter.lower(): # or .yml
+            fmt = "yaml"
+            path += ".yaml"
+        elif "xml" in selected_filter.lower():
+            fmt = "xml"
+            path += ".xml"
+        elif "csv" in selected_filter.lower():
+            fmt = "csv"
+            path += ".csv"
+        else: # default format
+            fmt = "json"
+            path += ".json"
 
     return path, fmt
 
