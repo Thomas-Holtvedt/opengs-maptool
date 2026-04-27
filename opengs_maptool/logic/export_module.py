@@ -1,5 +1,6 @@
-import json
 from PyQt6.QtWidgets import QFileDialog
+from PIL import Image
+import json
 import csv
 import yaml
 import xml.etree.ElementTree as ET
@@ -9,12 +10,17 @@ from xml.dom import minidom
 def export_image(parent_layout, image, text):
     if image:
         try:
-            path, _ = QFileDialog.getSaveFileName(
-                parent_layout, text, "", "PNG Files (*.png)")
+            path = _pick_file_image(parent_layout, text)
             if not path:
                 return
-            if not path.lower().endswith(".png"):
-                path += ".png"
+            
+            # Remove the alpha channel for JPEG image export
+            ext = path.lower().rsplit('.', 1)[-1]
+            if ext in ("jpg", "jpeg"):
+                background = Image.new('RGB', image.size, (255, 255, 255))
+                background.paste(image, mask=image.split()[3])
+                image = background
+
             image.save(path)
 
         except Exception as error:
@@ -27,7 +33,7 @@ def export_territory_definitions(main_layout):
         print("No territory data to export.")
         return
 
-    path, fmt = _pick_file(main_layout, "Export Territory Definitions")
+    path, fmt = _pick_file_data(main_layout, "Export Territory Definitions")
     if not path:
         return
 
@@ -78,7 +84,7 @@ def export_territory_history(main_layout):
         print("No territory data to export.")
         return
 
-    path, fmt = _pick_file(main_layout, "Export Territory History")
+    path, fmt = _pick_file_data(main_layout, "Export Territory History")
     if not path:
         return
 
@@ -126,7 +132,7 @@ def export_province_definitions(main_layout):
         print("No province data to export.")
         return
 
-    path, fmt = _pick_file(main_layout, "Export Province Definitions")
+    path, fmt = _pick_file_data(main_layout, "Export Province Definitions")
     if not path:
         return
 
@@ -181,39 +187,82 @@ def export_province_definitions(main_layout):
                 w.writerow(row)
 
 
-def _pick_file(parent, title):
+def _pick_file_image(parent, title):
+    """Open save dialog with image format filters. Returns path (with valid file extension) or None"""
+    filters = (
+        "All Files (*);;"
+        "PNG Files (*.png);;"
+        "JPEG Files (*.jpg *.jpeg);;"
+        "BMP Files (*.bmp);;"
+        "GIF Files (*.gif);;"
+        "TIFF Files (*.tiff *.tif);;"
+        "WebP Files (*.webp)"
+    )
+    
+    path, selected_filter = QFileDialog.getSaveFileName(parent, title, "", filters)
+    if not path:
+        return None
+    
+    if not path.lower().endswith((".png", ".jpg", ".jpeg", ".bmp", ".gif", ".tiff", ".tif", ".webp")):
+        if "png" in selected_filter.lower():
+            path += ".png"
+        elif "jpeg" in selected_filter.lower(): # or .jpg
+            path += ".jpg"
+        elif "bmp" in selected_filter.lower():
+            path += ".bmp"
+        elif "gif" in selected_filter.lower():
+            path += ".gif"
+        elif "tiff" in selected_filter.lower(): # or .tif
+            path += ".tiff"
+        elif "webp" in selected_filter.lower():
+            path += ".webp"
+        else: # default format
+            path += ".png"
+
+    return path
+
+
+def _pick_file_data(parent, title):
     """Open save dialog with data format filters. Returns (path, format) or (None, None)."""
-    path, selected_filter = QFileDialog.getSaveFileName(
-        parent, title, "", 
-        "JSON Files (*.json);;" \
-        "CSV Files (*.csv);;" \
-        "YAML Files (*.yaml);;" \
+    filters = (
+        "All Files (*);;"
+        "JSON Files (*.json);;"
+        "CSV Files (*.csv);;"
+        "YAML Files (*.yaml *.yml);;"
         "XML Files (*.xml)"
     )
+    
+    path, selected_filter = QFileDialog.getSaveFileName(parent, title, "", filters)
     if not path:
         return None, None
-
-    # Determine format from extension, fall back to selected filter
+        
+    # Determine format from extension
     if path.lower().endswith(".json"):
         fmt = "json"
     elif path.lower().endswith(".csv"):
         fmt = "csv"
-    elif path.lower().endswith(".yaml"):
+    elif path.lower().endswith((".yaml", ".yml")):
         fmt = "yaml"
     elif path.lower().endswith(".xml"):
         fmt = "xml"
-    elif "json" in selected_filter.lower():
-        fmt = "json"
-        path += ".json"
-    elif "yaml" in selected_filter.lower():
-        fmt = "yaml"
-        path += ".yaml"
-    elif "xml" in selected_filter.lower():
-        fmt = "xml"
-        path += ".xml"
-    else:
-        fmt = "csv"
-        path += ".csv"
+    
+    # Fallback to the selected filter
+    elif not path.lower().endswith((".json", ".csv", ".yaml", ".yml", ".xml")):
+        if "json" in selected_filter.lower():
+            fmt = "json"
+            path += ".json"
+        elif "yaml" in selected_filter.lower(): # or .yml
+            fmt = "yaml"
+            path += ".yaml"
+        elif "xml" in selected_filter.lower():
+            fmt = "xml"
+            path += ".xml"
+        elif "csv" in selected_filter.lower():
+            fmt = "csv"
+            path += ".csv"
+        else: # default format
+            fmt = "json"
+            path += ".json"
 
     return path, fmt
 
