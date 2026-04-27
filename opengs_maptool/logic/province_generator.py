@@ -28,6 +28,10 @@ def generate_province_map(main_layout):
     total_ocean_provs = main_layout.ocean_slider.value()
     lake_mask = masks.get("lake_mask")
 
+    # Reset province_ids from any previous generation
+    for d in territory_data:
+        d["province_ids"] = []
+
     # Separate territories by type
     land_terrs = [d for d in territory_data if d["territory_type"] == "land"]
     ocean_terrs = [d for d in territory_data if d["territory_type"] == "ocean"]

@@ -1,0 +1,2 @@
+[gui_scripts]
+opengs-maptool = opengs_maptool.main:main
