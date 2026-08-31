@@ -12,9 +12,10 @@ A GSMAP file is organized as follows:
 
 ```txt
 project.json
-|_ data/
-|_ images/
-|_ metadata/
+settings.json
+data/
+images/
+metadata/
 ```
 
 ### 1. Project Description File
@@ -45,7 +46,20 @@ The following table lists the available properties:
 }
 ```
 
-### 2. Data Directory
+### 2. Settings file
+
+The archive contains an optional `settings.json` file that holds all the project settings.
+
+Here is a list of all the available optional properties:
+
+| Property      | Type       | Description                                 |
+| ------------- | ---------- | ------------------------------------------- |
+| `ocean_color` | `array[3]` | The color of the oceans for the land image. |
+| `lake_color`  | `array[3]` | The color of the lakes for the land image.  |
+
+> **Note:** Optional properties may either be omitted entirely or set to `null` when no value is provided.
+
+### 3. Data Directory
 
 This directory contains all JSON data files associated with the project.
 
@@ -53,7 +67,7 @@ For example, if territories have been generated, this directory will contain a f
 
 > For more information about data file formats, see the [Data Export Format](data_export_format.md) documentation page.
 
-### 3. Images Directory
+### 4. Images Directory
 
 This directory contains all images used by the project.
 
@@ -61,7 +75,7 @@ Each generated map layer (land, boundaries, territories, etc.) is stored here in
 
 > For more information about image file formats, see the [Image Export Format](image_export_format.md) documentation page.
 
-### 4. Metadata Directory
+### 5. Metadata Directory
 
 This directory contains files required by the editor to perform various operations.
 

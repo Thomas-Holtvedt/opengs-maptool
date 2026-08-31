@@ -3,6 +3,7 @@ import json
 from typing import Any
 import numpy as np
 from opengs_maptool.models.project import Project
+import opengs_maptool.config as config
 import opengs_maptool.logic.datastructure as ds
 from PIL import Image
 import zipfile
@@ -62,6 +63,16 @@ class ProjectService:
             project.territory_pmap = self._load_territory_pmap_from_zip(zip)
             project.cached_masks = self._load_cached_masks_from_zip(zip)
 
+            # Load settings (if exists)
+            if zipfile.Path(zip, "settings.json").exists():
+                settings = json.loads(zip.read("settings.json"))
+
+                if settings.get("ocean_color"):
+                    project.ocean_color = tuple(settings.get("ocean_color"))
+
+                if settings.get("lake_color"):
+                    project.lake_color = tuple(settings.get("lake_color"))
+
             return project
 
 
@@ -106,6 +117,17 @@ class ProjectService:
             self._save_territory_pmap_in_zip(zip, project.territory_pmap)
             self._save_cached_masks_in_zip(zip, project.cached_masks)
 
+                np.savez(buffer, **project.cached_masks)
+                zip.writestr("metadata/cached_masks.npz", buffer.getvalue())
+
+            # Save settings
+            settings = {
+                "ocean_color": project.ocean_color,
+                "lake_color": project.lake_color
+            }
+
+            zip.writestr("settings.json", json.dumps(settings, indent=4))
+            
             # Update dirty indicator
             project.modified = False
 

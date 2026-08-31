@@ -11,6 +11,8 @@ from PyQt6.QtWidgets import (
     QScrollArea, QVBoxLayout, QWidget
 )
 
+from vcolorpicker import getColor
+
 import opengs_maptool.config as config
 from opengs_maptool.context import ApplicationContext, LimitedTaskContext
 from opengs_maptool.controllers.progress_controller import ProgressController
@@ -26,7 +28,9 @@ from opengs_maptool.logic.land_actions import get_land_informations
 from opengs_maptool.logic.territory_generator import generate_territory_map
 from opengs_maptool.logic.province_generator import generate_province_map
 from opengs_maptool.simple_types import TabName
-from opengs_maptool.ui.buttons import create_button, create_checkbox, create_slider
+from opengs_maptool.ui.buttons import (
+    create_button, create_checkbox, create_slider, ColorPickerButton
+)
 from opengs_maptool.ui.file_dialogs import (
     pick_open_image, pick_save_data, pick_save_image
 )
@@ -232,6 +236,21 @@ class LeftPanel(QWidget):
 
         infos_group.setLayout(infos_layout)
         self._content_layout.addWidget(infos_group)
+
+        # Land settings group
+        settings_group = QGroupBox("Settings")
+        settings_layout = QFormLayout()
+
+        ocean_color_btn = ColorPickerButton(self._context.project.ocean_color, self)
+        ocean_color_btn.colorChanged.connect(self._update_ocean_color)
+        settings_layout.addRow("Ocean color:", ocean_color_btn)
+
+        lake_color_btn = ColorPickerButton(self._context.project.lake_color, self)
+        lake_color_btn.colorChanged.connect(self._update_lake_color)
+        settings_layout.addRow("Lake color:", lake_color_btn)
+
+        settings_group.setLayout(settings_layout)
+        self._content_layout.addWidget(settings_group)
 
     def _display_boundary_content(self):
         # Boundary actions group
@@ -588,6 +607,12 @@ class LeftPanel(QWidget):
             return
 
         exporter_function(project, path, fmt)
+
+    def _update_ocean_color(self, color):
+        self._context.project.ocean_color = color
+
+    def _update_lake_color(self, color):
+        self._context.project.lake_color = color
 
     def _execute_function_in_thread(
         self,

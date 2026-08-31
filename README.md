@@ -45,9 +45,13 @@ inside the project directory
 ## How to use the tool
 ### Land Image
 The first tab takes an image that specifies the ocean and lake areas of the map.
-- **Ocean** must be RGB color (5, 20, 18)
-- **Lakes** must be RGB color (0, 255, 0)
+
+By default:
+- **Ocean**: the RGB color must be (5, 20, 18)
+- **Lakes**: the RGB color must be (0, 255, 0)
 - Everything else is considered land
+
+These colors can be changed in the editor.
 
 See examples in the folder "examples/input".
 

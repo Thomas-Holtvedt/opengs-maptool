@@ -13,8 +13,8 @@ def get_land_informations(project: Project) -> tuple[float, float, float]:
     colors = image.getcolors(total_pixels)
     color_dict = {color: count for count, color in colors}
 
-    ocean_color_count = color_dict.get(config.OCEAN_COLOR, 0)
-    lake_color_count = color_dict.get(config.LAKE_COLOR, 0)
+    ocean_color_count = color_dict.get(project.ocean_color, 0)
+    lake_color_count = color_dict.get(project.lake_color, 0)
 
     ocean_percentage = (ocean_color_count / total_pixels) * 100
     lake_percentage = (lake_color_count / total_pixels) * 100

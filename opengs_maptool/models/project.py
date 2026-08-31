@@ -36,6 +36,10 @@ class Project:
         self.territory_pmap: ds.RegionPixelMap | None = None
         self.cached_masks: ds.Masks | None = None
 
+        # Project settings
+        self.ocean_color: tuple[int] = config.DEFAULT_OCEAN_COLOR
+        self.lake_color: tuple[int] = config.DEFAULT_LAKE_COLOR
+
         # Generation options
         self.land_territory_density = config.LAND_TERRITORIES_DEFAULT
         self.oceanic_territory_density = config.OCEAN_TERRITORIES_DEFAULT

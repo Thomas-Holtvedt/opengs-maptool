@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QHBoxLayout, QLabel, QSlider, QPushButton, QCheckBox
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, pyqtSignal
 
+from vcolorpicker import getColor
 
 def create_slider(
     parent_layout,
@@ -63,3 +64,23 @@ def create_checkbox(
 
     parent_layout.addWidget(checkbox)
     return checkbox
+
+
+class ColorPickerButton(QPushButton):
+    colorChanged = pyqtSignal(tuple)
+
+    def __init__(self, color, parent=None):
+        super().__init__("", parent)
+
+        self.clicked.connect(self._get_color)
+        self._update(color)
+
+    def _get_color(self):
+        color = tuple(map(int, getColor()))
+        self._update(color)
+
+        self.colorChanged.emit(color)
+
+    def _update(self, color):
+        self.setText(str(color))
+        self.setStyleSheet("background-color: rgb" + str(color) + ";")

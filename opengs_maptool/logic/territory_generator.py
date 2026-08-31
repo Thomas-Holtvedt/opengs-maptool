@@ -46,7 +46,7 @@ def generate_territory_map(
     with progress_controller.execute_phase(phase1):
         project = task_ctx.project
         clear_used_colors()
-        masks = extract_masks(project.boundary_image, project.land_image)
+        masks = extract_masks(project)
 
         series = NumberSeries(
             config.TERRITORY_ID_PREFIX,
