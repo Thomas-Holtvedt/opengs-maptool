@@ -391,23 +391,33 @@ class LeftPanel(QWidget):
             display_scale=0.1
         )
 
-        # Territory jagged land checkbox
-        checkbox_territory_jagged_land = create_checkbox(
-            actions_layout, "Jagged Land Borders",
+        # Set territory jagged land Slider
+        slider_jagged_land_borders_strength = create_slider(
+            actions_layout,
+            "Jagged Land Borders Strength:",
+            config.JAGGED_BORDER_LAND_AMPLITUDE_MIN,
+            config.JAGGED_BORDER_LAND_AMPLITUDE_MAX,
+            self._context.project.territory_jagged_land_amplitude,
+            config.JAGGED_BORDER_LAND_AMPLITUDE_TICK,
+            config.JAGGED_BORDER_LAND_AMPLITUDE_STEP,
             lambda value: setattr(self._context.project,
-                                  'territory_jagged_land', bool(value))
+                                  'territory_jagged_land_amplitude', value),
+            display_scale=0.01
         )
-        checkbox_territory_jagged_land.setChecked(
-            self._context.project.territory_jagged_land)
 
-        # Territory jagged ocean checkbox
-        checkbox_territory_jagged_ocean = create_checkbox(
-            actions_layout, "Jagged Ocean Borders",
+        # Set territory jagged Ocean Slider
+        slider_jagged_ocean_borders_strength = create_slider(
+            actions_layout,
+            "Jagged Ocean Borders Strength:",
+            config.JAGGED_BORDER_OCEAN_AMPLITUDE_MIN,
+            config.JAGGED_BORDER_OCEAN_AMPLITUDE_MAX,
+            self._context.project.territory_jagged_ocean_amplitude,
+            config.JAGGED_BORDER_OCEAN_AMPLITUDE_TICK,
+            config.JAGGED_BORDER_OCEAN_AMPLITUDE_STEP,
             lambda value: setattr(self._context.project,
-                                  'territory_jagged_ocean', bool(value))
+                                  'territory_jagged_ocean_amplitude', value),
+            display_scale=0.01
         )
-        checkbox_territory_jagged_ocean.setChecked(
-            self._context.project.territory_jagged_ocean)
 
         # Generate territories button
         self.btn_generate_territories = create_button(
@@ -505,23 +515,33 @@ class LeftPanel(QWidget):
             display_scale=0.1
         )
 
-        # Province jagged land checkbox
-        checkbox_province_jagged_land = create_checkbox(
-            actions_layout, "Jagged Land Borders",
+        # Set province jagged land Slider
+        slider_jagged_land_borders_strength = create_slider(
+            actions_layout,
+            "Jagged Land Borders Strength:",
+            config.JAGGED_BORDER_LAND_AMPLITUDE_MIN,
+            config.JAGGED_BORDER_LAND_AMPLITUDE_MAX,
+            self._context.project.province_jagged_land_amplitude,
+            config.JAGGED_BORDER_LAND_AMPLITUDE_TICK,
+            config.JAGGED_BORDER_LAND_AMPLITUDE_STEP,
             lambda value: setattr(self._context.project,
-                                  'province_jagged_land', bool(value))
+                                  'province_jagged_land_amplitude', value),
+            display_scale=0.01
         )
-        checkbox_province_jagged_land.setChecked(
-            self._context.project.province_jagged_land)
 
-        # Province jagged ocean checkbox
-        checkbox_province_jagged_ocean = create_checkbox(
-            actions_layout, "Jagged Ocean Borders",
+        # Set province jagged Ocean Slider
+        slider_jagged_ocean_borders_strength = create_slider(
+            actions_layout,
+            "Jagged Ocean Borders Strength:",
+            config.JAGGED_BORDER_OCEAN_AMPLITUDE_MIN,
+            config.JAGGED_BORDER_OCEAN_AMPLITUDE_MAX,
+            self._context.project.province_jagged_ocean_amplitude,
+            config.JAGGED_BORDER_OCEAN_AMPLITUDE_TICK,
+            config.JAGGED_BORDER_OCEAN_AMPLITUDE_STEP,
             lambda value: setattr(self._context.project,
-                                  'province_jagged_ocean', bool(value))
+                                  'province_jagged_ocean_amplitude', value),
+            display_scale=0.01
         )
-        checkbox_province_jagged_ocean.setChecked(
-            self._context.project.province_jagged_ocean)
 
         # Generate provinces button
 

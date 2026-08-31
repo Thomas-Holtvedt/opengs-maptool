@@ -45,7 +45,20 @@ MAX_IMAGE_PIXELS = 300000000
 
 # Generation algorithm
 LLOYD_ITERATIONS = 4
-JAGGED_BORDER_AMPLITUDE = 0.12  # fraction of avg seed spacing used as noise
+
+# Jagged Land Border Amplitud Factor
+JAGGED_BORDER_LAND_AMPLITUDE_DEFAULT = 12  # fraction of avg seed spacing used as noise.  Slider value (divided by 10 = 2.0)
+JAGGED_BORDER_LAND_AMPLITUDE_MIN = 0
+JAGGED_BORDER_LAND_AMPLITUDE_MAX  = 50
+JAGGED_BORDER_LAND_AMPLITUDE_TICK = 1
+JAGGED_BORDER_LAND_AMPLITUDE_STEP = 1
+
+# Jagged Ocean Border Amplitud Factor
+JAGGED_BORDER_OCEAN_AMPLITUDE_DEFAULT = 12  # fraction of avg seed spacing used as noise.  Slider value (divided by 10 = 2.0)
+JAGGED_BORDER_OCEAN_AMPLITUDE_MIN = 0
+JAGGED_BORDER_OCEAN_AMPLITUDE_MAX  = 50
+JAGGED_BORDER_OCEAN_AMPLITUDE_TICK = 1
+JAGGED_BORDER_OCEAN_AMPLITUDE_STEP = 1
 
 # Number Series
 PROVINCE_ID_PREFIX = "PRV"

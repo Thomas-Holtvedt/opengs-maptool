@@ -45,8 +45,8 @@ def generate_province_map(
         
         density_strength = project.province_density_strength / 10.0
         exclude_ocean_density = project.province_exclude_ocean
-        jagged_land = project.province_jagged_land
-        jagged_ocean = project.province_jagged_ocean
+        jagged_land_strength = project.province_jagged_land_amplitude / 100.0
+        jagged_ocean_strength = project.province_jagged_ocean_amplitude / 100.0
         map_h, map_w = masks.map_h, masks.map_w
 
         total_land_provs = project.land_province_density
@@ -185,7 +185,7 @@ def generate_province_map(
                 terr_density = density_arr
                 terr_density_strength = density_strength
 
-            jagged = jagged_land if region_type == ds.RegionType.LAND else jagged_ocean
+            amplitude_factor = jagged_land_strength if region_type == ds.RegionType.LAND else jagged_ocean_strength
 
             # Pass None for inner progress controller to create_region_map here
             # to keep granular updates balanced across territory iterations
@@ -193,8 +193,8 @@ def generate_province_map(
                 terr_fill, terr_border, prov_count, start_index,
                 series, region_type, ds.RegionLevel.PROVINCE,
                 ProgressController(), # ignore sub progress as we already track loop progress
-                density=terr_density, density_strength=terr_density_strength,
-                jagged=jagged
+                density=terr_density, density_strength=terr_density_strength, 
+                amplitude_factor=amplitude_factor
             )
 
             # Tag each province with its parent territory
