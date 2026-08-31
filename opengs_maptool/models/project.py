@@ -37,8 +37,9 @@ class Project:
         self.cached_masks: ds.Masks | None = None
 
         # Project settings
-        self.ocean_color: tuple[int] = config.DEFAULT_OCEAN_COLOR
-        self.lake_color: tuple[int] = config.DEFAULT_LAKE_COLOR
+        self.land_color: ds.ColorTuple = config.DEFAULT_LAND_COLOR
+        self.ocean_color: ds.ColorTuple = config.DEFAULT_OCEAN_COLOR
+        self.lake_color: ds.ColorTuple = config.DEFAULT_LAKE_COLOR
 
         # Generation options
         self.land_territory_density = config.LAND_TERRITORIES_DEFAULT

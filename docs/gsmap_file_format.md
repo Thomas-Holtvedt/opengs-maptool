@@ -54,6 +54,7 @@ Here is a list of all the available optional properties:
 
 | Property      | Type       | Description                                 |
 | ------------- | ---------- | ------------------------------------------- |
+| `land_color`  | `array[3]` | The color of the land for the land image.   |
 | `ocean_color` | `array[3]` | The color of the oceans for the land image. |
 | `lake_color`  | `array[3]` | The color of the lakes for the land image.  |
 

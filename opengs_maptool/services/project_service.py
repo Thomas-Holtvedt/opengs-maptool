@@ -67,6 +67,9 @@ class ProjectService:
             if zipfile.Path(zip, "settings.json").exists():
                 settings = json.loads(zip.read("settings.json"))
 
+                if settings.get("land_color"):
+                    project.land_color = tuple(settings.get("land_color"))
+
                 if settings.get("ocean_color"):
                     project.ocean_color = tuple(settings.get("ocean_color"))
 
@@ -117,11 +120,9 @@ class ProjectService:
             self._save_territory_pmap_in_zip(zip, project.territory_pmap)
             self._save_cached_masks_in_zip(zip, project.cached_masks)
 
-                np.savez(buffer, **project.cached_masks)
-                zip.writestr("metadata/cached_masks.npz", buffer.getvalue())
-
             # Save settings
             settings = {
+                "land_color": project.land_color,
                 "ocean_color": project.ocean_color,
                 "lake_color": project.lake_color
             }

@@ -47,11 +47,14 @@ inside the project directory
 The first tab takes an image that specifies the ocean and lake areas of the map.
 
 By default:
+- **Land**: the RGB color is (122, 122, 122)
 - **Ocean**: the RGB color must be (5, 20, 18)
 - **Lakes**: the RGB color must be (0, 255, 0)
-- Everything else is considered land
+- Everything that is not ocean is treated as land during generation
 
-These colors can be changed in the editor.
+All three colors can be changed in the editor, on the "Settings" group of this tab.
+The land/ocean/lake densities shown above them are counted per color, so they add
+up to less than 100% when the image contains pixels that match none of the three.
 
 See examples in the folder "examples/input".
 

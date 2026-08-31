@@ -1,4 +1,3 @@
-import opengs_maptool.config as config
 from opengs_maptool.models.project import Project
 
 def get_land_informations(project: Project) -> tuple[float, float, float]:
@@ -13,12 +12,16 @@ def get_land_informations(project: Project) -> tuple[float, float, float]:
     colors = image.getcolors(total_pixels)
     color_dict = {color: count for count, color in colors}
 
+    land_color_count = color_dict.get(project.land_color, 0)
     ocean_color_count = color_dict.get(project.ocean_color, 0)
     lake_color_count = color_dict.get(project.lake_color, 0)
 
+    # Measured per configured color rather than inferred, so pixels that match
+    # none of the three (anti-aliased edges, stray colors) show up as a
+    # shortfall instead of being silently folded into the land share.
+    land_percentage = (land_color_count / total_pixels) * 100
     ocean_percentage = (ocean_color_count / total_pixels) * 100
     lake_percentage = (lake_color_count / total_pixels) * 100
-    land_percentage = 100.0 - (ocean_percentage + lake_percentage)
 
     return (
         land_percentage,

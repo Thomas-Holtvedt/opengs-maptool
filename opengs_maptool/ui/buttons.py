@@ -1,7 +1,8 @@
-from PyQt6.QtWidgets import QHBoxLayout, QLabel, QSlider, QPushButton, QCheckBox
+from PyQt6.QtWidgets import (
+    QColorDialog, QHBoxLayout, QLabel, QSlider, QPushButton, QCheckBox
+)
 from PyQt6.QtCore import Qt, pyqtSignal
-
-from vcolorpicker import getColor
+from PyQt6.QtGui import QColor
 
 def create_slider(
     parent_layout,
@@ -67,20 +68,70 @@ def create_checkbox(
 
 
 class ColorPickerButton(QPushButton):
+    """A swatch button that opens a color dialog pre-set to its current color.
+
+    Qt's own dialog is used rather than a third-party frameless one: it picks up
+    the Fusion palette like the rest of the tool, and it is a real window, so the
+    window manager gives it a title bar that can be dragged and a close button.
+    """
+
     colorChanged = pyqtSignal(tuple)
 
-    def __init__(self, color, parent=None):
+    def __init__(self, color, parent=None, title="Select Color"):
         super().__init__("", parent)
 
+        self._title = title
+        self._color = tuple(color)
+
         self.clicked.connect(self._get_color)
-        self._update(color)
+        self._update(self._color)
+
+    def color(self) -> tuple[int, int, int]:
+        return self._color
+
+    def set_color(self, color) -> None:
+        """Set the swatch without emitting colorChanged."""
+        self._update(tuple(color))
 
     def _get_color(self):
-        color = tuple(map(int, getColor()))
-        self._update(color)
+        chosen = QColorDialog.getColor(
+            QColor(*self._color),
+            self,
+            self._title,
+            # Keep the Qt-drawn dialog so it matches the rest of the app instead
+            # of whatever the platform would substitute.
+            QColorDialog.ColorDialogOption.DontUseNativeDialog,
+        )
 
+        if not chosen.isValid():
+            # Dialog was cancelled — leave the current color untouched.
+            return
+
+        color = (chosen.red(), chosen.green(), chosen.blue())
+        if color == self._color:
+            return
+
+        self._update(color)
         self.colorChanged.emit(color)
 
     def _update(self, color):
-        self.setText(str(color))
-        self.setStyleSheet("background-color: rgb" + str(color) + ";")
+        self._color = color
+        r, g, b = color
+
+        self.setText(f"({r}, {g}, {b})")
+        self.setToolTip(f"{self._title} — currently #{r:02X}{g:02X}{b:02X}")
+
+        # Keep the label legible on both dark and light swatches.
+        luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+        text_color = "#000000" if luminance > 0.5 else "#ffffff"
+
+        self.setStyleSheet(
+            "QPushButton {"
+            f"background-color: rgb({r}, {g}, {b});"
+            f"color: {text_color};"
+            "border: 1px solid palette(mid);"
+            "border-radius: 3px;"
+            "padding: 4px 8px;"
+            "}"
+            "QPushButton:hover { border: 1px solid palette(highlight); }"
+        )

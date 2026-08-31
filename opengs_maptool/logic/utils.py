@@ -4,11 +4,14 @@ from numpy.typing import NDArray
 from PIL import Image
 from scipy.spatial import cKDTree
 from scipy.ndimage import distance_transform_edt, label as ndlabel
-from typing import Any
+from typing import Any, TYPE_CHECKING
 import opengs_maptool.config as config
 from opengs_maptool.controllers.progress_controller import ProgressController
 import opengs_maptool.logic.datastructure as ds
 from opengs_maptool.logic.numb_gen import NumberSeries
+
+if TYPE_CHECKING:
+    from opengs_maptool.models.project import Project
 
 MAX_LLOYD_SAMPLE = 100_000
 
@@ -313,14 +316,21 @@ def assign_regions(
     return pmap
 
 
-def is_sea_color(arr: ds.ColorPixelMap) -> ds.BooleanMaskMap:
-    r, g, b = config.OCEAN_COLOR
+def _matches_color(arr: ds.ColorPixelMap, color: ds.ColorTuple) -> ds.BooleanMaskMap:
+    r, g, b = color
     return (arr[..., 0] == r) & (arr[..., 1] == g) & (arr[..., 2] == b)
 
 
-def is_lake_color(arr: ds.ColorPixelMap) -> ds.BooleanMaskMap:
-    r, g, b = config.LAKE_COLOR
-    return (arr[..., 0] == r) & (arr[..., 1] == g) & (arr[..., 2] == b)
+def is_land_color(project: Project, arr: ds.ColorPixelMap) -> ds.BooleanMaskMap:
+    return _matches_color(arr, project.land_color)
+
+
+def is_sea_color(project: Project, arr: ds.ColorPixelMap) -> ds.BooleanMaskMap:
+    return _matches_color(arr, project.ocean_color)
+
+
+def is_lake_color(project: Project, arr: ds.ColorPixelMap) -> ds.BooleanMaskMap:
+    return _matches_color(arr, project.lake_color)
 
 
 def assign_borders(pmap: ds.RegionPixelMap, border_mask: ds.BooleanMaskMap) -> None:
@@ -391,7 +401,7 @@ def combine_maps(
     return image, combined
 
 
-def extract_masks(boundary_image: ds.BoundaryImage | None, land_image: ds.LandImage | None) -> ds.Masks:
+def extract_masks(project: Project) -> ds.Masks:
     """Extract all masks from boundary and land images.
 
     Returns dict with keys: boundary_mask, land_mask, sea_mask,

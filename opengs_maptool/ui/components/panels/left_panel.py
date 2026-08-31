@@ -11,8 +11,6 @@ from PyQt6.QtWidgets import (
     QScrollArea, QVBoxLayout, QWidget
 )
 
-from vcolorpicker import getColor
-
 import opengs_maptool.config as config
 from opengs_maptool.context import ApplicationContext, LimitedTaskContext
 from opengs_maptool.controllers.progress_controller import ProgressController
@@ -47,6 +45,8 @@ class LeftPanel(QWidget):
         # Import buttons on the currently displayed tab, rebuilt on every tab
         # switch. Guardrails disable these while a map is generating.
         self._import_buttons: list[QPushButton] = []
+        # Density readouts on the land tab, rebuilt on every tab switch.
+        self._land_density_fields: list[QLineEdit] = []
 
         self.setMinimumWidth(280)
         self._layout = QVBoxLayout(self)
@@ -183,6 +183,7 @@ class LeftPanel(QWidget):
 
     def _clear_content(self):
         self._import_buttons.clear()
+        self._land_density_fields.clear()
         while self._content_layout.count():
             item = self._content_layout.takeAt(0)
             if item.widget():
@@ -213,26 +214,15 @@ class LeftPanel(QWidget):
         infos_group = QGroupBox("Informations")
         infos_layout = QFormLayout()
 
-        # Land density info
-        land_density = QLineEdit()
-        land_density.setReadOnly(True)
-        land_density.setText(
-            f"{get_land_informations(self._context.project)[0]:.2f}%")
-        infos_layout.addRow("Land density:", land_density)
+        # Densities are read straight off the configured colors, so they are
+        # kept as fields and refreshed whenever one of those colors changes.
+        for label in ("Land density:", "Ocean density:", "Lake density:"):
+            field = QLineEdit()
+            field.setReadOnly(True)
+            infos_layout.addRow(label, field)
+            self._land_density_fields.append(field)
 
-        # Ocean density info
-        ocean_density = QLineEdit()
-        ocean_density.setReadOnly(True)
-        ocean_density.setText(
-            f"{get_land_informations(self._context.project)[1]:.2f}%")
-        infos_layout.addRow("Ocean density:", ocean_density)
-
-        # Lake density info
-        lake_density = QLineEdit()
-        lake_density.setReadOnly(True)
-        lake_density.setText(
-            f"{get_land_informations(self._context.project)[2]:.2f}%")
-        infos_layout.addRow("Lake density:", lake_density)
+        self._refresh_land_informations()
 
         infos_group.setLayout(infos_layout)
         self._content_layout.addWidget(infos_group)
@@ -241,11 +231,18 @@ class LeftPanel(QWidget):
         settings_group = QGroupBox("Settings")
         settings_layout = QFormLayout()
 
-        ocean_color_btn = ColorPickerButton(self._context.project.ocean_color, self)
+        land_color_btn = ColorPickerButton(
+            self._context.project.land_color, self, "Land Color")
+        land_color_btn.colorChanged.connect(self._update_land_color)
+        settings_layout.addRow("Land color:", land_color_btn)
+
+        ocean_color_btn = ColorPickerButton(
+            self._context.project.ocean_color, self, "Ocean Color")
         ocean_color_btn.colorChanged.connect(self._update_ocean_color)
         settings_layout.addRow("Ocean color:", ocean_color_btn)
 
-        lake_color_btn = ColorPickerButton(self._context.project.lake_color, self)
+        lake_color_btn = ColorPickerButton(
+            self._context.project.lake_color, self, "Lake Color")
         lake_color_btn.colorChanged.connect(self._update_lake_color)
         settings_layout.addRow("Lake color:", lake_color_btn)
 
@@ -608,11 +605,33 @@ class LeftPanel(QWidget):
 
         exporter_function(project, path, fmt)
 
+    def _update_land_color(self, color):
+        self._context.project.land_color = color
+        self._on_land_color_changed()
+
     def _update_ocean_color(self, color):
         self._context.project.ocean_color = color
+        self._on_land_color_changed()
 
     def _update_lake_color(self, color):
         self._context.project.lake_color = color
+        self._on_land_color_changed()
+
+    def _on_land_color_changed(self):
+        """Flag the project dirty and refresh the densities derived from it."""
+        self._context.project.modified = True
+        self._refresh_land_informations()
+
+    def _refresh_land_informations(self):
+        """Recompute the land/ocean/lake densities shown on the land tab."""
+        fields = self._land_density_fields
+        if not fields or any(sip.isdeleted(field) for field in fields):
+            return  # only do this if the tab is still active
+
+        # One pass over the image for all three readouts.
+        informations = get_land_informations(self._context.project)
+        for field, percentage in zip(fields, informations):
+            field.setText(f"{percentage:.2f}%")
 
     def _execute_function_in_thread(
         self,
