@@ -45,8 +45,8 @@ class Project:
         self.land_territory_density = config.LAND_TERRITORIES_DEFAULT
         self.oceanic_territory_density = config.OCEAN_TERRITORIES_DEFAULT
         self.territory_density_strength = config.DENSITY_STRENGTH_DEFAULT
-        self.territory_jagged_land = False
-        self.territory_jagged_ocean = False
+        self.territory_jagged_land_amplitude = config.JAGGED_BORDER_LAND_AMPLITUDE_DEFAULT
+        self.territory_jagged_ocean_amplitude = config.JAGGED_BORDER_OCEAN_AMPLITUDE_DEFAULT
 
         self.territory_exclude_ocean = False
         self.province_exclude_ocean = False
@@ -54,8 +54,8 @@ class Project:
         self.land_province_density = config.LAND_PROVINCES_DEFAULT
         self.oceanic_province_density = config.OCEAN_PROVINCES_DEFAULT
         self.province_density_strength = config.DENSITY_STRENGTH_DEFAULT
-        self.province_jagged_land = False
-        self.province_jagged_ocean = False
+        self.province_jagged_land_amplitude = config.JAGGED_BORDER_LAND_AMPLITUDE_DEFAULT
+        self.province_jagged_ocean_amplitude = config.JAGGED_BORDER_OCEAN_AMPLITUDE_DEFAULT
 
         # Others
         self.file_path: str | None = None

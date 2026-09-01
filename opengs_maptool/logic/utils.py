@@ -136,7 +136,7 @@ def lloyd_relaxation(
     return point_seeds
 
 
-def _build_jitter_maps(h: int, w: int, seeds_arr: ds.JitterSeedsArray) -> tuple[ds.JitterSeedsArray, ds.JitterSeedsArray] | tuple[None, None]:
+def _build_jitter_maps(amplitude_factor, h: int, w: int, seeds_arr: ds.JitterSeedsArray) -> tuple[ds.JitterSeedsArray, ds.JitterSeedsArray] | tuple[None, None]:
     """Build spatially-correlated noise maps for jagged border effect.
 
     Returns (jitter_x, jitter_y) arrays of shape (h, w), or (None, None)
@@ -151,7 +151,7 @@ def _build_jitter_maps(h: int, w: int, seeds_arr: ds.JitterSeedsArray) -> tuple[
     seed_tree = cKDTree(seeds_arr)
     nn_dists, _ = seed_tree.query(seeds_arr, k=2)
     avg_dist = float(nn_dists[:, 1].mean())
-    amplitude = avg_dist * config.JAGGED_BORDER_AMPLITUDE
+    amplitude = avg_dist * amplitude_factor
 
     # Coarse noise grid — each cell covers ~avg_dist/4 pixels
     cell = max(4, int(avg_dist / 4))
@@ -208,7 +208,7 @@ def _remove_enclaves(pmap: ds.RegionPixelMap, mask: ds.BooleanMaskMap, progress_
 
 def assign_regions(
         mask: ds.BooleanMaskMap, seeds: list[ds.IntCoordinate], start_index: int,
-        progress_controller: ProgressController, jagged: bool = False
+        progress_controller: ProgressController, amplitude_factor=0.0
     ) -> ds.RegionPixelMap:
     """
     Assign each pixel in mask to the nearest seed, respecting boundaries.
@@ -249,8 +249,8 @@ def assign_regions(
         seeds_arr: ds.JitterSeedsArray = np.array(seeds, dtype=np.float32)
 
         jitter_x = jitter_y = None
-        if jagged:
-            jitter_x, jitter_y = _build_jitter_maps(h, w, seeds_arr)
+        if amplitude_factor != 0.0:
+            jitter_x, jitter_y = _build_jitter_maps(amplitude_factor, h, w, seeds_arr)
 
     with progress_controller.execute_phase(label_phase):
         labeled, num_components = ndlabel(mask)
@@ -481,7 +481,7 @@ def create_region_map(
         region_type: ds.RegionType, region_level: ds.RegionLevel,
         progress_controller: ProgressController,
         density: NDArray[Any] | None = None, density_strength: float = 1.0,
-        jagged: bool = False,
+        amplitude_factor=0.0,
     ) -> tuple[ds.RegionPixelMap, list[ds.RegionMetadata], int]:
     """
     Unified region map creator for both provinces and territories.
@@ -529,7 +529,7 @@ def create_region_map(
             )
 
     with progress_controller.execute_phase(assign_phase) as assign_progress:
-        pmap = assign_regions(fill_mask, seeds, start_index, assign_progress, jagged=jagged)
+        pmap = assign_regions(fill_mask, seeds, start_index, assign_progress, amplitude_factor=amplitude_factor)
 
     with progress_controller.execute_phase(borders_phase) as borders_progress:
         build_phase = borders_progress.add_phase(step_weight=100)

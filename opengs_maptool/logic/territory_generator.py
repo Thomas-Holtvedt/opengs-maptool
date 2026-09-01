@@ -58,8 +58,8 @@ def generate_territory_map(
         density_arr: NDArray[Any] = np.array(project.density_image)
         density_strength = project.territory_density_strength / 10.0
         exclude_ocean_density = project.territory_exclude_ocean
-        jagged_land = project.territory_jagged_land
-        jagged_ocean = project.territory_jagged_ocean
+        land_amplitude_factor = project.territory_jagged_land_amplitude / 100.0
+        ocean_amplitude_factor = project.territory_jagged_ocean_amplitude / 100.0
 
         land_points = project.land_territory_density
         sea_points = project.oceanic_territory_density
@@ -72,7 +72,7 @@ def generate_territory_map(
             series, ds.RegionType.LAND, ds.RegionLevel.TERRITORY,
             sub_progress3,
             density=density_arr, density_strength=density_strength,
-            jagged=jagged_land,
+            amplitude_factor=land_amplitude_factor
         )
 
     with progress_controller.execute_phase(phase4) as sub_progress4:
@@ -85,8 +85,8 @@ def generate_territory_map(
                 masks.sea_fill, masks.sea_border, sea_points, next_index,
                 series, ds.RegionType.OCEAN, ds.RegionLevel.TERRITORY,
                 sub_progress4,
-                density=sea_density, density_strength=sea_density_strength,
-                jagged=jagged_ocean,
+                density=sea_density, density_strength=sea_density_strength, 
+                amplitude_factor=ocean_amplitude_factor
             )
         else:
             # Consume sub_progress4 (which surprisingly isn't nededed) to keep the progress bar moving
