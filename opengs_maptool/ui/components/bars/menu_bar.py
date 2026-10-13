@@ -25,6 +25,10 @@ class MenuBar:
 
         menu_view = menu_bar.addMenu("View")
         menu_view.addAction(self._main_window.action_fullscreen)
+        menu_view.addSeparator()
+        menu_view.addAction(self._main_window.action_zoom_in)
+        menu_view.addAction(self._main_window.action_zoom_out)
+        menu_view.addAction(self._main_window.action_reset_zoom)
 
         menu_help = menu_bar.addMenu("Help")
         menu_help.addAction(self._main_window.action_open_github)

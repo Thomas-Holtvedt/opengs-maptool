@@ -96,22 +96,24 @@ class MainWindow(QMainWindow):
 
     def update_all_image_displays(self):
         for i in range(self._tabs.count()):
+
             tab: Tab = self._tabs.widget(i)
             tab_name = tab.get_tab_name_enum()
+            image_display = tab.get_image_display()
 
             match tab_name:
                 case TabName.LAND:
-                    tab.get_image_display().set_image(self._context.project.land_image)
+                    image_display.set_image(self._context.project.land_image)
                 case TabName.BOUNDARY:
-                    tab.get_image_display().set_image(self._context.project.boundary_image)
+                    image_display.set_image(self._context.project.boundary_image)
                 case TabName.DENSITY:
-                    tab.get_image_display().set_image(self._context.project.density_image)
+                    image_display.set_image(self._context.project.density_image)
                 case TabName.TERRAIN:
-                    tab.get_image_display().set_image(self._context.project.terrain_image)
+                    image_display.set_image(self._context.project.terrain_image)
                 case TabName.TERRITORY:
-                    tab.get_image_display().set_image(self._context.project.territory_image)
+                    image_display.set_image(self._context.project.territory_image)
                 case TabName.PROVINCE:
-                    tab.get_image_display().set_image(self._context.project.province_image)
+                    image_display.set_image(self._context.project.province_image)
 
 
     def get_current_image_display(self):
@@ -160,6 +162,18 @@ class MainWindow(QMainWindow):
         self.action_fullscreen.setShortcut(QKeySequence.StandardKey.FullScreen)
         self.action_fullscreen.triggered.connect(self._fullscreen)
 
+        self.action_zoom_in = QAction("Zoom in", self)
+        self.action_zoom_in.setShortcut(QKeySequence.StandardKey.ZoomIn)
+        self.action_zoom_in.triggered.connect(self._zoom_in)
+
+        self.action_zoom_out = QAction("Zoom out", self)
+        self.action_zoom_out.setShortcut(QKeySequence.StandardKey.ZoomOut)
+        self.action_zoom_out.triggered.connect(self._zoom_out)
+
+        self.action_reset_zoom = QAction("Reset zoom", self)
+        self.action_reset_zoom.setShortcut(QKeySequence("Ctrl+0"))
+        self.action_reset_zoom.triggered.connect(self._reset_zoom)
+
         self.action_open_github = QAction("GitHub", self)
         self.action_open_github.triggered.connect(editor_actions.open_github)
 
@@ -175,6 +189,24 @@ class MainWindow(QMainWindow):
             self.showFullScreen()
         else:
             self.showNormal()
+
+
+    def _zoom_in(self):
+        image_display = self.get_current_image_display()
+        if image_display is not None:
+            image_display.zoom_in()
+
+
+    def _zoom_out(self):
+        image_display = self.get_current_image_display()
+        if image_display is not None:
+            image_display.zoom_out()
+
+
+    def _reset_zoom(self):
+        image_display = self.get_current_image_display()
+        if image_display is not None:
+            image_display.reset_zoom()
 
 
     def _new_project(self):
