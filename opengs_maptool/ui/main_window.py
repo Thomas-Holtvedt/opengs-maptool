@@ -96,22 +96,24 @@ class MainWindow(QMainWindow):
 
     def update_all_image_displays(self):
         for i in range(self._tabs.count()):
+
             tab: Tab = self._tabs.widget(i)
             tab_name = tab.get_tab_name_enum()
+            image_display = tab.get_image_display()
 
             match tab_name:
                 case TabName.LAND:
-                    tab.get_image_display().set_image(self._context.project.land_image)
+                    image_display.set_image(self._context.project.land_image)
                 case TabName.BOUNDARY:
-                    tab.get_image_display().set_image(self._context.project.boundary_image)
+                    image_display.set_image(self._context.project.boundary_image)
                 case TabName.DENSITY:
-                    tab.get_image_display().set_image(self._context.project.density_image)
+                    image_display.set_image(self._context.project.density_image)
                 case TabName.TERRAIN:
-                    tab.get_image_display().set_image(self._context.project.terrain_image)
+                    image_display.set_image(self._context.project.terrain_image)
                 case TabName.TERRITORY:
-                    tab.get_image_display().set_image(self._context.project.territory_image)
+                    image_display.set_image(self._context.project.territory_image)
                 case TabName.PROVINCE:
-                    tab.get_image_display().set_image(self._context.project.province_image)
+                    image_display.set_image(self._context.project.province_image)
 
 
     def get_current_image_display(self):
