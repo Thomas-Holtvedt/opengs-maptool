@@ -76,19 +76,12 @@ class ImageDisplay(QGraphicsView):
             event.ignore()
             return
 
-        if event.angleDelta().y() > 0:
-            factor = 1.15
-        else:
-            factor = 1 / 1.15
-
-        new_zoom = self._zoom * factor
-
-        if not self._min_zoom <= new_zoom <= self._max_zoom:
-            event.accept()
-            return
-
-        self.scale(factor, factor)
-        self._zoom = new_zoom
+        delta = event.angleDelta().y()
+        
+        if delta > 0:
+            self._apply_zoom(1.15)
+        elif delta < 0:
+            self._apply_zoom(1 / 1.15)
 
         event.accept()
 
@@ -101,6 +94,24 @@ class ImageDisplay(QGraphicsView):
         self.fitInView(self._pixmap_item, Qt.AspectRatioMode.KeepAspectRatio)
         
         self._zoom = self.transform().m11()
+
+    def _apply_zoom(self, factor):
+        if self._image is None:
+            return
+
+        new_zoom = self._zoom * factor
+
+        if not self._min_zoom <= new_zoom <= self._max_zoom:
+            return
+
+        self.scale(factor, factor)
+        self._zoom = new_zoom
+
+    def zoom_in(self):
+        self._apply_zoom(1.15)
+
+    def zoom_out(self):
+        self._apply_zoom(1 / 1.15)
 
     def reset_zoom(self):
         """Reset the zoom to the default level (fit to view)"""

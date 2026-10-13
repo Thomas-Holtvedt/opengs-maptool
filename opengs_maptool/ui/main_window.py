@@ -162,6 +162,18 @@ class MainWindow(QMainWindow):
         self.action_fullscreen.setShortcut(QKeySequence.StandardKey.FullScreen)
         self.action_fullscreen.triggered.connect(self._fullscreen)
 
+        self.action_zoom_in = QAction("Zoom in", self)
+        self.action_zoom_in.setShortcut(QKeySequence.StandardKey.ZoomIn)
+        self.action_zoom_in.triggered.connect(self._zoom_in)
+
+        self.action_zoom_out = QAction("Zoom out", self)
+        self.action_zoom_out.setShortcut(QKeySequence.StandardKey.ZoomOut)
+        self.action_zoom_out.triggered.connect(self._zoom_out)
+
+        self.action_reset_zoom = QAction("Reset zoom", self)
+        self.action_reset_zoom.setShortcut(QKeySequence("Ctrl+0"))
+        self.action_reset_zoom.triggered.connect(self._reset_zoom)
+
         self.action_open_github = QAction("GitHub", self)
         self.action_open_github.triggered.connect(editor_actions.open_github)
 
@@ -177,6 +189,24 @@ class MainWindow(QMainWindow):
             self.showFullScreen()
         else:
             self.showNormal()
+
+
+    def _zoom_in(self):
+        image_display = self.get_current_image_display()
+        if image_display is not None:
+            image_display.zoom_in()
+
+
+    def _zoom_out(self):
+        image_display = self.get_current_image_display()
+        if image_display is not None:
+            image_display.zoom_out()
+
+
+    def _reset_zoom(self):
+        image_display = self.get_current_image_display()
+        if image_display is not None:
+            image_display.reset_zoom()
 
 
     def _new_project(self):
