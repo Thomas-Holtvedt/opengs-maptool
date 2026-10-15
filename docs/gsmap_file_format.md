@@ -52,11 +52,14 @@ The archive contains an optional `settings.json` file that holds all the project
 
 Here is a list of all the available optional properties:
 
-| Property      | Type       | Description                                 |
-| ------------- | ---------- | ------------------------------------------- |
-| `land_color`  | `array[3]` | The color of the land for the land image.   |
-| `ocean_color` | `array[3]` | The color of the oceans for the land image. |
-| `lake_color`  | `array[3]` | The color of the lakes for the land image.  |
+| Property         | Type                    | Description                                         |
+| ---------------- | ----------------------- | --------------------------------------------------- |
+| `land_color`     | `array[3]`              | The color of the land for the land image.           |
+| `ocean_color`    | `array[3]`              | The color of the oceans for the land image.         |
+| `lake_color`     | `array[3]`              | The color of the lakes for the land image.          |
+| `land_terrains`  | `object[str, array[3]]` | The colors of land terrains for the terrain image.  |
+| `naval_terrains` | `object[str, array[3]]` | The colors of naval terrains for the terrain image. |
+| `lake_terrains`  | `object[str, array[3]]` | The colors of lake terrains for the terrain image.  |
 
 > **Note:** Optional properties may either be omitted entirely or set to `null` when no value is provided.
 

@@ -71,33 +71,41 @@ The "Exclude Ocean" checkboxes on this tab let you ignore the density image for 
 
 ### Terrain Image
 The fourth tab allows you to import a terrain image that assigns terrain types to provinces after generation.
+
 Each pixel color maps to a specific terrain type. The terrain is sampled at each province's center point and constrained by province type (land provinces only receive land terrains, ocean provinces only receive naval terrains, etc.).
 
-**Land terrains** and their RGB colors:
-| Terrain  | RGB |
-|----------|-----|
-| forest   | (89, 199, 85) |
+You can edit the list of terrains for each type.
+
+Here are the default values: 
+
+#### Land terrains
+
+| Terrain  | RGB             |
+| -------- | --------------- |
+| forest   | (89, 199, 85)   |
 | hills    | (248, 255, 153) |
 | mountain | (157, 192, 208) |
-| plains   | (255, 129, 66) |
+| plains   | (255, 129, 66)  |
 | urban    | (120, 120, 120) |
-| jungle   | (127, 191, 0) |
-| marsh    | (76, 96, 35) |
-| desert   | (255, 127, 0) |
+| jungle   | (127, 191, 0)   |
+| marsh    | (76, 96, 35)    |
+| desert   | (255, 127, 0)   |
 
-**Naval terrains:**
-| Terrain     | RGB |
-|-------------|-----|
-| deep_ocean  | (2, 38, 150) |
+#### Naval terrains
+
+| Terrain     | RGB            |
+| ----------- | -------------- |
+| deep_ocean  | (2, 38, 150)   |
 | shallow_sea | (56, 118, 217) |
 | fjords      | (75, 162, 198) |
 
-**Lake terrain:**
-| Terrain | RGB |
-|---------|-----|
+#### Lake terrain
+
+| Terrain | RGB           |
+| ------- | ------------- |
 | lakes   | (58, 91, 255) |
 
-If no terrain image is provided, defaults are used: plains for land, deep_ocean for ocean, and lakes for lake provinces.
+> If no terrain image is provided, the value `None` (or *null*) is assigned.
 
 ### Territory Image
 The fifth tab generates the territory map, based on the input in tab 1 and 2.

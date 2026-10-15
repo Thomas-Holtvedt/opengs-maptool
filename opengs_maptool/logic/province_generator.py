@@ -1,5 +1,7 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
+
+from opengs_maptool.models.project import Project
 if TYPE_CHECKING:
     from opengs_maptool.context import ApplicationContext
 
@@ -233,16 +235,11 @@ def generate_province_map(
             terrain_image = project.terrain_image
             if terrain_image is not None:
                 terrain_arr = np.array(terrain_image)
-                _assign_terrain(all_metadata, terrain_arr, terrain_progress)
+                _assign_terrain(project, all_metadata, terrain_arr, terrain_progress)
             else:
                 for prov in terrain_progress.track_iteration(all_metadata):
                     region_type = prov.province_type
-                    if region_type == ds.RegionType.LAKE:
-                        prov.province_terrain = config.DEFAULT_TERRAIN_LAKE
-                    elif region_type == ds.RegionType.OCEAN:
-                        prov.province_terrain = config.DEFAULT_TERRAIN_OCEAN
-                    else:
-                        prov.province_terrain = config.DEFAULT_TERRAIN_LAND
+                    prov.province_terrain = None
 
     with progress_controller.execute_phase(phase6):
         project.province_image = province_image
@@ -302,8 +299,7 @@ def _distribute(
 
     return alloc
 
-
-def _assign_terrain(metadata: list[ds.RegionMetadata], terrain_arr: NDArray[Any], progress_controller: ProgressController) -> None:
+def _assign_terrain(project: Project, metadata: list[ds.RegionMetadata], terrain_arr: NDArray[Any], progress_controller: ProgressController) -> None:
     """Look up terrain color at each province center and assign province_terrain.
 
     Enforces category constraints: land provinces only get land terrains,
@@ -317,9 +313,9 @@ def _assign_terrain(metadata: list[ds.RegionMetadata], terrain_arr: NDArray[Any]
         h, w = terrain_arr.shape[:2]
 
         # Build per-category lookups: (R, G, B) -> terrain name
-        land_lookup = {color: name for name, color in config.LAND_TERRAIN_TYPES.items()}
-        naval_lookup = {color: name for name, color in config.NAVAL_TERRAIN_TYPES.items()}
-        lake_lookup = {color: name for name, color in config.LAKE_TERRAIN_TYPES.items()}
+        land_lookup = {color: name for name, color in project.land_terrains.items()}
+        naval_lookup = {color: name for name, color in project.naval_terrains.items()}
+        lake_lookup = {color: name for name, color in project.lake_terrains.items()}
 
     with progress_controller.execute_phase(province_phase) as province_progress:
         for prov in province_progress.track_iteration(metadata):
@@ -331,10 +327,11 @@ def _assign_terrain(metadata: list[ds.RegionMetadata], terrain_arr: NDArray[Any]
                      int(terrain_arr[py, px, 1]),
                      int(terrain_arr[py, px, 2]))
 
+            # TODO: Use default values
             region_type = prov.province_type
             if region_type == ds.RegionType.LAKE:
-                prov.province_terrain = lake_lookup.get(pixel, config.DEFAULT_TERRAIN_LAKE)
+                prov.province_terrain = lake_lookup.get(pixel, None)
             elif region_type == ds.RegionType.OCEAN:
-                prov.province_terrain = naval_lookup.get(pixel, config.DEFAULT_TERRAIN_OCEAN)
+                prov.province_terrain = naval_lookup.get(pixel, None)
             else:
-                prov.province_terrain = land_lookup.get(pixel, config.DEFAULT_TERRAIN_LAND)
+                prov.province_terrain = land_lookup.get(pixel, None)
