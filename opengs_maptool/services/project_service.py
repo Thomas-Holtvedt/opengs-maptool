@@ -76,6 +76,15 @@ class ProjectService:
                 if settings.get("lake_color"):
                     project.lake_color = tuple(settings.get("lake_color"))
 
+                if settings.get("land_terrains"):
+                    project.land_terrains = {k: tuple(v) for k, v in settings.get("land_terrains").items()}
+
+                if settings.get("naval_terrains"):
+                    project.naval_terrains = {k: tuple(v) for k, v in settings.get("naval_terrains").items()}
+
+                if settings.get("lake_terrains"):
+                    project.lake_terrains = {k: tuple(v) for k, v in settings.get("lake_terrains").items()}
+
             return project
 
 
@@ -124,7 +133,10 @@ class ProjectService:
             settings = {
                 "land_color": project.land_color,
                 "ocean_color": project.ocean_color,
-                "lake_color": project.lake_color
+                "lake_color": project.lake_color,
+                "land_terrains": {k: list(v) for k, v in project.land_terrains.items()},
+                "naval_terrains": {k: list(v) for k, v in project.naval_terrains.items()},
+                "lake_terrains": {k: list(v) for k, v in project.lake_terrains.items()}
             }
 
             zip.writestr("settings.json", json.dumps(settings, indent=4))

@@ -89,7 +89,7 @@ class RegionMetadata:
             "province_terrain": self.province_terrain,
         }
         if include_terrain:
-            data["province_terrain"] = self.province_terrain or "unknown"
+            data["province_terrain"] = self.province_terrain
         return data
 
     def serialize_full_json(self) -> dict[str, Any]:

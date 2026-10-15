@@ -43,6 +43,10 @@ class Project:
         self.ocean_color: ds.ColorTuple = config.DEFAULT_OCEAN_COLOR
         self.lake_color: ds.ColorTuple = config.DEFAULT_LAKE_COLOR
 
+        self.land_terrains: dict[str, ds.ColorTuple] = config.DEFAULT_LAND_TERRAIN_TYPES.copy()
+        self.naval_terrains: dict[str, ds.ColorTuple] = config.DEFAULT_NAVAL_TERRAIN_TYPES.copy()
+        self.lake_terrains: dict[str, ds.ColorTuple] = config.DEFAULT_LAKE_TERRAIN_TYPES.copy()
+
         # Generation options
         self.land_territory_density = config.LAND_TERRITORIES_DEFAULT
         self.oceanic_territory_density = config.OCEAN_TERRITORIES_DEFAULT
