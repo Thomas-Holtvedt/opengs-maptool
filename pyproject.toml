@@ -23,6 +23,7 @@ dependencies = [
     "opencv-python>=4.13.0.92",
     "svgwrite>=1.4.3",
     "promise>=2.3",
+    "webcolors>=25.10.0",
 ]
 
 classifiers = [

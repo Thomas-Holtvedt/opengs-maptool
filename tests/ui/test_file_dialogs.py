@@ -44,6 +44,27 @@ def test_suffixes_in_filter():
     assert fd._suffixes_in_filter("All Files (*)") == []
 
 
+def test_svg_is_available_for_image_export_but_not_import():
+    assert "SVG Files (*.svg)" in fd._split_filters(fd.IMAGE_FILTERS)
+    assert "*.svg" not in fd.IMAGE_IMPORT_FILTER
+
+
+@pytest.mark.parametrize("selected_path, expected", [("/tmp/map.png", "/tmp/map.png"), ("", None)])
+def test_pick_open_image_uses_supported_filter_and_normalizes_empty_result(
+    monkeypatch, selected_path, expected
+):
+    captured = {}
+
+    def fake_get_open_file_name(parent, title, directory, name_filter):
+        captured["name_filter"] = name_filter
+        return selected_path, name_filter
+
+    monkeypatch.setattr(QFileDialog, "getOpenFileName", fake_get_open_file_name)
+
+    assert fd.pick_open_image(None, "Open image") == expected
+    assert captured["name_filter"] == fd.IMAGE_IMPORT_FILTER
+
+
 def test_bare_project_name_gets_the_gsmap_extension(save_dialog):
     captured = save_dialog(fd.PROJECT_FILTERS, "mymap")
     path, _ = captured["result"]
@@ -71,14 +92,14 @@ def test_cancelling_returns_nothing(save_dialog):
     assert captured["result"] == (None, None)
 
 
-@pytest.mark.parametrize("typed, filter_index, expected_name, expected_fmt", [
-    ("defs", 0, "defs.json", "json"),
-    ("defs", 1, "defs.csv", "csv"),
-    ("defs", 2, "defs.yaml", "yaml"),
-    ("defs", 3, "defs.xml", "xml"),
+@pytest.mark.parametrize("typed, filter_index, expected, expected_fmt", [
+    ("defs", 0, "defs.json", fd.ExportFormat.JSON),
+    ("defs", 1, "defs.csv", fd.ExportFormat.CSV),
+    ("defs", 2, "defs.yaml", fd.ExportFormat.YAML),
+    ("defs", 3, "defs.xml", fd.ExportFormat.XML),
 ])
 def test_pick_save_data_reports_the_format_of_the_chosen_type(
-    qapp, monkeypatch, typed, filter_index, expected_name, expected_fmt
+    qapp, monkeypatch, typed, filter_index, expected, expected_fmt
 ):
     def fake_exec(dialog):
         dialog.findChild(QLineEdit, "fileNameEdit").setText(typed)
@@ -89,7 +110,7 @@ def test_pick_save_data_reports_the_format_of_the_chosen_type(
 
     monkeypatch.setattr(QFileDialog, "exec", fake_exec)
     path, fmt = fd.pick_save_data(None, "t")
-    assert os.path.basename(path) == expected_name
+    assert os.path.basename(path) == expected
     assert fmt == expected_fmt
 
 

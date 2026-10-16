@@ -48,12 +48,12 @@ class ProjectService:
             # Load data
             territory_data_json = self._load_data_from_zip(zip, "territory_data.json")
             province_data_json = self._load_data_from_zip(zip, "province_data.json")
-            
+
             if territory_data_json is not None:
                 project.territory_data = [ds.RegionMetadata.deserialize_from_full_json(m) for m in territory_data_json]
             else:
                 project.territory_data = None
-            
+
             if province_data_json is not None:
                 project.province_data = [ds.RegionMetadata.deserialize_from_full_json(m) for m in province_data_json]
             else:
@@ -109,9 +109,9 @@ class ProjectService:
             # Save map data
             if project.territory_data is not None:
                 territory_data_json = [m.serialize_full_json() for m in project.territory_data]
-                self._save_data_in_zip(zip, territory_data_json, "territory_data.json")          
+                self._save_data_in_zip(zip, territory_data_json, "territory_data.json")
 
-            
+
             if project.province_data is not None:
                 province_data_json = [m.serialize_full_json() for m in project.province_data]
                 self._save_data_in_zip(zip, province_data_json, "province_data.json")
@@ -128,8 +128,8 @@ class ProjectService:
             }
 
             zip.writestr("settings.json", json.dumps(settings, indent=4))
-            
-            # Update dirty indicator
+
+            # Update dirty indicator, project controller should send update signals after this
             project.modified = False
 
 

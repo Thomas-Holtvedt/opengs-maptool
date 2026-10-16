@@ -26,6 +26,8 @@ class CategoryLoggerRegistry:
         # UPDATE THIS WHEN NEW LOGGER CATEGORIES ARE ADDED TO config.LOG_CATEGORIES #
         #############################################################################
         self.task_progress = self.create_category_logger("task_progress", config.LOG_CATEGORIES["task_progress"])
+        self.export = self.create_category_logger("export", config.LOG_CATEGORIES["export"])
+        self.command = self.create_category_logger("command", config.LOG_CATEGORIES["command"])
 
     def create_category_logger(self, category_name: str, config_entry: LoggerCategoryConfiguration) -> CategoryLogger:
         """Create a new category logger at runtime."""

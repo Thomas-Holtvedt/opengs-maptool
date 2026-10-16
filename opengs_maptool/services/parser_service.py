@@ -23,6 +23,7 @@ class CommandArgSpec:
     arg_type: type[str] | type[int] | type[float] | type[bool]
     description: str
     default: CommandValue | object = _MISSING
+    choices: list[CommandValue] | None = None
 
     @property
     def required(self) -> bool:
@@ -117,12 +118,17 @@ def _build_argument_parser(
 
     # Add the arguments
     for spec in argument_specs:
+        arg_choices = None
+        if spec.choices is not None:
+            # argparse will compare parsed strings to choices, so stringify choices here
+            arg_choices = [str(c) for c in spec.choices]
+
         if spec.required:
-            parser.add_argument(spec.name, type=str, help=spec.description)
+            parser.add_argument(spec.name, type=str, help=spec.description, choices=arg_choices)
         elif spec.arg_type is bool:
             parser.add_argument(
                 f"--{spec.name}",
-                action=argparse.BooleanOptionalAction, # Example: adds --no-force automatically for a --force boolean flag
+                action=argparse.BooleanOptionalAction,  # Example: adds --no-force automatically for a --force boolean flag
                 default=spec.default,
                 help=spec.description,
             )
@@ -132,6 +138,7 @@ def _build_argument_parser(
                 type=str,
                 default=spec.default,
                 help=spec.description,
+                choices=arg_choices,
             )
 
     return parser
@@ -163,6 +170,28 @@ def _validate_argument_specs(command_id: str, argument_specs: list[CommandArgSpe
             raise CommandParserConfigurationError(
                 f"Command {_single_quotes(command_id)} has an invalid default for argument {_single_quotes(spec.name)}."
             )
+
+        # Validate choices if provided
+        if spec.choices is not None:
+            if spec.arg_type is bool:
+                raise CommandParserConfigurationError(
+                    f"Command {_single_quotes(command_id)} cannot use choices for boolean argument {_single_quotes(spec.name)}."
+                )
+            if not isinstance(spec.choices, (list, tuple)) or len(spec.choices) == 0:
+                raise CommandParserConfigurationError(
+                    f"Command {_single_quotes(command_id)} has invalid choices for argument {_single_quotes(spec.name)}."
+                )
+            for choice in spec.choices:
+                if type(choice) is not spec.arg_type:
+                    raise CommandParserConfigurationError(
+                        f"Command {_single_quotes(command_id)} has an invalid choice for argument {_single_quotes(spec.name)}."
+                    )
+            # If a default is provided, ensure it's within choices
+            if not spec.required and spec.default is not _MISSING:
+                if spec.default not in spec.choices:
+                    raise CommandParserConfigurationError(
+                        f"Command {_single_quotes(command_id)} has an invalid default for argument {_single_quotes(spec.name)}."
+                    )
         names.add(spec.name)
 
 
@@ -229,6 +258,16 @@ def _format_argparse_error(message: str, argument_name: str | None = None) -> st
 
     name = argument_name or _argument_name_from_message(message)
     detail = message.split(": ", 1)[-1]
+    # Argparse invalid choice wording: "invalid choice: 'gif' (choose from 'png', 'jpeg')"
+    if "invalid choice" in detail:
+        # attempt to extract the offending value and the choice list
+        m = re.search(r"invalid choice: '([^']+)' \(choose from (.+)\)", detail)
+        if m:
+            bad, choices_txt = m.groups()
+            # normalize choices text
+            choices_txt = choices_txt.strip()
+            cleaned_name = (name or "unknown").lstrip("-")
+            return f"Invalid value for argument {_single_quotes(cleaned_name)}: {_single_quotes(bad)}. Expected one of: {choices_txt}."
     if detail == "expected one argument":
         return f"Argument {_single_quotes(name or 'unknown')} requires a value."
     if detail.startswith("ignored explicit argument"):

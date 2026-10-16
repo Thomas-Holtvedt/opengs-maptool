@@ -12,6 +12,7 @@ from opengs_maptool.ui.components.bars.tool_bar import ToolBar
 from opengs_maptool.ui.components.panels.left_panel import LeftPanel
 from opengs_maptool.ui.components.panels.right_panel import RightPanel
 from opengs_maptool.ui.components.tab import Tab
+from opengs_maptool.controllers.project_controller import ProjectAttribute
 from opengs_maptool.ui.file_dialogs import pick_open_project, pick_save_project
 from opengs_maptool.ui.modals.error_modal import ErrorModal
 from opengs_maptool.ui.modals.project_details_modal import ProjectDetailsModal
@@ -30,7 +31,7 @@ class MainWindow(QMainWindow):
         self._app = app
         self._context = app.context
 
-        self.setWindowTitle(self._context.project.name + " - " + config.TITLE)
+        self._update_window_title(ProjectAttribute.name)
         self.setMinimumSize(800, 600)
         self.resize(config.WINDOW_SIZE_WIDTH, config.WINDOW_SIZE_HEIGHT)
 
@@ -38,7 +39,11 @@ class MainWindow(QMainWindow):
         self._init_layout()
 
         # Refresh UI when context reports project-level changes.
-        self._context.events.refresh_after_project_change_requested.connect(self._refresh_after_project_change)
+        self._context.project_controller.project_was_modified.connect(self._update_window_title)
+
+    def _update_window_title(self, attribute: ProjectAttribute):
+        if attribute == ProjectAttribute.name:
+            self.setWindowTitle(self._context.project.name + " - " + config.TITLE)
 
     def _init_layout(self):
         self._menu_bar = MenuBar(self)
@@ -80,7 +85,7 @@ class MainWindow(QMainWindow):
         right_panel = RightPanel(self._context, self)
         splitter.addWidget(right_panel)
 
-        splitter.setSizes([300, 900, 300])
+        splitter.setSizes([400, 900, 300])
         splitter.setChildrenCollapsible(False)
 
         content_layout.addWidget(splitter)
@@ -112,11 +117,6 @@ class MainWindow(QMainWindow):
                     tab.get_image_display().set_image(self._context.project.territory_image)
                 case TabName.PROVINCE:
                     tab.get_image_display().set_image(self._context.project.province_image)
-
-
-    def get_current_image_display(self):
-        current_tab = self._tabs.currentWidget()
-        return current_tab.get_image_display()
 
 
     # TODO: Perhaps create an actions file containing all the actions instead of storing them here
@@ -182,7 +182,6 @@ class MainWindow(QMainWindow):
             return
 
         self._context.project_controller.create_project()
-        self._refresh_after_project_change()
 
 
     def _open_project(self):
@@ -196,7 +195,6 @@ class MainWindow(QMainWindow):
 
         try:
             self._context.project_controller.load_project(filename)
-            self._refresh_after_project_change()
         except Exception:
             error_text = "Cannot open this file, incompatible format"
             error_modal = ErrorModal(self, error_text)
@@ -221,9 +219,8 @@ class MainWindow(QMainWindow):
 
 
     def _open_project_details(self):
-        modal = ProjectDetailsModal(self, self._context.project)
-        if modal.exec():
-            self._refresh_after_project_change()
+        modal = ProjectDetailsModal(self, self._context.project_controller)
+        modal.exec()
 
 
     def _confirm_discarded_changes(self) -> bool:
@@ -239,12 +236,6 @@ class MainWindow(QMainWindow):
             return True
         else:
             return False
-
-
-    def _refresh_after_project_change(self):
-        self.update_current_left_panel()
-        self.update_all_image_displays()
-        self.setWindowTitle(self._context.project.name + " - " + config.TITLE)
 
 
     def closeEvent(self, event):
