@@ -1,6 +1,6 @@
 from __future__ import annotations
+from PIL import ImageColor
 from typing import TYPE_CHECKING
-import webcolors
 
 if TYPE_CHECKING:
     from opengs_maptool.context import ApplicationContext
@@ -43,8 +43,7 @@ def cmd_land_color_settings_set(context: ApplicationContext, land_type: str, new
     """Changes the colors expected in the land image for land, oceans and lakes."""
     from opengs_maptool.services.command_service import wrap_in_single_quotes
     try: # validation and parsing
-        int_rgb = webcolors.hex_to_rgb(new_color)
-        rgb = (int_rgb.red, int_rgb.green, int_rgb.blue)
+        rgb = tuple(ImageColor.getrgb(new_color))
     except ValueError:
         return CommandResponse(f"Cannot use invalid color: {wrap_in_single_quotes(new_color)} Please use a hexadecimal color in the format of #RRGGBB", MessageType.ERROR)
 
