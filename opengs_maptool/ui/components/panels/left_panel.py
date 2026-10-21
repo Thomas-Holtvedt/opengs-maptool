@@ -1,6 +1,8 @@
 from __future__ import annotations
 from typing import Any, Callable, TYPE_CHECKING
 
+from opengs_maptool.ui.components.panels.contents.terrain_content import TerrainContent
+
 if TYPE_CHECKING:
     from opengs_maptool.ui.main_window import MainWindow
 
@@ -8,7 +10,7 @@ from PyQt6 import sip
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
     QFormLayout, QGroupBox, QLineEdit, QPushButton,
-    QScrollArea, QStackedWidget, QVBoxLayout, QWidget
+    QScrollArea, QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget, QStackedWidget
 )
 
 import opengs_maptool.config as config
@@ -481,20 +483,13 @@ class LeftPanel(QWidget):
         actions_group.setLayout(actions_layout)
         self._content_layout.addWidget(actions_group)
 
+
     def _display_terrain_content(self):
-        # Terrain actions group
-        actions_group = QGroupBox("Actions")
-        actions_layout = QVBoxLayout()
-
-        # Import terrain image button
-        self._create_import_button(
-            actions_layout,
-            "Import Terrain Image",
-            self._import_terrain_image
-        )
-
-        actions_group.setLayout(actions_layout)
-        self._content_layout.addWidget(actions_group)
+        terrain_content = TerrainContent(self._context)
+        self._import_buttons.append(terrain_content.get_import_button())
+        
+        self._content_layout.addWidget(terrain_content)
+        
 
     def _display_territory_content(self):
         # Territory actions group
@@ -624,18 +619,7 @@ class LeftPanel(QWidget):
             error = self._context.import_service.import_density_image(path)
             self._show_error_modal_if_exception(error)
 
-    def _import_terrain_image(self):
-        path = pick_open_image(self, "Import Terrain Image")
-        if path:
-            error = self._context.import_service.import_terrain_image(path)
-            self._show_error_modal_if_exception(error)
-
-    def _export_image(self,
-                title: str, image: ds.TerritoryImage|ds.ProvinceImage|None,
-                data: list[ds.RegionMetadata]|None=None
-            ) -> None:
-        if not image:
-            return
+    def _export_image(self, title, image, data=None):
         path = pick_save_image(self, title)
         if not path:
             return

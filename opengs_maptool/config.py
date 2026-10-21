@@ -79,8 +79,8 @@ DENSITY_STRENGTH_TICK = 5
 DENSITY_STRENGTH_STEP = 1
 DENSITY_STRENGTH_DIVISOR = 10 # Divides all of the above values to get the actual strength factor used in the algorithm
 
-# Terrain Types — color: (R, G, B)
-LAND_TERRAIN_TYPES = {
+# Default Terrain Types — color: (R, G, B)
+DEFAULT_LAND_TERRAIN_TYPES = {
     "forest":   (89, 199, 85),
     "hills":    (248, 255, 153),
     "mountain": (157, 192, 208),
@@ -91,23 +91,15 @@ LAND_TERRAIN_TYPES = {
     "desert":   (255, 127, 0),
 }
 
-NAVAL_TERRAIN_TYPES = {
+DEFAULT_NAVAL_TERRAIN_TYPES = {
     "deep_ocean":   (2, 38, 150),
     "shallow_sea":  (56, 118, 217),
     "fjords":       (75, 162, 198),
 }
 
-LAKE_TERRAIN_TYPES = {
+DEFAULT_LAKE_TERRAIN_TYPES = {
     "lakes": (58, 91, 255),
 }
-
-# All terrain types combined (for color lookup)
-TERRAIN_TYPES = {**LAND_TERRAIN_TYPES, **NAVAL_TERRAIN_TYPES, **LAKE_TERRAIN_TYPES}
-
-# Default terrain per province type (used when no terrain image or no color match)
-DEFAULT_TERRAIN_LAND = "plains"
-DEFAULT_TERRAIN_OCEAN = "deep_ocean"
-DEFAULT_TERRAIN_LAKE = "lakes"
 
 # Console message colors
 CONSOLE_COMMAND_COLOR = "#cf1374"
