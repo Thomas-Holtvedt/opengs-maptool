@@ -6,9 +6,62 @@ from opengs_maptool.services.command_service import execute_command_string, seri
 from opengs_maptool.models.command_response import CommandResponse
 from opengs_maptool.models.message import Message, MessageAuthor, MessageType
 from opengs_maptool.ui.modals.error_modal import ErrorModal
-from PyQt6.QtCore import QEventLoop
-from PyQt6.QtGui import QFontDatabase, QTextCursor
+from PyQt6.QtCore import QEventLoop, Qt
+from PyQt6.QtGui import QFontDatabase, QKeyEvent, QTextCursor
 from PyQt6.QtWidgets import QFileDialog, QTextEdit, QVBoxLayout, QWidget, QLineEdit, QPushButton, QHBoxLayout, QSizePolicy
+
+
+class _CommandInput(QLineEdit):
+    def __init__(self, history_provider):
+        super().__init__()
+        self._history_provider = history_provider
+        self._history: list[str] = []
+        self._history_index: int | None = None
+        self._draft = ""
+        self.textEdited.connect(self._reset_history_navigation)
+
+    def keyPressEvent(self, event: QKeyEvent) -> None:
+        if event.modifiers() == Qt.KeyboardModifier.NoModifier:
+            if event.key() == Qt.Key.Key_Up and self._show_previous_command():
+                event.accept()
+                return
+            if event.key() == Qt.Key.Key_Down and self._show_next_command():
+                event.accept()
+                return
+        super().keyPressEvent(event)
+
+    def _show_previous_command(self) -> bool:
+        if self._history_index is None:
+            commands = self._history_provider()
+            if not commands:
+                return False
+            self._history = [command.text for command in reversed(commands)]
+            self._history_index = 0
+            self._draft = self.text()
+        else:
+            self._history_index = min(len(self._history) - 1, self._history_index + 1)
+
+        self.setText(self._history[self._history_index])
+        return True
+
+    def _show_next_command(self) -> bool:
+        if self._history_index is None:
+            return False
+
+        if self._history_index > 0:
+            self._history_index -= 1
+            self.setText(self._history[self._history_index])
+        else:
+            draft = self._draft
+            self._reset_history_navigation()
+            self.setText(draft)
+        return True
+
+    def _reset_history_navigation(self, _text: str = "") -> None:
+        self._history = []
+        self._history_index = None
+        self._draft = ""
+
 
 class ConsoleWidget(QWidget):
     def __init__(self, context: ApplicationContext, main_window):
@@ -29,7 +82,7 @@ class ConsoleWidget(QWidget):
         layout.addWidget(self._output)
 
         # Input line (for user commands)
-        self._input = QLineEdit()
+        self._input = _CommandInput(self._context.console_controller.get_command_history)
         self._input.setFont(monospace_font)
         self._input.setPlaceholderText("Enter command...")
         self._input.returnPressed.connect(self._submit_user_command)
@@ -104,6 +157,7 @@ class ConsoleWidget(QWidget):
         if self._context.task_controller.is_thread_slot_occupied(ThreadTaskSlot.execute_command):
             return
 
+        self._input._reset_history_navigation()
         user_message_text = self._input.text().strip()
         self._input.clear()
 

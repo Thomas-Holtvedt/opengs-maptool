@@ -3,6 +3,7 @@ import pytest
 
 from opengs_maptool.models.command_response import CommandResponse
 from opengs_maptool.models.message import MessageType
+from opengs_maptool.services.command_service import CommandDevStatus, get_command_documentation
 from opengs_maptool.services.parser_service import CommandArgSpec
 import opengs_maptool.services.command_core as command_core
 
@@ -66,6 +67,30 @@ def test_register_command_and_lookup():
 
     func = command_core.get_command_implementation("ping")
     assert func == cmd_ping
+
+
+def test_command_documentation_api_includes_examples_and_aliases():
+    @command_core.register_command(
+        "test.documented",
+        args=[CommandArgSpec("name", str, "Name to greet")],
+        aliases=["documented"],
+        examples=["test.documented Ada"],
+        status=CommandDevStatus.PLANNED,
+    )
+    def cmd_documented(context, name: str) -> CommandResponse:
+        """Greets a person."""
+        return CommandResponse(f"Hello, {name}", MessageType.NORMAL)
+
+    command = next(
+        item for item in get_command_documentation()
+        if item.command_id == "test.documented"
+    )
+
+    assert command.description == "Greets a person."
+    assert command.arguments[0].name == "name"
+    assert command.aliases == ("documented",)
+    assert command.examples == ("test.documented Ada",)
+    assert command.status is CommandDevStatus.PLANNED
 
 
 def test_register_command_duplicate():

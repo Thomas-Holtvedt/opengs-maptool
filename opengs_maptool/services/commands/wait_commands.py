@@ -31,5 +31,5 @@ def cmd_wait_tasks_completed(context: ApplicationContext) -> CommandResponse:
 
     return CommandResponse(
         f"Waited {finish_time - start_time:.2f} seconds for background tasks to complete",
-        MessageType.SUCCESS
+        MessageType.NORMAL
     )

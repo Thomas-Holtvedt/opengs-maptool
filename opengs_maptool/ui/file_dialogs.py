@@ -3,6 +3,7 @@ import re
 import sys
 
 from PyQt6.QtWidgets import QFileDialog
+from opengs_maptool.logic.export_module import ExportFormat
 
 IMAGE_FILTERS = (
     "PNG Files (*.png);;"
@@ -14,6 +15,8 @@ IMAGE_FILTERS = (
     "WebP Files (*.webp);;"
     "All Files (*)"
 )
+
+IMAGE_IMPORT_FILTER = "Images (*.png *.jpg *.jpeg *.bmp *.gif)"
 
 DATA_FILTERS = (
     "JSON Files (*.json);;"
@@ -28,15 +31,6 @@ PROJECT_FILTERS = (
     "ZIP Files (*.zip);;"
     "All Files (*)"
 )
-
-# Maps a file extension onto the format name the export functions expect.
-_DATA_FORMAT_BY_SUFFIX = {
-    "json": "json",
-    "csv": "csv",
-    "yaml": "yaml",
-    "yml": "yaml",
-    "xml": "xml",
-}
 
 
 def _split_filters(filters: str) -> list[str]:
@@ -127,7 +121,7 @@ def _run_save_dialog(parent, title: str, filters: str) -> tuple[str | None, str 
 
 def pick_open_image(parent, title):
     path, _ = QFileDialog.getOpenFileName(
-        parent, title, "", "Images (*.png *.jpg *.jpeg *.bmp *.gif)"
+        parent, title, "", IMAGE_IMPORT_FILTER,
     )
     return path or None
 
@@ -149,11 +143,9 @@ def pick_save_project(parent, title):
     return path
 
 
-def pick_save_data(parent, title):
+def pick_save_data(parent, title) -> tuple[str | None, ExportFormat | None]:
     """Open save dialog for data files and return (path, format) tuple with proper extension."""
     path, _ = _run_save_dialog(parent, title, DATA_FILTERS)
     if not path:
         return None, None
-
-    suffix = path.rpartition(".")[2].lower()
-    return path, _DATA_FORMAT_BY_SUFFIX.get(suffix, "json")
+    return path, ExportFormat.get_by_path(path)

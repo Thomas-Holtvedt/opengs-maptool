@@ -1,5 +1,7 @@
 from __future__ import annotations
+from dataclasses import dataclass
 from difflib import get_close_matches
+from enum import Enum
 import mslex
 from promise import Promise
 import re
@@ -19,6 +21,7 @@ from opengs_maptool.services.parser_service import (
     CommandParserConfigurationError,
     deserialize_command_arguments,
 )
+from opengs_maptool.services.logging_service import LOGGING_SERVICE
 
 #####################################################
 #                Base Infrastructure                #
@@ -28,7 +31,27 @@ from opengs_maptool.services.parser_service import (
 
 # command.this.format.id -> implementation function
 CommandImplementation: TypeAlias = Callable[..., CommandResponse]
-_commands: dict[str, tuple[CommandImplementation, str, list[CommandArgSpec]]] = {}
+
+
+class CommandDevStatus(Enum):
+    PLANNED = "planned"
+    IN_PROGRESS = "in_progress"
+
+
+@dataclass(frozen=True)
+class CommandDocumentation:
+    command_id: str
+    description: str
+    arguments: tuple[CommandArgSpec, ...]
+    aliases: tuple[str, ...]
+    examples: tuple[str, ...]
+    status: CommandDevStatus | None = None
+
+
+_commands: dict[
+    str,
+    tuple[CommandImplementation, str, list[CommandArgSpec], list[str], CommandDevStatus | None],
+] = {}
 _command_aliases = (dict[str, str])() # alias -> real command
 _SORT_PRIORITY_PREFIXES = [
     "link", "console", "project",
@@ -42,6 +65,8 @@ def register_command(
     command_id: str,
     args: list[CommandArgSpec],
     aliases: list[str] | None = None,
+    examples: list[str] | None = None,
+    status: CommandDevStatus | None = None,
 ):
     """Decorator to register a command function with a given command ID."""
     def decorator[T: CommandImplementation](func: T) -> T:
@@ -49,7 +74,10 @@ def register_command(
             raise ValueError(f"Please report this. Command {command_id} is already registered.")
 
         doc = func.__doc__ or "No description provided"
-        _commands[command_id] = (func, doc, args)
+        if status is not None and not isinstance(status, CommandDevStatus):
+            raise ValueError("Command status must be a CommandDevStatus value or None.")
+
+        _commands[command_id] = (func, doc, args, examples or [], status)
 
         if aliases:
             for alias in aliases:
@@ -73,6 +101,23 @@ def get_command_description(command_id: str) -> str:
 def get_command_arg_specs(command_id: str) -> list[CommandArgSpec]:
     command_id = _command_aliases.get(command_id, command_id)
     return _commands[command_id][2]
+
+def get_command_examples(command_id: str) -> list[str]:
+    command_id = _command_aliases.get(command_id, command_id)
+    return _commands[command_id][3]
+
+def get_command_documentation() -> list[CommandDocumentation]:
+    return [
+        CommandDocumentation(
+            command_id=command_id,
+            description=description.strip(),
+            arguments=tuple(arguments),
+            aliases=tuple(alias for alias, target in _command_aliases.items() if target == command_id),
+            examples=tuple(examples),
+            status=status,
+        )
+        for command_id, (_, description, arguments, examples, status) in _commands.items()
+    ]
 
 def get_all_command_ids() -> list[str]:
     return list(_commands.keys())
@@ -149,12 +194,18 @@ def _run_command_func_with_args(
         command_func: CommandImplementation,
         parsed_arguments: list[str|int|float|bool],
     ) -> CommandResponse:
+
+    def log_error_msg() -> str:
+        header = ">>> UNEXPECTED ERROR IN COMMAND FUNCTION <<<\n"
+        exception_text = traceback.format_exc()
+        indented_text = "\n".join(">\t" + line for line in exception_text.splitlines())
+        LOGGING_SERVICE.loggers.command.send(header + indented_text)
+
     try:
         response = command_func(context, *parsed_arguments)
 
     except TypeError as error:
-        print(">>> UNEXPECTED ERROR IN COMMAND FUNCTION <<<")
-        traceback.print_exc()
+        log_error_msg()
         if _is_wrong_argument_count_error(error):
             response = CommandResponse(
                 f"Internal Error: registered and implemented arguments of command {_single_quotes(command_id)} do not match: {error}",
@@ -164,8 +215,7 @@ def _run_command_func_with_args(
             raise
 
     except Exception as error:
-        print(">>> UNEXPECTED ERROR IN COMMAND FUNCTION <<<")
-        traceback.print_exc()
+        log_error_msg()
         response = CommandResponse(f"Unexpected error executing command {_single_quotes(command_id)}: {error}", MessageType.ERROR)
     return response
 

@@ -173,3 +173,51 @@ def test_unrecognized_arguments_error_formatting():
     specs = [CommandArgSpec("path", str, "Path")]
     with pytest.raises(CommandArgumentParseError, match="Unknown argument\(s\) or optional flag\(s\): --unknown"):
         deserialize_command_arguments("test.cmd", "desc", ["file.txt", "--unknown"], specs)
+
+
+def test_validate_specs_choices_type_mismatch():
+    specs = [CommandArgSpec("fmt", int, "Format", choices=["png", "jpeg"]) ]  # choices are strings, type is int
+    with pytest.raises(CommandParserConfigurationError, match="has an invalid choice"):
+        deserialize_command_arguments("test.cmd", "desc", [], specs)
+
+
+def test_deserialize_with_choices_valid_and_invalid():
+    specs = [
+        CommandArgSpec("path", str, "Required path"),
+        CommandArgSpec("format", str, "Format setting", default="png", choices=["png", "jpeg"]),
+    ]
+
+    # valid choice
+    args = ["output.png", "--format", "jpeg"]
+    result = deserialize_command_arguments("test.cmd", "desc", args, specs)
+    assert result == ["output.png", "jpeg"]
+
+    # invalid choice
+    args = ["output.png", "--format", "gif"]
+    with pytest.raises(CommandArgumentParseError, match="Invalid value for argument 'format'"):
+        deserialize_command_arguments("test.cmd", "desc", args, specs)
+
+
+def test_deserialize_required_positional_argument_with_choices():
+    specs = [CommandArgSpec("format", str, "Output format", choices=["json", "csv"])]
+
+    assert deserialize_command_arguments("test.cmd", "desc", ["csv"], specs) == ["csv"]
+    with pytest.raises(CommandArgumentParseError, match="Invalid value for argument 'format'"):
+        deserialize_command_arguments("test.cmd", "desc", ["xml"], specs)
+
+
+@pytest.mark.parametrize(
+    "arg_type, default, choices, error_message, required",
+    [
+        (str, None, [], "has invalid choices", True),
+        (bool, False, [True], "cannot use choices for boolean argument", False),
+        (str, "xml", ["json", "csv"], "has an invalid default", False),
+    ],
+)
+def test_validate_choice_specifications(arg_type, default, choices, error_message, required):
+    if required:
+        spec = CommandArgSpec("format", arg_type, "Output format", choices=choices)
+    else:
+        spec = CommandArgSpec("format", arg_type, "Output format", default=default, choices=choices)
+    with pytest.raises(CommandParserConfigurationError, match=error_message):
+        deserialize_command_arguments("test.cmd", "desc", [], [spec])

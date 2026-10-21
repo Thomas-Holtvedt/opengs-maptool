@@ -77,6 +77,6 @@ def cmd_console_history_list(context: ApplicationContext) -> CommandResponse:
 
 @register_command("console.history.clear", args=[])
 def cmd_console_history_clear(context: ApplicationContext) -> CommandResponse:
-    """"Clears the console message history."""
+    """Clears the console message history."""
     context.console_service.clear_console(context.console)
     return CommandResponse("History cleared", MessageType.NORMAL)

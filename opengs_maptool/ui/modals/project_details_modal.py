@@ -9,16 +9,17 @@ from PyQt6.QtWidgets import (
     QFormLayout,
     QVBoxLayout,
 )
+from opengs_maptool.controllers.project_controller import ProjectController
 
 
 class ProjectDetailsModal(QDialog):
-    def __init__(self, parent, project):
+    def __init__(self, parent, project_controller: ProjectController):
         super().__init__(parent)
-        self._project = project
+        self._project_controller = project_controller
 
         self.setWindowTitle("Project details")
         self.setModal(True)
-        
+
         self._create_ui()
         self._load_project()
 
@@ -60,11 +61,12 @@ class ProjectDetailsModal(QDialog):
 
     def _load_project(self):
         """Load project details into the form fields."""
-        self._name_input.setText(self._project.name)
-        self._editor_version_input.setText(self._project.editor_version)
-        self._description_input.setPlainText(self._project.description or "")
-        self._author_input.setText(self._project.author or "")
-        self._path_label.setText(self._project.file_path or "Not saved yet")
+        project = self._project_controller.get_project()
+        self._name_input.setText(project.name)
+        self._editor_version_input.setText(project.editor_version)
+        self._description_input.setPlainText(project.description or "")
+        self._author_input.setText(project.author or "")
+        self._path_label.setText(project.file_path or "Not saved yet")
 
 
     def _on_save(self):
@@ -74,17 +76,11 @@ class ProjectDetailsModal(QDialog):
             QMessageBox.warning(self, "Validation error", "Project name is required.")
             return
 
-        name_changed = name != self._project.name
         description = self._description_input.toPlainText().strip() or None
-        description_changed = description != (self._project.description or None)
         author = self._author_input.text().strip() or None
-        author_changed = author != (self._project.author or None)
 
-        self._project.name = name
-        self._project.description = description
-        self._project.author = author
-
-        if name_changed or description_changed or author_changed:
-            self._project.modified = True
+        self._project_controller.set_project_name(name)
+        self._project_controller.set_project_description(description)
+        self._project_controller.set_project_author(author)
 
         self.accept()

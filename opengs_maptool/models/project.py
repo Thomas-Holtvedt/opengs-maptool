@@ -16,7 +16,7 @@ class Project:
             description: str | None = None,
             author: str | None = None
         ):
-        # Project description
+        # Project description (please use controller to modify)
         self.name: str = name
         self.editor_version: str = editor_version
         self.description: str | None = description
@@ -49,15 +49,14 @@ class Project:
         self.territory_density_strength = config.DENSITY_STRENGTH_DEFAULT
         self.territory_jagged_land_amplitude = config.JAGGED_BORDER_LAND_AMPLITUDE_DEFAULT
         self.territory_jagged_ocean_amplitude = config.JAGGED_BORDER_OCEAN_AMPLITUDE_DEFAULT
-
         self.territory_exclude_ocean = False
-        self.province_exclude_ocean = False
 
         self.land_province_density = config.LAND_PROVINCES_DEFAULT
         self.oceanic_province_density = config.OCEAN_PROVINCES_DEFAULT
         self.province_density_strength = config.DENSITY_STRENGTH_DEFAULT
         self.province_jagged_land_amplitude = config.JAGGED_BORDER_LAND_AMPLITUDE_DEFAULT
         self.province_jagged_ocean_amplitude = config.JAGGED_BORDER_OCEAN_AMPLITUDE_DEFAULT
+        self.province_exclude_ocean = False
 
         # Others
         self.file_path: str | None = None

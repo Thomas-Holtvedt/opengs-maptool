@@ -19,6 +19,8 @@ def generate_territory_map(
     ) -> tuple[ds.TerritoryImage, list[ds.RegionMetadata]] | tuple[None, None]:
     """
     Generate a territory map for the given project, updating the progress with "virtually calculated step numbers" as it goes.
+    Raises:
+        NumberSeriesExhaustedError: Raised when the NumberSeries for region IDs is exhausted.
     """
     # Safety check matching the button setEnabled condition
     if not task_ctx.project.can_territory_image_be_generated(task_ctx, ignore_locked=True):
@@ -56,10 +58,10 @@ def generate_territory_map(
 
     with progress_controller.execute_phase(phase2):
         density_arr: NDArray[Any] = np.array(project.density_image)
-        density_strength = project.territory_density_strength / 10.0
+        density_strength = project.territory_density_strength / config.DENSITY_STRENGTH_DIVISOR
         exclude_ocean_density = project.territory_exclude_ocean
-        land_amplitude_factor = project.territory_jagged_land_amplitude / 100.0
-        ocean_amplitude_factor = project.territory_jagged_ocean_amplitude / 100.0
+        land_amplitude_factor = project.territory_jagged_land_amplitude / config.JAGGED_BORDER_LAND_AMPLITUDE_DIVISOR
+        ocean_amplitude_factor = project.territory_jagged_ocean_amplitude / config.JAGGED_BORDER_OCEAN_AMPLITUDE_DIVISOR
 
         land_points = project.land_territory_density
         sea_points = project.oceanic_territory_density
@@ -103,11 +105,10 @@ def generate_territory_map(
 
     with progress_controller.execute_phase(phase6):
         # Is instant, sub-steps are not worth it
-        project.territory_image = territory_image
-        project.territory_data = metadata
-        project.territory_pmap = combined_pmap
-        project.cached_masks = masks
-        project.modified = True
-        task_ctx.refresh_tab_view(TabName.TERRITORY)
+        controller = task_ctx.project_controller
+        controller.set_territory_image(territory_image)
+        controller.set_territory_data(metadata)
+        controller.set_territory_pmap(combined_pmap)
+        controller.set_cached_masks(masks)
 
     return territory_image, metadata
