@@ -1,3 +1,4 @@
+from __future__ import annotations
 from PIL import Image
 import json
 import csv
@@ -8,53 +9,99 @@ import yaml
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 from typing import Any
+from enum import Enum
 from opengs_maptool.models.project import Project
 import opengs_maptool.logic.datastructure as ds
+from opengs_maptool.services.logging_service import LOGGING_SERVICE
 
 
-def export_image(path: str, image: Image.Image, data: dict[str, dict[str, Any]] = None) -> None:
+def export_image(
+        path: str, image: Image.Image,
+        data: list[ds.RegionMetadata] | None = None,
+        raise_on_error: bool = False,
+    ) -> None:
     """Export an image to the specified file path."""
     if not image or not path:
         return
 
     try:
         ext = path.lower().rsplit('.', 1)[-1]
-        
         if ext == "svg":
             if data is not None:
-                _export_svg(path, image, data)
+                try:
+                    _export_svg(path, image, data)
+                except Exception as error:
+                    LOGGING_SERVICE.loggers.export.send(f"Error exporting SVG image: {error}")
+                    if raise_on_error:
+                        raise
             else:
-                raise ValueError(f"Data is required for SVG export, but not provided for {path}")
+                message = f"Data is required for SVG image export, but none is provided for {path}"
+                LOGGING_SERVICE.loggers.export.send(message)
+                if raise_on_error:
+                    raise ValueError(message)
         else:
             # Remove the alpha channel for JPEG image export
             if ext in ("jpg", "jpeg"):
                 background = Image.new('RGB', image.size, (255, 255, 255))
+                background.paste(image, mask=image.split()[3]) 
+                """ TODO: fix this error (happens on jpg export of province image)
                 background.paste(image, mask=image.split()[3])
+                                                ~~~~~~~~~~~~~^^^
+                IndexError: tuple index out of range
+                """
                 image = background
             
             image.save(path)
-
+        
     except Exception as error:
-        print(f"Error saving image: {error}")
+        LOGGING_SERVICE.loggers.export.send(f"Error saving image: {error}")
+        if raise_on_error:
+            raise
 
 
-def export_territory_definitions(project: Project, path: str, fmt: str) -> None:
+
+FORMAT_ALIASES = {
+    "yml": "yaml"
+}
+
+class ExportFormat(Enum):
+    JSON = "json"
+    CSV = "csv"
+    YAML = "yaml"
+    XML = "xml"
+
+    @classmethod
+    def get_by_path(cls, path: str, raise_on_unknown: bool = False) -> ExportFormat:
+        """Return the export format corresponding to the file extension."""
+        suffix = path.rpartition(".")[2].lower()
+        if suffix in FORMAT_ALIASES:
+            suffix = FORMAT_ALIASES[suffix]
+
+        try:
+            return cls(suffix) # use the Enum constructor to get the corresponding enum
+        except ValueError as error:
+            if raise_on_unknown:
+                raise ValueError(f"Please specify a valid export format (JSON, CSV, YAML, XML), invalid file extension: {path}") from error
+            return cls.JSON  # default to JSON if unknown extension
+
+
+def export_territory_definitions(project: Project, path: str, fmt: ExportFormat) -> None:
     """Export territory definitions to the specified path in the given format."""
     territory_data = project.territory_data
     if not territory_data:
-        print("No territory data to export.")
+        LOGGING_SERVICE.loggers.export.send("No territory data to export.")
         return
 
     data: dict[str, dict[str, Any]] = {}
     for d in territory_data:
         data[d.territory_id] = d.serialize_territory_json()
-    
-    if fmt in ("json", "yaml", "xml"):
-        if fmt == "json":
+
+    if fmt in (ExportFormat.JSON, ExportFormat.YAML, ExportFormat.XML):
+        if fmt == ExportFormat.JSON:
             _write_json(path, data)
-        elif fmt == "yaml":
+        elif fmt == ExportFormat.YAML:
             _write_yaml(path, data)
-        elif fmt == "xml":
+        elif fmt == ExportFormat.XML:
             root = ET.Element("territories")
 
             for territory_id, info in data.items():
@@ -82,11 +129,11 @@ def export_territory_definitions(project: Project, path: str, fmt: str) -> None:
                 w.writerow(_get_csv_row_values(keys, info, id_value=territory_id, id_key="id"))
 
 
-def export_territory_history(project: Project, path: str, fmt: str) -> None:
+def export_territory_history(project: Project, path: str, fmt: ExportFormat) -> None:
     """Export territory history to the specified path in the given format."""
     territory_data = project.territory_data
     if not territory_data:
-        print("No territory data to export.")
+        LOGGING_SERVICE.loggers.export.send("No territory data to export.")
         return
 
     data: dict[str, dict[str, list[str]]] = {}
@@ -95,12 +142,12 @@ def export_territory_history(project: Project, path: str, fmt: str) -> None:
             "provinces": d.province_ids or [],
         }
 
-    if fmt in ("json", "yaml", "xml"):
-        if fmt == "json":
+    if fmt in (ExportFormat.JSON, ExportFormat.YAML, ExportFormat.XML):
+        if fmt == ExportFormat.JSON:
             _write_json(path, data)
-        elif fmt == "yaml":
+        elif fmt == ExportFormat.YAML:
             _write_yaml(path, data)
-        elif fmt == "xml":
+        elif fmt == ExportFormat.XML:
             root = ET.Element("territories")
 
             for territory_id, info in data.items():
@@ -128,11 +175,11 @@ def export_territory_history(project: Project, path: str, fmt: str) -> None:
                 w.writerow([territory_id, provinces])
 
 
-def export_province_definitions(project: Project, path: str, fmt: str) -> None:
+def export_province_definitions(project: Project, path: str, fmt: ExportFormat) -> None:
     """Export province definitions to the specified path in the given format."""
     province_data = project.province_data
     if not province_data:
-        print("No province data to export.")
+        LOGGING_SERVICE.loggers.export.send("No province data to export.")
         return
 
     has_terrain = any((d.province_terrain is not None) for d in province_data)
@@ -141,12 +188,12 @@ def export_province_definitions(project: Project, path: str, fmt: str) -> None:
     for d in province_data:
         data[d.province_id] = d.serialize_province_json(include_terrain=has_terrain)
 
-    if fmt in ("json", "yaml", "xml"):
-        if fmt == "json":
+    if fmt in (ExportFormat.JSON, ExportFormat.YAML, ExportFormat.XML):
+        if fmt == ExportFormat.JSON:
             _write_json(path, data)
-        elif fmt == "yaml":
+        elif fmt == ExportFormat.YAML:
             _write_yaml(path, data)
-        elif fmt == "xml":
+        elif fmt == ExportFormat.XML:
             root = ET.Element("provinces")
 
             for province_id, info in data.items():
@@ -192,32 +239,28 @@ def _write_yaml(path: str, data: Any) -> None:
         yaml.dump(data, f, sort_keys=False)
 
 def _export_svg(path: str, source_image: Image.Image, data: list[ds.RegionMetadata]) -> None:
-    """Export an image as an SVG file."""
-    try:
-        w, h = source_image.size
-        drawing = svgwrite.Drawing(path, size=(w, h))
+    """Export an image as an SVG file. Possibly raises exceptions if the export fails."""
+    w, h = source_image.size
+    drawing = svgwrite.Drawing(path, size=(w, h))
 
-        for region in data:
-            # OpenCV uses BGR format
-            image = cv2.cvtColor(np.array(source_image), cv2.COLOR_RGB2BGR)
-            target_color = np.array([region.B, region.G, region.R], dtype=np.uint8)
+    for region in data:
+        # OpenCV uses BGR format
+        image = cv2.cvtColor(np.array(source_image), cv2.COLOR_RGB2BGR)
+        target_color = np.array([region.B, region.G, region.R], dtype=np.uint8)
 
-            mask = cv2.inRange(image, target_color, target_color)
+        mask = cv2.inRange(image, target_color, target_color)
 
-            contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-            for contour in contours:
-                points = [(float(pt[0][0]), float(pt[0][1])) for pt in contour]
+        for contour in contours:
+            points = [(float(pt[0][0]), float(pt[0][1])) for pt in contour]
 
-                color_hex = f"#{region.R:02x}{region.G:02x}{region.B:02x}"
-                
-                region_id = region.territory_id
-                if region.region_level == ds.RegionLevel.PROVINCE:
-                    region_id = region.province_id
+            color_hex = f"#{region.R:02x}{region.G:02x}{region.B:02x}"
+            
+            region_id = region.territory_id
+            if region.region_level == ds.RegionLevel.PROVINCE:
+                region_id = region.province_id
 
-                drawing.add(drawing.polygon(points, fill=color_hex, stroke="none", id=region_id))
+            drawing.add(drawing.polygon(points, fill=color_hex, stroke="none", id=region_id))
 
-        drawing.save()
-
-    except Exception as error:
-        print(f"Error exporting SVG: {error}")
+    drawing.save()

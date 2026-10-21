@@ -485,6 +485,8 @@ def create_region_map(
     ) -> tuple[ds.RegionPixelMap, list[ds.RegionMetadata], int]:
     """
     Unified region map creator for both provinces and territories.
+    Raises:
+        NumberSeriesExhaustedError: Raised when the NumberSeries for region IDs is exhausted.
     """
 
     """
@@ -553,6 +555,10 @@ def _build_region_metadata(
         pmap: ds.RegionPixelMap, seeds: list[ds.IntCoordinate], start_index: int,
         series: NumberSeries, region_type: ds.RegionType, region_level: ds.RegionLevel,
     ) -> list[ds.RegionMetadata]:
+    """
+    Raises:
+        NumberSeriesExhaustedError: Raised when the NumberSeries for region IDs is exhausted.
+    """
     valid_mask = pmap >= 0
     ys, xs = np.where(valid_mask)
     flat = pmap[valid_mask]
@@ -569,8 +575,6 @@ def _build_region_metadata(
             continue
         index = start_index + i
         rid = series.get_id()
-        if rid is None:
-            continue
         r, g, b = color_from_id(index, region_type)
         metadata.append(ds.RegionMetadata(
             # For both territories & provinces

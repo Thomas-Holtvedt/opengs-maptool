@@ -1,0 +1,46 @@
+name: Update command documentation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "opengs_maptool/services/commands/**"
+      - "opengs_maptool/services/command_core.py"
+      - "dev_scripts/generate_command_docs.py"
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    name: Regenerate command reference
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install application dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install .
+
+      - name: Generate command reference
+        run: python -m dev_scripts.generate_command_docs
+
+      - name: Commit updated command reference
+        run: |
+          if git diff --quiet -- docs/command_list.md; then
+            echo "Command reference is already up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/command_list.md
+          git commit -m "docs: regenerate command reference"
+          git push origin HEAD:main

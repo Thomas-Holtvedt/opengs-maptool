@@ -47,18 +47,20 @@ MAX_IMAGE_PIXELS = 300000000
 LLOYD_ITERATIONS = 4
 
 # Jagged Land Border Amplitud Factor
-JAGGED_BORDER_LAND_AMPLITUDE_DEFAULT = 12  # fraction of avg seed spacing used as noise.  Slider value (divided by 10 = 2.0)
+JAGGED_BORDER_LAND_AMPLITUDE_DEFAULT = 12  # fraction of avg seed spacing used as noise.  Slider value (divided by ..._DIVISOR = 0.12)
 JAGGED_BORDER_LAND_AMPLITUDE_MIN = 0
 JAGGED_BORDER_LAND_AMPLITUDE_MAX  = 50
 JAGGED_BORDER_LAND_AMPLITUDE_TICK = 1
 JAGGED_BORDER_LAND_AMPLITUDE_STEP = 1
+JAGGED_BORDER_LAND_AMPLITUDE_DIVISOR = 100
 
 # Jagged Ocean Border Amplitud Factor
-JAGGED_BORDER_OCEAN_AMPLITUDE_DEFAULT = 12  # fraction of avg seed spacing used as noise.  Slider value (divided by 10 = 2.0)
+JAGGED_BORDER_OCEAN_AMPLITUDE_DEFAULT = 12  # fraction of avg seed spacing used as noise.  Slider value (divided by ..._DIVISOR = 0.12)
 JAGGED_BORDER_OCEAN_AMPLITUDE_MIN = 0
 JAGGED_BORDER_OCEAN_AMPLITUDE_MAX  = 50
 JAGGED_BORDER_OCEAN_AMPLITUDE_TICK = 1
 JAGGED_BORDER_OCEAN_AMPLITUDE_STEP = 1
+JAGGED_BORDER_OCEAN_AMPLITUDE_DIVISOR = 100
 
 # Number Series
 PROVINCE_ID_PREFIX = "PRV"
@@ -70,11 +72,12 @@ TERRITORY_ID_END = 999999
 
 # Density Image
 DEFAULT_DENSITY_GREY = 128
-DENSITY_STRENGTH_DEFAULT = 20  # Slider value (divided by 10 = 2.0)
+DENSITY_STRENGTH_DEFAULT = 20  # Slider value (divided by DENSITY_STRENGTH_DIVISOR = 2.0)
 DENSITY_STRENGTH_MIN = 0
 DENSITY_STRENGTH_MAX = 50
 DENSITY_STRENGTH_TICK = 5
 DENSITY_STRENGTH_STEP = 1
+DENSITY_STRENGTH_DIVISOR = 10 # Divides all of the above values to get the actual strength factor used in the algorithm
 
 # Default Terrain Types — color: (R, G, B)
 DEFAULT_LAND_TERRAIN_TYPES = {
@@ -115,7 +118,7 @@ GUARDRAILS = True
 
 # Others
 GITHUB_URL = "https://github.com/Thomas-Holtvedt/opengs-maptool"
-CONSOLE_HELP_URL = f"{GITHUB_URL}/blob/main/docs/console_guide.md"
+CONSOLE_HELP_URL = f"{GITHUB_URL}/tree/v{VERSION}/docs/console_guide.md"
 DISCORD_URL = "https://discord.gg/6pRc9f6g6S"
 
 # Logging Configuration
@@ -133,6 +136,16 @@ LOG_CATEGORIES: dict[str, LoggerCategoryConfiguration] = {
     "task_progress": LoggerCategoryConfiguration(
         prefix="[Task Progress]",
         level=LoggingLevel.DEBUG,
+        enabled=True,
+    ),
+    "export": LoggerCategoryConfiguration(
+        prefix="[Export]",
+        level=LoggingLevel.ERROR,
+        enabled=True,
+    ),
+    "command": LoggerCategoryConfiguration(
+        prefix="[Command]",
+        level=LoggingLevel.ERROR,
         enabled=True,
     ),
 }
